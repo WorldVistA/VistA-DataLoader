@@ -1,0 +1,87 @@
+GTM>d P^DI
+
+VA FileMan 22.0
+
+Select OPTION: ENTER OR EDIT FILE ENTRIES
+
+INPUT TO WHAT FILE: NEW PERSON// 200  NEW PERSON  (1443 entries)
+EDIT WHICH FIELD: ALL//
+
+Select NEW PERSON NAME: DOCTOR,THIRTY-NINE
+
+NAME: DOCTOR,THIRTY-NINE//
+
+STREET ADDRESS 1: ^ACCESS CODE  Want to edit ACCESS CODE (Y/N)
+
+Want to edit ACCESS CODE (Y/N): Y
+
+Enter a new ACCESS CODE <Hidden>: ********
+Please re-type the new code to show that I have it right: ********
+OK, Access code has been changed!
+
+The VERIFY CODE has been deleted as a security measure.
+You will need to enter a new VERIFY code so the user can sign-on.
+
+FILE MANAGER ACCESS CODE: ^VER
+     1   VERIFY CODE  Want to edit VERIFY CODE (Y/N)
+     2   VERIFY CODE never expires
+CHOOSE 1-2: 1  Want to edit VERIFY CODE (Y/N)
+Want to edit VERIFY CODE (Y/N): Y
+
+Enter a new VERIFY CODE: *********
+
+Please re-type the new code to show that I have it right: *********
+
+OK, Verify code has been changed!
+
+ALLOW ARA ACCESS: ^KEY
+     1   KEY DELEGATION LEVEL
+     2   KEYS
+     3   KEYSTROKES FROM LM WP
+CHOOSE 1-3: 2  KEYS
+Select KEY: MAGDISP CLIN// LRVERIFY
+  REVIEW DATE:
+Select KEY: LRSUPER
+  REVIEW DATE:
+Select KEY: XUPROG
+     1   XUPROG
+     2   XUPROGMODE
+CHOOSE 1-2: 1  XUPROG
+  REVIEW DATE:
+Select KEY: XUMGR
+  REVIEW DATE:
+Select KEY: PSAMGR
+  REVIEW DATE:
+Select KEY: ^AUTH
+     1   AUTHORIZE RELEASE OF NPI
+     2   AUTHORIZED TO WRITE MED ORDERS
+CHOOSE 1-2: 2  AUTHORIZED TO WRITE MED ORDERS
+AUTHORIZED TO WRITE MED ORDERS: YES// YES  YES
+DEA#: ^SECONDARY MENU OPTIONS
+Select SECONDARY MENU OPTIONS: PX IRM MAIN MENU// ISI DATA IMPORT       ISI DATA
+ IMPORT
+  Are you adding 'ISI DATA IMPORT' as
+    a new SECONDARY MENU OPTIONS (the 6TH for this NEW PERSON)? No// Y  (Yes)
+  SYNONYM:
+
+Select SECONDARY MENU OPTIONS: ^ELECTRONIC SIGNATURE CODE
+ELECTRONIC SIGNATURE CODE: <Hidden>// TESTING4
+MAIL CODE: ^RAD/NUC
+     1   RAD/NUC MED CLASSIFICATION
+     2   RAD/NUC MED INACTIVE DATE
+     3   RAD/NUC MED LOCATION ACCESS
+CHOOSE 1-3: 1  RAD/NUC MED CLASSIFICATION
+
+Select RAD/NUC MED CLASSIFICATION: staf  (S   staff)
+  Are you adding 'staff' as a new RAD/NUC MED CLASSIFICATION (the 1ST for this
+NEW PERSON)? No// Y  (Yes)
+Select RAD/NUC MED CLASSIFICATION:
+RAD/NUC MED INACTIVE DATE: ^
+
+
+Select NEW PERSON NAME:
+
+
+
+
+Select OPTION:

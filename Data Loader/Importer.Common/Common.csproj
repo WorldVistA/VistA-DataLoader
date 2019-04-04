@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4552872-DE6A-4764-883D-D0ADE88D1F10}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataLoader.Common</RootNamespace>
+    <AssemblyName>DataLoader.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\RadTechTool\lib\Newtonsoft\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\AllergyMapping.cs" />
+    <Compile Include="Model\ApptMapping.cs" />
+    <Compile Include="Model\Case.cs" />
+    <Compile Include="Model\ConsultMapping.cs" />
+    <Compile Include="Model\NonVAMedMapping.cs" />
+    <Compile Include="Model\QrdaDataLocation.cs" />
+    <Compile Include="Model\QrdaDataLocationList.cs" />
+    <Compile Include="Model\QrdaMap.cs" />
+    <Compile Include="Model\QrdaMapList.cs" />
+    <Compile Include="Model\TreatingFacilityMapping.cs" />
+    <Compile Include="Model\VPntEducation.cs" />
+    <Compile Include="Model\VPov.cs" />
+    <Compile Include="Model\VImmunization.cs" />
+    <Compile Include="Model\VExamMapping.cs" />
+    <Compile Include="Model\VCPTMapping.cs" />
+    <Compile Include="Model\HeathFactorMapping.cs" />
+    <Compile Include="Model\EncounterMapping.cs" />
+    <Compile Include="Model\StringItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\StringItemList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\StringItemXmlList.cs" />
+    <Compile Include="Model\StringItemXml.cs" />
+    <Compile Include="Model\PatientLoad.cs" />
+    <Compile Include="Model\Template.cs" />
+    <Compile Include="Model\RadMapping.cs" />
+    <Compile Include="Model\MedMapping.cs" />
+    <Compile Include="Model\NoteMapping.cs" />
+    <Compile Include="Model\LabMapping.cs" />
+    <Compile Include="Model\UserLoad.cs" />
+    <Compile Include="Model\VitalMapping.cs" />
+    <Compile Include="Model\PatientList.cs" />
+    <Compile Include="Model\ProblemMapping.cs" />
+    <Compile Include="Model\PntMapping.cs" />
+    <Compile Include="Model\Excell.cs" />
+    <Compile Include="Model\Patient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\QRDA_Config_File.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VistA.DataLoader.Broker\DataLoader.Broker.csproj">
+      <Project>{7775ea01-e0d3-456b-b9b0-e726e13b3eb1}</Project>
+      <Name>DataLoader.Broker</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

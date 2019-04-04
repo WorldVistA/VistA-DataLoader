@@ -1,0 +1,2663 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.3  (Win32)">
+	<META NAME="AUTHOR" CONTENT="Mike Stark">
+	<META NAME="CREATED" CONTENT="20120822;22351594">
+	<META NAME="CHANGEDBY" CONTENT="Mike Stark">
+	<META NAME="CHANGED" CONTENT="20120827;15582949">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0 RULES=ROWS>
+	<COL WIDTH=77*>
+	<COL WIDTH=25*>
+	<COL WIDTH=31*>
+	<COL WIDTH=123*>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>PNT IMPORT ERRORS:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><FONT SIZE=2><B>Severity:</B></FONT></P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><FONT SIZE=2><B>Frequency:</B></FONT></P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><B>Description:</B></P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid TEMPLATE name.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>High</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client requests the &ldquo;DEFAULT&rdquo; entry in
+			the ISI PT IMPORT TEMPLATE file (#9001).  If there is no &ldquo;DEFAULT&rdquo;
+			entry available, one must be created in VistA.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>High</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid date value in DOB, LO_DOB, or UP_DOB field</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Bad date string passed.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing IMP_TYPE</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Medium</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client (1.0) always uses an Import Type of
+			&ldquo;I&rdquo;ndividual for each record created.  This error
+			might indicate a corruption in the Importer code (client or
+			server).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid IMP_BATCH_NUM</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Medium</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>This value is not used with this version of the Importer client
+			(1.0).  This error might indicate a corruption in the code (client
+			or server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid DFN_NAME ('Y' or 'N')</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Medium</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>This value is not used with this version of the Importer client
+			(1.0).  This error might indicate a problem in the code (client or
+			server).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PATIENT TYPE (#2;391)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>This version of the Importer client defaults with a PATIENT
+			TYPE of &ldquo;NON-VETERAN (OTHER).&rdquo;  This error might
+			indicate a problem requiring programmer intervention.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid NAME (#2;.01)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid character or formatting problem with NAME submitted.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Must have either NAME or NAME_MASK</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>If a NAME value is not provide, the ISI PT IMPORT TEMPLATE file
+			(#9001) is initially set to a *,PATIENT value.  This can be
+			changed, but if it is removed AND a NAME is not provided during
+			client import this error will result.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid SEX (#2;.02)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Gender value provided by the client is invalid.  Use the
+			Tools;Export VistA Tables; Gender to confirm/refresh your xls
+			select list.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid DOB (#2;.03)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid date string passed.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid LOW_DOB (#2;.03)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare 
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer 1.0 client does not pass this value.  The LOW_DOB
+			(#9001,6) can be entered in the ISI PT IMPORT TEMPLATE file in
+			VistA.  Initially, this value is blank.   It creates a range from
+			which random dates of birth are generated for newly created
+			patients.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid UP_DOB (#2;.03)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer 1.0 client does not pass this value.  The UP_DOB
+			(#9001,6) can be entered in the ISI PT IMPORT TEMPLATE file in
+			VistA.  Initially, this value is blank.   It creates a range from
+			which random dates of birth are generated for newly created
+			patients.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid MARITAL_STATUS (#2;.05)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer 1.0 client does not pass this value and a random
+			value is selected from the MARITAL STATUS file (#11) in VistA.  A
+			default MARITAL STATUS can be set in the ISI PT IMPORT TEMPLATE
+			file in VistA.  
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid OCCUPATION (#2;.07)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Occupation is a free text entry.  This error might indicate an
+			invalid character is being passed.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid RACE INFORMATION (#2.02,.01)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid RACE value is being passed.  Use the Tools;Export VistA
+			Tables; Race to confirm/refresh your xls select list.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ETHNICITY INFORMATION (#2.06,.01)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid ETHNICITY information is being passed.  Use the
+			Tools;Export VistA Tables; Ethnicity to confirm/refresh your xls
+			select list.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Can't use full SSN with IMP_TYPE='B'</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>High</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer 1.0 client always uses a IMP_TYPE value of &ldquo;I&rdquo;.
+			 This error might indicate a code problem.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Duplicate SSN</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer 1.0 client does not submit SSN numbers of VistA. 
+			It generates them using the SSN MASK (#9001,4) value in the ISI PT
+			IMPORT TEMPLATE file. 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid STREET_ADDD1 (#2;.111)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit Street Address
+			values.  These are automatically semi-randomly generated.  This
+			error might indicated a code problem.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid STREET_ADDD2 (#2;.112)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit Street Address
+			values.  These are randomly generated.  This error might indicate
+			a code problem.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid CITY (#2;.114)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>Rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit a City value.  This
+			value can be either randomly generated or set by the IS PT IMPORT
+			TEMPLATE file.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid STATE (#2;.115)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit a State value. 
+			This value can be either randomly generated or set by the IS PT
+			IMPORT TEMPLATE file.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ZIP_4 (#2;.1112)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit a ZIP value.  This
+			value is generated using the ZIP+4 MASK (#9001,9) in the IS PT
+			IMPORT TEMPLATE value.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ZIP_4_MASK.  5 digits max.  Only numbers</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit a ZIP_4_MASK value.
+			 This value is provided from the the IS PT IMPORT TEMPLATE
+			(#9001,9).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PH_NUM (#2;.131)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit a Phone number
+			value.  This value is randomly generated.  A PHONE NUMBER
+			[RESIDENCE] MASK (#9001,9) can be provided in the IS PT IMPORT
+			TEMPLATE.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PH_NUM_MASK. Numeric between 0 and 999999</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The ISI Importer 1.0 client does not submit a Phone number mask
+			value.  A PHONE NUMBER [RESIDENCE] MASK (#9001,9) can be provided
+			in the IS PT IMPORT TEMPLATE.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid VETERAN (#2;1901)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid value submitted.  Expects a Booleen (Y/N)  value.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid EMPLOY_STAT (#2;.31115)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid value submitted for Employment Status.  You may wish to
+			confirm/refresh the values provided by Tools; Export VistA Tables;
+			Employ_Status.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid INSUR_TYPE (#2;.3121)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid value submitted for Insurance.  You may wish to
+			confirm/refresh the values provided by Tools; Export VistA Tables;
+			Insurance.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Appointment Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>High</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>High</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>A null value was submitted.  The Importer client should screen
+			null or blank values.  This error might indicate a problem with
+			the Importer code (client or server). 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid appointment date.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid date string passed.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing date/time for appt.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Missing date parameter.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing appt. location (#44).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Missing appointment location (#44).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing patient ien (#2).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Importer was unable to associate record with a PATIENT (#2)
+			record.  Likely, an improper Pat SSN was submitted.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing time for appt.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>rare</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer 1.0 should not produce this error.  The importer
+			creates appointment times if they are not provided.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid appt date/time.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P>Low</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P>common</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid date/time string provided.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No entry found for clinic (#44).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid value passed.  Use a valid entry from the HOSPITAL
+			LOCATION (#44) file.  You may wish to confirm/refresh the values
+			provided by Tools; Export VistA Tables; Location.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No internal entry found for clinic (#44).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid value passed.  Use a valid entry from the HOSPITAL
+			LOCATION (#44) file.  You may wish to confirm/refresh the values
+			provided by Tools; Export VistA Tables; Location.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No entry found for PATIENT (#2)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Importer was unable to associate record with a PATIENT (#2)
+			record.  Likely, an improper Pat SSN was submitted.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Problem Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>A null value was submitted.  The Importer client should screen
+			null or blank values.  This error might indicate a problem with
+			the Importer code (client or server). 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ONSET date.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid date string passed.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing PROBLEM param.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Missing data.  The ICD9 description is required.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing data for PROBLEM.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Missing data.  The ICD9 description is required.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid data for PROBLEM.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>Invalid ICD9 description provided.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid data for PROVIDER.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing PROVIDER (#2,.01)</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing Patient SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PAT_SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ONSET date.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Vitals Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid DT_TAKEN date/time.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing DT_TAKEN entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid DT_TAKEN (#120.5,.01).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing Patient SSN.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PAT_SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing VITAL_TYPE entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid VITAL_TYPE (#120.5,.03).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Unable to find internal value for VITAL_TYPE (#120.5,.03).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing RATE entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>VITAL_TYPE does not accept RATE entries.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid RATE value for VITAL_TYPE.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing ENTERED_BY entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ENTERED_BY (#120.5,.06).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing LOCATION entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid LOCATION (#120.5,.05).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Allergy Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ORIG_DATE date/time.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid OBSRV_DT date/time.&quot;</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing ALLERGEN.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ALLERGEN (#120.82).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing SYMPTOM.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid SYMPTOM (#120.83).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing Patient SSN.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PAT_SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing ORIGINTRY entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ORIGINTR (#120.8,5).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing ORIG_DATE entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ORIG_DATE (#120.8,4).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing HISTORIC entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid HISTORIC value (0/1).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing OBSRV_DT entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid OBSRV_DT.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Lab Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid RESULT_DT date/time.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing Patient SSN.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PAT_SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing LAB_TEST.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing value for LAB_TEST (#60).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Couldn't find ien for LAB_TEST (#60).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>LAB_TEST incorrect. SUBSCRIPT (#60,4) must by 'CH'.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Could't locate 'SPECIMEN CPT' (#60.196,.01) for LAB_TEST value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Couldn't locate COLLECTION SAMPLE (#62) for LAB_TEST value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Couldn't locate SPECIMIN (#61) for LAB_TEST value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing RESULT_VAL.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid RESULT_VAL.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing RESULT_DT entry.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid ENTERED_BY (#200,.01).  Insufficient privelages.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing LOCATION.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid LOCATION value (#44,.01).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Notes Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid VDT date/time.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing Patient SSN.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PAT_SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing TIU_NAME.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid TIU_NAME (#8925.1).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing VDT (Visit Date/time).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing value for VDT (Visit Date/Time).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing VLOC (Hospital Location #44).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid LOCATION value (#44,.01).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing PROV (#200).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing PROV.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PROV value (#200, .01).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing note text.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>PROVIDER (#200) missing Electronic Signature.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Visit will not allow additional attached notes.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Note requires co-signature.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P><B>Meds Errors:</B></P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Bad parameter title passed: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P>The Importer client controls the parameter values passed.  This
+			error might indicate a problem in the Importer code (client or
+			server.)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>No data provided for parameter: 
+			</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid DATE date/time.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing Patient SSN.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PAT_SSN (#2,.09).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing DRUG (#50,.01) value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid Generic Drug (#50,.01) value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing SIG (#51,.01) value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing QTY (quantity) value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid QTY (quantity) value. Must be number.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Missing SUPPLY (DAYS SUPPLY) value.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid SUPPLY (DAYS SUPPLY)value. Must be number.</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Unable to locate valid PROVIDER (#200).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Invalid PROVIDER (#200,.01).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=30%>
+			<P>Can't locate valid OUTPATIENT SITE FILE (#59).</P>
+		</TD>
+		<TD WIDTH=10%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=12%>
+			<P><BR>
+			</P>
+		</TD>
+		<TD WIDTH=48%>
+			<P><BR>
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+</BODY>
+</HTML>

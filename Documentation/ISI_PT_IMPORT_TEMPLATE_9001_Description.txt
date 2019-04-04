@@ -1,0 +1,59 @@
+The ISI PT IMPORT TEMPLATE (#9001) can be used to help speed data entry for creating new patient records in 
+VistA.  The file contains 15 fields that contain default values or masks for patient records.
+
+This file fills the gaps on values not provided by the user during import.  User-provided input supersedes
+the values in this file.  The ISI Data Loader first lays down the values from this file and then 
+overwrites values with user supplied values (via the spreadheet) during an data loading session.  
+ 
+There are five kinds of fields used in this file to create patient records:  parameters, static values, ranges,
+string masks and numeric masks.   Parameters are values that provide information to the application, but do 
+not contain data directly used in creating records.  Values are static values set to be used if a user supplied 
+value is not provided.  Ranges provide upper and lower limits used to auto-generate values if user supplied v
+alues are not provided.  String masks provide a core string with a "*" character that will be replaced by a
+generated value.  Numeric masks provide a number to which will be appended with a generated 
+number.
+
+Examples of each kind of field:
+
+NAME (9001,.01) is a parameter field. This field is identifies the Template (9001) record.
+
+TYPE (9001,1) is a "static value" field.  If you provide a value for TYPE, this value is applied to all records created
+by the Data Loader where the user has not provided their own TYPE OF PATIENT value (via the spreadsheet).
+
+EARLIEST DATE OF BIRTH (9001,5) is a "range" field.  It provides that low end range used to randomly generate a Date
+of Birth where the user has not provided a DOB.
+
+NAME MASK (9001,2) is a string mask field.  When a string value of "*,Patient" is used in this field the Data Loader will
+auto generate a patient name value (#2,.01) keying of the "*" character to substitute either incrimented 
+numeric values or DFN values.  For instance with a "*,PATIENT" NAME MASK and no user supplied value the Data Loader
+could generate a name of "ONE,PATIENT".  With a "LASTNAME,*" NAME MASK and no user supplied value, the
+data loader could generate a name of "LASTNAME,ONE".
+
+SSN MASK (9001,4) is a numeric mask field.   When a number value of 123456 is used in this field  and no SSN value is
+supplied by the user, the Data Loader will auto generate the next available SSN using the core value of 123456.  For
+instance the Data Loader could generate an SSN of 123456888.
+
+Below is provided a list of Template fields and description of each
+
+NAME (9001,.01) is parameter field.  The install package creates a record named "DEFAULT." This record should not be deleted or its name changed.   The Data Loader client uses this record.  
+TYPE (9001,1) is a static value field.  The install value "NON-VETERAN (OTHER)." 
+NAME MASK (9001,2) is a string mask field.  The install value is "*,PATIENT".	
+SSN MASK (9001,4) is a numeric mask field.  The install value is 666.
+SEX (9001,5) is a static value field.  The install value is empty.
+EARLIEST DATE OF BIRTH (9001, 6) is a lower range field.  The install value is 1/1/29.
+LATEST DATE OF BIRTH (9001,7) is an upper range field.  The install value is 05/24/12.
+MARITAL STATUS (9001, 8) is a static value field.  The default value is empty.
+ZIP+4 MASK (9001,9) is a numeric mask field.  The install value is 99999.
+PHONE NUMBER [RESIDENCE] MASK (9001,10) is a numeric mask field.  The install value is 999.
+CITY (9001,11) is a static value field.  The install value is blank.
+STATE (9001,12) is a static value field.  The install value is blank.
+VETERAN (9001,13) is a static value field.  The install value is blank.
+DFN_NAME (9001,14) is a parameter field.  The install value is "Y".
+EMPLOYMENT STATUS (9001,15) is a static value field.  The install value is blank.
+
+Note -- The ISI PT IMPORT TEMPLATE's functionality is especially useful for "batch" patient creation.  
+By batch, is meant the ability to create a  large number of new patient records automatically -- each 
+deriving key default values from values, ranges, and masks provided inside #9001.  This functionality
+is not available for use through the Data Loader client application and can only be directly
+accessed by utilizing the Patient import API (IMPORTPT^ISIIMP03).
+

@@ -1,0 +1,258 @@
+1) Patient import API
+
+Entry point:  IMPORTPT^ISIIMP03(ISIMISC)
+
+Input - ISIMISC(ARRAY)
+Format:  ISIMISC(PARAM)=VALUE
+    eg:  ISIMISC("NAME")="FIRST,LAST" 
+
+Output - ISIRC [return code]
+         ISIRESUL(0) = CNT
+         ISIRESUL(1) = DFN^SSN^NAME
+
+ISIMISC ARRAY Definitions:
+
+PARAM             TYPE        VistA FILE  Description
+-------------------------------------------------------------------------------
+IMP_TYPE         |PARAM      |           |'I'ndividual or 'B'atch
+IMP_BATCH_NUM    |PARAM      |           |Batch number to be imported
+DFN_NAME         |PARAM      |           |'Y' or 'N' for use of DFN derived NAME     
+TYPE             |FIELD      |391        |TYPE OF PATIENT value
+NAME             |FIELD      |.01        |NAME value
+NAME_MASK        |MASK       |.01        |Last name mask value
+SEX              |FIELD      |.02        |SEX (M/F) value
+DOB              |FIELD      |.03        |DOB value
+RACE             |FIELD      |2.02,.01   |RACE INFORMATION value (pointer to #10)
+ETHNICITY        |FIELD      |2.06,.01   |ETHNICITY INFORMATION value (pointer to #10.2)
+LOW_DOB          |PARAM      |.03        |Lower date limit of auto DOB
+UP_DOB           |PARAM      |.03        |Upper date limit of auto DOB
+MARITAL_STATUS   |FIELD      |.05        |MARITAL STATUS value
+OCCUPATION       |FIELD      |.07        |OCCUPATION (free text)
+SSN              |FIELD      |.09        |SSN value
+SSN_MASK         |MASK       |.09        |SSN mask value (5 digit max)
+STREET_ADD1      |FIELD      |.111       |Street ADD 1 value
+STREET_ADD2      |FIELD      |.112       |Street ADD 2 value
+CITY             |FIELD      |.114       |CITY value
+STATE            |FIELD      |.115       |STATE value
+ZIP_4            |FIELD      |.1112      |ZIP CODE value
+ZIP_4_MASK       |MASK       |.1112      |Zip code mask value (5 max)
+PH_NUM           |FIELD      |.131       |PHONE value
+PH_NUM_MASK      |MASK       |.131       |Phone number mask value
+EMPLOY_STAT      |FIELD      |.31115     |EMPLOYMENT STATUS value (table)
+INSUR_TYPE       |FIELD      |2.312,.01  |INSURANCE TYPE (pointer to #36)
+VETERAN          |FIELD      |1901       |VETERAN STATUS value
+
+
+
+2) Appointment Import API
+
+Entry pont:  APPT^ISIIMP05
+
+Input -  ADATE (Appointment Date #44.001,.01)
+         SC    (Hospital Location #44,.01)
+         DFN   (Patient DFN #2,.09)
+Output - ISIRC [return code]
+ 
+
+
+Problem Import API
+
+Entry point:  CREATE^ISIIMP07
+
+Input - ISIMISC(ARRAY)
+Format:  ISIMISC(PARAM)=VALUE
+    eg:  ISIMISC("PROVIDER")=126 
+
+Output - ISIRC [return code]
+         ISIRESUL(0)=1
+         ISIRESUL(1)=IEN (#9000011)
+
+ISIMISC ARRAY Definitions:
+
+PARAM             TYPE        VistA FILE  Description
+----------------------------------------------------------------------------
+PROBLEM          |FIELD      |#757.01,.01   |PROBLEM Description
+PROVIDER         |FIELD      |#9000011,1.04 |PROVIDER NAME
+PAT_SSN          |FIELD      |#2,.09        |PATIENT SSN
+STATUS           |FIELD      |#9000011,.12  |'A'ctive or 'I'active 
+ONSET            |FIELD      |#9000011,.13  |Onset DATE
+TYPE             |FIELD      |#9000011,1.14 |PRIORITY ('A'cute or 'C'hronic)
+
+
+
+3) Vitals Import API
+
+Entry point:  IMPORTVT^ISIIMP09
+
+Input - ISIMISC(ARRAY)
+Format:  ISIMISC(PARAM)=VALUE
+    eg:  ISIMISC("DFN")=12345 
+
+Output - ISIRC [return code]
+
+ISIMISC ARRAY Definitions:
+PARAM             TYPE        VistA FILE  Description
+----------------------------------------------------------------------------
+DT_TAKEN         |FIELD      |120.5,.01  |DATE/TIME vital measurement taken
+DFN              |FIELD      |2          |PATIENT DFN 
+VITAL_TYPE       |FIELD      |120.5,.03  |GMVR VITAL TYPE(#120.51)
+RATE             |FIELD      |120.5,1.2  |Rate/value for vital
+LOCATION         |FIELD      |120.5,.05  |HOSPITAL LOCATION IEN (#44)
+ENTERED_BY       |FIELD      |120.5,.06  |PERSON IEN (#200)
+
+
+
+4) Allergy Import API
+
+Entry point:  IMPRTALG^ISIIMP11
+
+Input - ISIMISC(ARRAY)
+Format:  ISIMISC(PARAM)=VALUE
+    eg:  ISIMISC("GMRAORIG")=12345 
+
+Output - ISIRC [return code]
+         ISIRESUL(0)=1 [if successful]
+         ISIRESUL(1)="success" [if successful]  
+
+ISIMISC ARRAY Definitions:
+PARAM             Description
+------------------------------
+GMRAGNT           ALLERGEN^IEN (#120.82,01)
+GMRATYPE          TYPE^IEN (#120.82,1)
+GMRANATR          "A^Allergy"
+GMRASYMP          Array - (0)=counter, (.n)=IEN^NAME^^^ (#120.83)
+GMRAORIG          #200 IEN
+GMRAOBHX          "h^HISTORICAL" or "o^OBSERVED"
+GMRASEVR          2 (Severity)
+GMRARDT           Observation Date
+GMRACHT           Array - (0)=counter, (.n)=chart edit datetime
+
+
+
+5) LABS Import API
+
+Entry point: IMPRTLAB^ISIIMP13
+
+Input - ISIMISC(ARRAY)
+Format:  ISIMISC(PARAM)=VALUE
+    eg:  ISIMISC("RESULT_VAL")=110 
+
+Output - ISIRC [return code]
+         ISIRESUL(0)=1 [if successful]
+         ISIRESUL(1)="success" [if successful] 
+
+ISIMISC ARRAY Definitions:
+PARAM             TYPE        Description
+----------------------------------------------------------------------------
+PAT_SSN          |FIELD      |PATIENT (#2) pointer
+LAB_TEST         |FIELD      |Laboratory test name
+RESULT_DT        |FIELD      |Date/time of result
+RESULT_VAL       |FIELD      |Lab test result value
+LOCATION         |FIELD      |Lab test location
+
+
+
+
+6) Notes Import API
+
+Entry point:  IMPRTNOT^ISIIMP15
+
+Input - ISIMISC(ARRAY)
+Format:  ISIMISC(PARAM)=VALUE
+    eg:  ISIMISC("DFN")=12345 
+
+Output - ISIRC [return code]
+         ISIRESUL(0)=1 [if successful]
+         ISIRESUL(1)=TIUDA [if successful] 
+
+ISIMISC ARRAY Definitions:
+PARAM             TYPE        Description
+----------------------------------------------------------------------------
+DFN              |FIELD      |2          |Patient DFN
+TIU              |FIELD      |8925.1     |TIU IEN (#8925.1)
+VDT              |FIELD      |           |Visit Datetime
+VLOC             |FIELD      |44         |Location IEN (HOSPITAL LOCATION)
+PROV             |FIELD      |200        |Provider IEN (#200)
+TEXT             |           |           |TIU Text
+
+
+
+7) Med Import API
+
+Entry point:  MEDS^ISIIMP17
+
+DFN              |FIELD      |2          |Patient DFN
+DRUG             |FIELD      |50,.01         |Generic Name
+DATE             |FIELD      |           |Multiple uses (issue, dispense, fill)
+EXPIRDT        |FIELD       |50,17.1
+SIG              |FIELD      |51,.01     |Medication Instruction name
+QTY              |FIELD      |           |Quantity.  Must be a number
+SUPPLY           |FIELD      |           |# of Days supply. Must be a number
+REFILL           |FIELD      |           |# of refills.  Must be a number.
+PROV             |FIELD      |200,.01        |Provider IEN
+
+
+
+8) Consults Import API
+
+Entry point:  CONS^ISIIMP19
+
+DFN              |FIELD      |2          |Patient DFN
+CONSULT          |FIELD      |123.5      |Consult IEN
+LOC              |FIELD      |44         |Visit Location IEN (HOSPITAL LOCATION)
+PROV             |FIELD      |200        |Provider (#200)  IEN
+TEXT             |           |           |Consult text
+
+
+
+
+9) RAD ORDERS Import API
+
+Entry point: RADO^ISIIMP21
+
+DFN              |FIELD      |2         |Patient DFN
+RAPROC           |FIELD      |71        |Radiology Procedure IEN
+MAGLOC           |FIELD      |79.1      |Imaging Location IEN
+PROV             |FIELD      |200       |Provider (#200)  (if not provided use logon user)
+RADTE            |FIELD      |70.02     |Exam Date/Time
+EXAMCAT          |FIELD      |75.1      |Radiology Exam Category (I,O,C,S,E,R)
+REQLOC           |FIELD      |44        |Request Location (#44)
+REASON           |FIELD      |75.1      |Rad exam reason (free text)
+HISTORY          |FIELD      |75.1,400  |Clinical History for exam (free text)
+
+
+
+
+10)  File fetch for external select lists
+
+Entry point: ENTRY^ISIIMPUA
+
+INPUT: 
+ TABLE="NOTE" - txt to designate VistA file fetched
+
+ OUTPUT:
+ # -- Number of resolved entry (1-22)
+
+TABLE val:   Resolves to (File #) Description:
+------------------------------------------------
+1            #8925.1              NOTE
+2            #50                  DRUG
+3            #51                  INSTRUCTION
+4            #200                 PROVIDER
+5            #200                 USER
+6            #10                  Race
+7            #10.2                Ethnicity
+8            #2,.31115            Employment Status
+9            #36                  Insurance Company
+10           #44                  Hospital Location
+11           #120.51              Vital Type
+12           #120.82              Allergen
+13           #120.83              Symptom
+14           #60                  Lab test
+15           #2,.02               Sex
+16           (Y/N)                "Y","N"
+17           #9000011,.12         Problem Status
+18           #9000011,.14         Problem Type
+19           #123.5               Consults
+20           #79.1                Imaging Location
+21           #71                  Radiology Procedure

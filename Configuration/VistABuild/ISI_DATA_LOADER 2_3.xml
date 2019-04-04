@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<build
+
+ name="ISI_DATA_LOADER*2.3*5"
+
+ patch=""
+
+ patchName="VistA Data Loader Tool 2.3"
+
+ envCheckRoutine=""
+
+ deleteEnvCheckRoutine=""
+
+ preInstallRoutine=""
+
+ deletePreInstalltRoutine=""
+
+ postInstallRoutine=""
+
+ deletePostInstallRoutine=""
+
+ packageName="ISI"
+
+ packageNumber="175"
+
+ packageVersion="1.0"
+
+ packagePrefix="ISI"
+
+ packageDateDestributed=""
+
+ alphaBetaTesting="NO"
+
+ installationMessage="NO"
+
+ addressForUsageReporting=""
+
+ xmlns="http://va.gov/VistA/kids/manifest">
+<requiredBuilds>
+<!-- action= 0:Warning only;1:Don't install, remove global;2:Don't install, leave global;
+ -->
+</requiredBuilds>
+<components>
+<dataDictionaries>
+<dataDictionary name="9001" export="DD_9001.KID"/>
+</dataDictionaries>
+<routines>
+<routine name="ISIIMP" export="ISIIMP.m"/>
+<routine name="ISIIMP02" export="ISIIMP02.m"/>
+<routine name="ISIIMP03" export="ISIIMP03.m"/>
+<routine name="ISIIMP04" export="ISIIMP04.m"/>
+<routine name="ISIIMP05" export="ISIIMP05.m"/>
+<routine name="ISIIMP06" export="ISIIMP06.m"/>
+<routine name="ISIIMP07" export="ISIIMP07.m"/>
+<routine name="ISIIMP08" export="ISIIMP08.m"/>
+<routine name="ISIIMP09" export="ISIIMP09.m"/>
+<routine name="ISIIMP10" export="ISIIMP10.m"/>
+<routine name="ISIIMP11" export="ISIIMP11.m"/>
+<routine name="ISIIMP12" export="ISIIMP12.m"/>
+<routine name="ISIIMP13" export="ISIIMP13.m"/>
+<routine name="ISIIMP14" export="ISIIMP14.m"/>
+<routine name="ISIIMP15" export="ISIIMP15.m"/>
+<routine name="ISIIMP16" export="ISIIMP16.m"/>
+<routine name="ISIIMP17" export="ISIIMP17.m"/>
+<routine name="ISIIMP18" export="ISIIMP18.m"/>
+<routine name="ISIIMP19" export="ISIIMP19.m"/>
+<routine name="ISIIMP20" export="ISIIMP20.m"/>
+<routine name="ISIIMP21" export="ISIIMP21.m"/>
+<routine name="ISIIMP22" export="ISIIMP22.m"/>
+<routine name="ISIIMP23" export="ISIIMP23.m"/>
+<routine name="ISIIMP24" export="ISIIMP24.m"/>
+<routine name="ISIIMP25" export="ISIIMP25.m"/>
+<routine name="ISIIMP26" export="ISIIMP26.m"/>
+<routine name="ISIIMP27" export="ISIIMP27.m"/>
+<routine name="ISIIMP28" export="ISIIMP28.m"/>
+<routine name="ISIIMP29" export="ISIIMP29.m"/>
+<routine name="ISIIMPER" export="ISIIMPER.m"/>
+<routine name="ISIIMPL1" export="ISIIMPL1.m"/>
+<routine name="ISIIMPL2" export="ISIIMPL2.m"/>
+<routine name="ISIIMPL3" export="ISIIMPL3.m"/>
+<routine name="ISIIMPL4" export="ISIIMPL4.m"/>
+<routine name="ISIIMPL5" export="ISIIMPL5.m"/>
+<routine name="ISIIMPL6" export="ISIIMPL6.m"/>
+<routine name="ISIIMPL7" export="ISIIMPL7.m"/>
+<routine name="ISIIMPL8" export="ISIIMPL8.m"/>
+<routine name="ISIIMPL9" export="ISIIMPL9.m"/>
+<routine name="ISIIMPR1" export="ISIIMPR1.m"/>
+<routine name="ISIIMPR2" export="ISIIMPR2.m"/>
+<routine name="ISIIMPR3" export="ISIIMPR3.m"/>
+<routine name="ISIIMPT1" export="ISIIMPT1.m"/>
+<routine name="ISIIMPU1" export="ISIIMPU1.m"/>
+<routine name="ISIIMPU2" export="ISIIMPU2.m"/>
+<routine name="ISIIMPU3" export="ISIIMPU3.m"/>
+<routine name="ISIIMPU4" export="ISIIMPU4.m"/>
+<routine name="ISIIMPU5" export="ISIIMPU5.m"/>
+<routine name="ISIIMPU6" export="ISIIMPU6.m"/>
+<routine name="ISIIMPU7" export="ISIIMPU7.m"/>
+<routine name="ISIIMPU8" export="ISIIMPU8.m"/>
+<routine name="ISIIMPU9" export="ISIIMPU9.m"/>
+<routine name="ISIIMPUA" export="ISIIMPUA.m"/>
+<routine name="ISIIMPUB" export="ISIIMPUB.m"/>
+<routine name="ISIIMPUC" export="ISIIMPUC.m"/>
+<routine name="ISIIMPUD" export="ISIIMPUD.m"/>
+<routine name="ISIIMPUE" export="ISIIMPUE.m"/>
+<routine name="ISIIMPUF" export="ISIIMPUF.m"/>
+<routine name="ISIIMPUG" export="ISIIMPUG.m"/>
+<routine name="ISIIMPUH" export="ISIIMPUH.m"/>
+<routine name="ISIIMPUI" export="ISIIMPUI.m"/>
+</routines>
+<rpcs>
+<rpc name="ISI IMPORT ADMIT" export="RPC_ISI_IMPORT_ADMIT.KID"/>
+<rpc name="ISI IMPORT ALLERGY" export="RPC_ISI_IMPORT_ALLERGY.KID"/>
+<rpc name="ISI IMPORT APPT" export="RPC_ISI_IMPORT_APPT.KID"/>
+<rpc name="ISI IMPORT CONSULT" export="RPC_ISI_IMPORT_CONSULT.KID"/>
+<rpc name="ISI IMPORT GET TEMPLATE DETLS" export="RPC_ISI_IMPORT_GET_TEMPLATE_DETLS.KID"/>
+<rpc name="ISI IMPORT GET TEMPLATES" export="RPC_ISI_IMPORT_GET_TEMPLATES.KID"/>
+<rpc name="ISI IMPORT HFACTOR" export="RPC_ISI_IMPORT_HFACTOR.KID"/>
+<rpc name="ISI IMPORT ICDFIND" export="RPC_ISI_IMPORT_ICDFIND.KID"/>
+<rpc name="ISI IMPORT IMMUNIZATIONS" export="RPC_ISI_IMPORT_IMMUNIZATIONS.KID"/>
+<rpc name="ISI IMPORT LAB" export="RPC_ISI_IMPORT_LAB.KID"/>
+<rpc name="ISI IMPORT MED" export="RPC_ISI_IMPORT_MED.KID"/>
+<rpc name="ISI IMPORT NONVA MED" export="RPC_ISI_IMPORT_NONVA_MED.KID"/>
+<rpc name="ISI IMPORT NOTE" export="RPC_ISI_IMPORT_NOTE.KID"/>
+<rpc name="ISI IMPORT PAT" export="RPC_ISI_IMPORT_PAT.KID"/>
+<rpc name="ISI IMPORT PROB" export="RPC_ISI_IMPORT_PROB.KID"/>
+<rpc name="ISI IMPORT RAD ORDER" export="RPC_ISI_IMPORT_RAD_ORDER.KID"/>
+<rpc name="ISI IMPORT SAVE TEMPLATE" export="RPC_ISI_IMPORT_SAVE_TEMPLATE.KID"/>
+<rpc name="ISI IMPORT TABLEFETCH" export="RPC_ISI_IMPORT_TABLEFETCH.KID"/>
+<rpc name="ISI IMPORT TFL" export="RPC_ISI_IMPORT_TFL.KID"/>
+<rpc name="ISI IMPORT USER" export="RPC_ISI_IMPORT_USER.KID"/>
+<rpc name="ISI IMPORT V CPT" export="RPC_ISI_IMPORT_V_CPT.KID"/>
+<rpc name="ISI IMPORT V EXAM" export="RPC_ISI_IMPORT_V_EXAM.KID"/>
+<rpc name="ISI IMPORT V PATIENT ED" export="RPC_ISI_IMPORT_V_PATIENT_ED.KID"/>
+<rpc name="ISI IMPORT V POV" export="RPC_ISI_IMPORT_V_POV.KID"/>
+<rpc name="ISI IMPORT VITALS" export="RPC_ISI_IMPORT_VITALS.KID"/>
+</rpcs>
+<options>
+<option name="ISI DATA IMPORT" export="OPT_ISI_DATA_IMPORT.KID"/>
+</options>
+<securityKeys>
+</securityKeys>
+<protocols>
+</protocols>
+<templateLists>
+</templateLists>
+<hl7Applications>
+</hl7Applications>
+<hl7LogicalLinks>
+</hl7LogicalLinks>
+<parameterDefinitions>
+</parameterDefinitions>
+<parameterTemplates>
+</parameterTemplates>
+<printTemplates>
+</printTemplates>
+<sortTemplates>
+</sortTemplates>
+<inputTemplates>
+</inputTemplates>
+<forms>
+</forms>
+<functions>
+</functions>
+<dialogs>
+</dialogs>
+<bulletins>
+</bulletins>
+<mailGroups>
+</mailGroups>
+<helpFrames>
+</helpFrames>
+</components>
+</build>

@@ -1,0 +1,2313 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<QRDAConfig xmlns="DataLoader-XMLMapping" descr="Manages mapping and dataconversions for QRDA documents">
+
+  <!-- VistA DataLoader 2.0 QRDA conversion mapping -->
+
+  <!-- Copyright (C) 2012 Johns Hopkins University -->
+
+  <!-- VistA Data Loader is provided by the Johns Hopkins University School of
+       Nursing, and funded by the Department of Health and Human Services, Office
+       of the National Coordinator for Health Information Technology under Award
+       Number #1U24OC000013-01.
+  
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+  -->
+
+  <!-- Types are types of converstions currently allowed-->
+  <types>
+    <type name="codesystem"/>
+    <!-- Encounter have special mapping types: location, roombed, and provider-->
+    <type name="location"/>
+    <type name="roombed"/>
+    <type name ="provider"/>
+  </types>
+  <!-- Mapping and data conversion elements are arranged by datagrid tables, ie 'worksheets'-->
+  <worksheets>
+    <worksheet value="Patients">
+      <!-- the 'Patients' worksheet does NOT draw mappings from this config file yet-->
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.114222.4.11.3591" description="SOP" version="5.0" active="YES">
+          <item inputvalue="394" vistavalue="OTHER"/>
+        </type>
+        <type name="race" id="2.16.840.1.113883.6.238" description="Race" active="YES">
+          <item inputvalue="1002-5" vistavalue="AMERICAN INDIAN OR ALASKA NATI"/>
+          <item inputvalue="2028-9" vistavalue="ASIAN"/>
+          <item inputvalue="2054-5" vistavalue="BLACK OR AFRICAN AMERICAN"/>
+          <item inputvalue="2076-8" vistavalue="NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"/>
+          <item inputvalue="2106-3" vistavalue="WHITE"/>
+          <item inputvalue="213101" vistavalue="DECLINED TO SPECIFY"/>
+          <!--item inputvalue="9999-4" vistavalue="UNKNOWN BY PATIENT"/-->
+        </type>
+        <type name="ethnicity" id="2.16.840.1.113883.6.238" description="Ethnicity" active="YES">
+          <item inputvalue="21350-2" vistavalue="HISPANIC OR LATINO"/>
+          <item inputvalue="2186-5" vistavalue="NOT HISPANIC OR LATINO"/>
+          <item inputvalue="213101" vistavalue="DECLINED TO ANSWER"/>
+          <!--item inputvalue="" vistavalue="UNKNOWN BY PATIENT"/-->
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath></xpath>/>
+              <type>Static</type>/>
+              <column>Case name</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal>CASE1</matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/name/family</xpath>/>
+              <type>Data</type>/>
+              <column>Last name</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/name/given</xpath>/>
+              <type>Data</type>/>
+              <column>First name</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/administrativeGenderCode/@code</xpath>/>
+              <type>Data</type>/>
+              <column>Gender</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/birthTime/@value</xpath>/>
+              <type>Data</type>/>
+              <column>DOB</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/raceCode/@code</xpath>/>
+              <type>Data</type>/>
+              <column>Race</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/ethnicGroupCode/@displayName</xpath>/>
+              <type>Data</type>/>
+              <column>Ethnicity</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>addr/city</xpath>/>
+              <type>Data</type>/>
+              <column>city</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>addr/state</xpath>/>
+              <type>Data</type>/>
+              <column>State</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>addr/postalCode</xpath>/>
+              <type>Data</type>/>
+              <column>Zip</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>telecom/@value</xpath>/>
+              <type>Data</type>/>
+              <column>Phone</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>patient/languageCommunication/languageCode/@code</xpath>/>
+              <type>Data</type>/>
+              <column>Language</column>/>
+              <matchAtrrib></matchAtrrib>/>
+              <matchVal></matchVal>/>
+              <matchFunction></matchFunction>/>
+            </item>
+            <item>
+              <xpath>observation/value@code</xpath>/>
+              <type>Data</type>/>
+              <column>Insurance</column>/>
+              <matchAtrrib>sdtc:valueSet</matchAtrrib>/>
+              <matchVal>2.16.840.1.114222.4.11.3591</matchVal>/>
+              <matchFunction>Insurance</matchFunction>/>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="HealthFactor">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="4525004" vistavalue="ED [ARRIVAL-DEPARTURE] TIME"/>
+          <item inputvalue="1748006" vistavalue="VTE COMFIRMED"/>
+          <item inputvalue="10378005" vistavalue="TIME DECISION TO ADMIT MADE"/>
+          <item inputvalue="225337009" vistavalue="SUICIDE RISK ASSESSMENT"/>
+          <item inputvalue="428191000124101" vistavalue="DOCUMENTATION OF CURRENT MEDS"/>
+          <item inputvalue="371530004" vistavalue="CLINICAL CONSULTATION REPORT"/>
+          <item inputvalue="428171000124102" vistavalue="ADOLESCENT DEPRESSION SCREEN NEGATIVE"/>
+          <item inputvalue="428231000124106" vistavalue="MATERNAL POSTPARTUM DEPRESSION CARE"/>
+          <item inputvalue="428341000124108" vistavalue="MACULAR EDEMA ABSENT"/>
+          <item inputvalue="193350004" vistavalue="MACULAR EDEMA PRESENT"/>
+          <item inputvalue="417886001" vistavalue="TREATMENT ADJUSTED PER PROTOCOL"/>
+          <item inputvalue="105480006" vistavalue="WRITTEN INFORMATION NOT GIVEN"/>
+          <item inputvalue="413318004" vistavalue="WRITTEN INFORMATION GIVEN"/>
+          <item inputvalue="226789007" vistavalue="BREAST MILK ADMINISTERED"/>
+          <item inputvalue="105480006" vistavalue="PATIENT REFUSED TREATMENT"/>
+          <item inputvalue="428171000124102" vistavalue="ADULT DEPRESSION SCREEN"/>
+          <item inputvalue="183932001" vistavalue="PROCEDURE CONTRAINDICATED"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.1" description="LOINC" active="YES">
+          <item inputvalue="38208-5" vistavalue="STANDARD PAIN ASSMNT TOOL"/>
+          <item inputvalue="44249-1" vistavalue="PHQ-9 RESULT"/>
+          <item inputvalue="71955-9" vistavalue="PROMIS-29: "/>
+          <item inputvalue="71938-5" vistavalue="MLHFQ"/>
+          <item inputvalue="71955-9" vistavalue="PROMIS-29"/>
+          <item inputvalue="58151-2" vistavalue="BIMS SCORE"/>
+          <item inputvalue="73830-2" vistavalue="FALL RISK ASSESSMENT"/>
+          <item inputvalue="73831-0" vistavalue="ADOLESCENT DEPRESSION SCREEN"/>
+          <item inputvalue="73832-8" vistavalue="ADULT DEPRESSION SCREEN"/>
+          <item inputvalue="69981-9" vistavalue="ASTHMA ACTION PLAN"/>
+        </type>
+      </mapping>
+      <!-- Data location defines the mappings:  source xpath, target column, and matching logic-->
+      <datalocation>
+        <parentnode name="encounter">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.40</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.22</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>author/time/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>author/time/@value</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib>CERTIFICATION,DOCTOR</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.49</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>4525004</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>ED ARRIVAL TIME</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.49</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>4525004</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>ED DEPARTURE TIME</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/high/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/high/@value</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+        <parentnode name="observation">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.2</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.20</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.67</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.28</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.69</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.69</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.88</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>410666004</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>value/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+        <parentnode name="procedure">
+          <record description="mapping set for record/row">
+            <item>
+              <!--Procedure Performed template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.64</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <!--Procedure Activity-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.14</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+        <parentnode name="act">
+          <record description="mapping set for record/row">
+            <item>
+              <!--Communication to Provider-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.3.4</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.12</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.32</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Health Factor</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>HealthFactor</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>text</xpath>
+              <type>Data</type>
+              <column>Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="Problems">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.103" description="ICD9" active="NO">
+          <item inputvalue="" vistavalue=""/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="NO">
+          <item inputvalue="" vistavalue=""/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="observation">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.4</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.135</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>value/@code</xpath>
+              <type>Data</type>
+              <column>Problem</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>entryRelationship/observation/templateId/@root</xpath>
+              <type>Data</type>
+              <column>Problem status</column>
+              <match>2.16.840.1.113883.10.20.24.3.135</match>
+              <matchAttrib></matchAttrib>
+              <matchVal>A</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Problem type</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>A</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Dr name</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Problem onset date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Entry date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>VPov</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>Y</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="Encounters">
+      <!-- check to make sure below is correct-->
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="183452005" vistavalue="IP"/>
+          <item inputvalue="185349003" vistavalue="OP"/>
+          <item inputvalue="4525004" vistavalue="ER"/>
+          <item inputvalue="10197000" vistavalue="PS"/>
+          <item inputvalue="10378005" vistavalue="IP"/>
+          <item inputvalue="108313002" vistavalue="OP"/>
+          <item inputvalue="171047005" vistavalue="IO"/>
+          <item inputvalue="32485007" vistavalue="IP"/>
+          <item inputvalue="305351004" vistavalue="ICU"/>
+          <item inputvalue="112689000" vistavalue="IP"/>
+          <item inputvalue="8715000" vistavalue="IP"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.12" description="CPT" active="YES">
+
+          <item inputvalue="92002" vistavalue="OP"/>
+          <item inputvalue="96150" vistavalue="PS"/>
+          <item inputvalue="99201" vistavalue="OP"/>
+          <item inputvalue="99285" vistavalue="ER"/>
+          <item inputvalue="90791" vistavalue="PS"/>
+          <item inputvalue="99202" vistavalue="OP"/>
+          <item inputvalue="99203" vistavalue="OP"/>
+          <item inputvalue="99213" vistavalue="OP"/>
+          <item inputvalue="99285" vistavalue="ER"/>
+          <item inputvalue="99381" vistavalue="OP"/>
+          <item inputvalue="99347" vistavalue="OP"/>
+          <item inputvalue="99238" vistavalue="OP"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.285" description="HCPS" active="YES">
+          <item inputvalue="G0438" vistavalue="OP"/>
+        </type>
+        <type name="location" id="location" description="Clinic or Ward Location by Encounter type" active="YES">
+          <item inputvalue="OP" vistavalue="NEIGHBORHOOD PHYSICAN PRACTICE"/>
+          <item inputvalue="ER" vistavalue="EMERGENCY DEPT"/>
+          <item inputvalue="IP" vistavalue="CERT MED SURG"/>
+          <item inputvalue="ICU" vistavalue="CERT ICU"/>
+          <item inputvalue="PS" vistavalue="CLINIC A"/>
+        </type>
+        <type name="roombed" id="roombed" description="RoomBd value by Encounter type" active="YES">
+          <item inputvalue="OP" vistavalue=""/>
+          <item inputvalue="ER" vistavalue=""/>
+          <item inputvalue="IP" vistavalue="M1-A"/>
+          <item inputvalue="ICU" vistavalue="1-A"/>
+          <item inputvalue="PS" vistavalue="CLINIC PSYCHIATRY"/>
+        </type>
+        <type name="provider" id="provider" description="Provider value by Encounter type" active="YES">
+          <item inputvalue="OP" vistavalue="CERTIFICATION,DOCTOR"/>
+          <item inputvalue="ER" vistavalue="CERTIFICATION,DOCTOR"/>
+          <item inputvalue="IP" vistavalue="CERTIFICATION,DOCTOR"/>
+          <item inputvalue="ICU" vistavalue="CERTIFICATION,DOCTOR"/>
+          <item inputvalue="PS" vistavalue="CERTIFICATION,DOCTOR"/>
+        </type>
+        <type name="admittingregulation" id="admittingregulation" description="Admitting Regulation value by Encounter type" active="YES">
+          <item inputvalue="OP" vistavalue=""/>
+          <item inputvalue="ER" vistavalue=""/>
+          <item inputvalue="IP" vistavalue="OBSERVATION (AND) EXAMINATION"/>
+          <item inputvalue="ICU" vistavalue="OBSERVATION (AND) EXAMINATION"/>
+          <item inputvalue="PS" vistavalue=""/>
+        </type>
+        <type name="facilitytreatingspecialty" id="facilitytreatingspecialty" description="Facility Treating Specialty value by Encounter type" active="YES">
+          <item inputvalue="OP" vistavalue=""/>
+          <item inputvalue="ER" vistavalue=""/>
+          <item inputvalue="IP" vistavalue="MEDICAL OBSERVATION"/>
+          <item inputvalue="ICU" vistavalue="MEDICAL OBSERVATION"/>
+          <item inputvalue="PS" vistavalue=""/>
+        </type>
+        <type name="dischargetype" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="10161009" vistavalue="DISCHARGE TO HOME OR POLICE CU"/>
+          <item inputvalue="" vistavalue="REGULAR"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="encounter">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.49</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Type of Encounter</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>EncounterType</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Begin DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Location</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Location</matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Room-Bed</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Room-Bed</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/high/@value</xpath>
+              <type>Data</type>
+              <column>End DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Admission Type</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>NON-VETERAN</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>sdtc:dischargeDispositionCode/@code</xpath>
+              <type>Data</type>
+              <column>Type of Disposition</column>
+              <match></match>
+              <matchAttrib>codesystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>DischargeType</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Admitting Regulation</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>AdmittingRegulation</matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Facility Treating Specialty</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>FacilityTreatingSpecialty</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Facility Directory Excluded</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>1</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Diagnosis Description</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>Test Diagnosis Description</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="Meds">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.88" description="RXNorm" active="NO">
+          <item inputvalue="" vistavalue=""/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="substanceAdministration">
+          <record description="mapping set for record/row">
+            <!--medication activity template-->
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.16</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>consumable/manufacturedProduct/templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>consumable/manufacturedProduct/manufacturedMaterial/code/@code</xpath>
+              <type>Data</type>
+              <column>Medication</column>
+              <match>2.16.840.1.113883.6.88</match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Fill Date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/high/@value</xpath>
+              <type>Data</type>
+              <column>Expire Date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Schedule</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>BID</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Quantity</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>1</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Days supply</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>1</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Number of refills</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>0</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="Vitals">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.1" description="LOINC" active="YES">
+          <item inputvalue="8462-4" vistavalue="BLOOD PRESSURE" hold="YES" holdtype="BP-DI"/>
+          <item inputvalue="8480-6" vistavalue="BLOOD PRESSURE" hold="NO" holdtype="BP-SY"/>
+          <item inputvalue="39156-5" vistavalue="BMI"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="observation">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.13</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.59</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Vital type</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Vitals</matchFunction>
+            </item>
+            <item>
+              <xpath>value/@value</xpath>
+              <type>Data</type>
+              <column>Rate 1</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Vitals</matchFunction>
+            </item>
+            <item>
+              <xpath>value/@value</xpath>
+              <type>Data</type>
+              <column>Rate 2</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Vitals</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Clinic</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>NEIGHBORHOOD PHYSICAN PRACTICE</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Taken by</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="VPatientEd">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="11816003" vistavalue="DIET EDUCATION"/>
+          <item inputvalue="171047005" vistavalue="DRUGS OF ADDICTION EDUCATION"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="act">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.12</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.32</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Education Topic</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>EdTopic</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+        <parentnode name="encounter">
+          <record description="mapping set for record/row">
+            <item>
+              <!--Encounter activities template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.49</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <!--Encounter performed template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Education Topic</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>EdTopic</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="Consults">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="103697008" vistavalue="DENTAL"/>
+          <item inputvalue="171047005" vistavalue="PHYSICAL REHAB"/>
+          <item inputvalue="233591003" vistavalue="DIALYSIS: Other Services"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="act">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.12</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.32</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Consult</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Consult</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Location</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CLINIC 1</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Reason for request</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>Consult.</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="RadOrders">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.1" description="LOINC" active="YES">
+          <item inputvalue="24533-2" vistavalue="ABDOMINAL VESSELS MRI ANGIOGRAM W/CON  IV"/>
+          <item inputvalue="24604-1" vistavalue="BREAST MAMMOGRAM DIAGNOSTIC LIMITED"/>
+          <item inputvalue="25031-6" vistavalue="BONE SCAN"/>
+          <item inputvalue="24665-2" vistavalue="SACRUM AND COCCYX X-RAY"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="113094008" vistavalue="DIAGNOSTIC RADIOGRAPHY OF CHEST, LATERAL"/>
+          <item inputvalue="168731009" vistavalue="CHEST XRAY"/>
+          <item inputvalue="1748006" vistavalue="VTE Confirmed."/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="observation">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.2</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <!--Diagnostic Study Result template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.20</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Rad Procedure</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>RadProc</matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Imaging Location</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>RadProc</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Requesting Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Exam DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Request Location</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CLINIC 1</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Reason</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>Diagnostic Study.</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Clinical History</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>Test</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Technician</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CQM,TECHNOLOGIST</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Tech Comment</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>Comments</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Exam Status</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>C</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="VImmunization">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.12.292" description="CVX" active="YES">
+          <item inputvalue="3" vistavalue="MEASLES,MUMPS,RUBELLA (MMR)"/>
+          <item inputvalue="8" vistavalue="HEPATITIS B"/>
+          <item inputvalue="10" vistavalue="POLIOMYELITIS"/>
+          <item inputvalue="20" vistavalue="DIP-TET-a/PERT"/>
+          <item inputvalue="21" vistavalue="VARICELLA"/>
+          <item inputvalue="33" vistavalue="PNEUMOCOCCAL CONJUGATE PCV23"/>
+          <item inputvalue="48" vistavalue="HIB,PRP-T"/>
+          <item inputvalue="83" vistavalue="HEPA,PED/ADOL-2"/>
+          <item inputvalue="104" vistavalue="HEPA/HEPB ADULT"/>
+          <item inputvalue="111" vistavalue="FLU,NASAL"/>
+          <item inputvalue="116" vistavalue="ROTOVIRUS,ORAL"/>
+          <item inputvalue="140" vistavalue="INFLUENZA"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="442333005" vistavalue="INFLUENZA"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="substanceAdministration">
+          <record description="mapping set for record/row">
+            <item>
+              <!--medication activity template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.16</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <!--medication information template-->
+              <xpath>consumable/manufacturedProduct/templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>consumable/manufacturedProduct/manufacturedMaterial/code/@code</xpath>
+              <type>Data</type>
+              <column>Immunization</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Immunization</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+        <parentnode name="procedure">
+          <record description="mapping set for record/row">
+            <item>
+              <!--procedure performed template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.64</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <!--Procedure Activity Procedure-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.14</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Immunization</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Immunization</matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="VExam">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.1" description="LOINC" active="YES">
+          <item inputvalue="24604-1" vistavalue="MAMMOGRAM"/>
+          <item inputvalue="32451-7" vistavalue="MACULAR EXAM"/>
+          <item inputvalue="44249-1" vistavalue="PHQ-9 RESULT"/>
+          <item inputvalue="54108-6" vistavalue="NEONATAL HEARING EXAM"/>
+          <item inputvalue="54109-4" vistavalue="NEONATAL HEARING EXAM"/>
+          <item inputvalue="57254-5" vistavalue="FALL RISK ASSESSMENT"/>
+          <item inputvalue="58151-2" vistavalue="BIMS SCORE"/>
+          <item inputvalue="65853-4" vistavalue="CARDIOVASCULAR RISK"/>
+          <item inputvalue="71484-0" vistavalue="CUP TO DISK RATIO EXAM"/>
+          <item inputvalue="71486-5" vistavalue="OPTIC DISK EXAM"/>
+          <item inputvalue="71938-5" vistavalue="MLHFQ"/>
+          <item inputvalue="71955-9" vistavalue="PROMIS-29:"/>
+          <item inputvalue="73831-0" vistavalue="ADOLESCENT DEPRESSION SCREEN NEGATIVE"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="225337009" vistavalue="SUICIDE RISK ASSESSMENT"/>
+          <item inputvalue="91161007" vistavalue="PULSE FOOT EXAM"/>
+          <item inputvalue="134388005" vistavalue="DIABETIC FOOT EXAM"/>
+          <item inputvalue="252779009" vistavalue="DILATED EYE EXAM"/>
+          <item inputvalue="401191002" vistavalue="DIABETIC FOOT CHECK"/>
+          <item inputvalue="419775003" vistavalue="VISION EXAM"/>
+          <item inputvalue="412726003" vistavalue="LENGTH OF GESTATION AT BIRTH"/>
+          <item inputvalue="44413500" vistavalue="ESTIMATED FETAL GESTATIONAL AGE"/>
+          <item inputvalue="417491009" vistavalue="NEONATAL HEARING EXAM"/>
+          <item inputvalue="274795007" vistavalue="DIABETIC EYE EXAM"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="observation">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.13</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.59</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Exam</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Exam</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.2</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <!--/Diagnostic Study Result template-->
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.20</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Exam</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Exam</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="VCpt">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.285" description="HCPS" active="YES">
+          <item inputvalue="G0438" vistavalue="G0438"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.12" description="CPT" active="YES">
+          <item inputvalue="99201" vistavalue="OP"/>
+          <item inputvalue="90791" vistavalue="PS"/>
+          <item inputvalue="99202" vistavalue="OP"/>
+          <item inputvalue="99381" vistavalue="OP"/>
+          <item inputvalue="99213" vistavalue="OP"/>
+          <item inputvalue="99203" vistavalue="OP"/>
+        </type>
+        <type name="codesystem" id="2.16.840.1.113883.6.96" description="SNOMED-CT" active="YES">
+          <item inputvalue="10492003" vistavalue="55810"/>
+          <item inputvalue="84755001" vistavalue="77427"/>
+          <item inputvalue="234723000" vistavalue="D1206"/>
+          <item inputvalue="10745001" vistavalue="59400"/>
+          <item inputvalue="10178000" vistavalue="66840"/>
+          <item inputvalue="105355005" vistavalue="99408"/>
+          <item inputvalue="12350003" vistavalue="44388"/>
+          <item inputvalue="15163009" vistavalue="27130"/>
+          <item inputvalue="177184002" vistavalue="59409"/>
+          <item inputvalue="179344006" vistavalue="27447"/>
+          <item inputvalue="13767004" vistavalue="65235"/>
+          <item inputvalue="108241001" vistavalue="90937"/>
+          <item inputvalue="185349003" vistavalue="99202"/>
+          <item inputvalue="442333005" vistavalue="90653"/>
+          <item inputvalue="444783004" vistavalue="45378"/>
+          <item inputvalue="4525004" vistavalue="99285"/>
+          <item inputvalue="185349003" vistavalue="99381"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="encounter">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.49</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.23</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Cpt</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider Narrative</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>OTHER</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+        <parentnode name="procedure">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.64</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.22.4.14</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Cpt</column>
+              <match></match>
+              <matchAttrib>codeSystem</matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction>Procedure</matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider Narrative</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>OTHER</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>DateTime</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Provider</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>CERTIFICATION,DOCTOR</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>Static</xpath>
+              <type>Pat SSN</type>
+              <column></column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+    <worksheet value="Labs">
+      <mapping>
+        <type name="codesystem" id="2.16.840.1.113883.6.1" description="LOINC" active="YES">
+          <item inputvalue="2085-9" vistavalue="HDL CHOLESTEROL"/>
+          <item inputvalue="39469-2" vistavalue="LDL CHOLESTEROL"/>
+          <item inputvalue="46418-0" vistavalue="INR"/>
+          <item inputvalue="34714-6" vistavalue="PT/INR"/>
+          <item inputvalue="2093-3" vistavalue="CHOLESTEROL, TOTAL"/>
+          <item inputvalue="12773-8" vistavalue="LDL CHOLESTEROL"/>
+          <item inputvalue="13457-7" vistavalue="LDL CHOLESTEROL"/>
+          <item inputvalue="13056-7" vistavalue="PLATELET COUNT"/>
+          <item inputvalue="10524-7" vistavalue="PAP TEST"/>
+          <item inputvalue="17856-6" vistavalue="HEMOGLOBIN A1C"/>
+          <item inputvalue="17855-8" vistavalue="HEMOGLOBIN A1C"/>
+          <item inputvalue="10508-0" vistavalue="PSA"/>
+          <item inputvalue="10351-5" vistavalue="HIV 1 RNA"/>
+          <item inputvalue="35266-6" vistavalue="GLEASON SCORE"/>
+          <item inputvalue="24467-3" vistavalue="CD4 COUNT"/>
+          <item inputvalue="20447-9" vistavalue="HIV 1 RNA"/>
+          <item inputvalue="19080-1" vistavalue="PREGNANCY TEST"/>
+          <item inputvalue="10674-0" vistavalue="HEPATITIS B SURFACE ANTIGEN"/>
+          <item inputvalue="2093-3" vistavalue="CHOLESTEROL, TOTAL"/>
+          <item inputvalue="12951-0" vistavalue="TRIGLYCERIDES"/>
+          <item inputvalue="11268-0" vistavalue="STREPTOZYME"/>
+          <item inputvalue="13217-5" vistavalue="CHLAMYDIA CULTURE"/>
+          <item inputvalue="14463-4" vistavalue="CHLAMYDIA CULTURE"/>
+        </type>
+      </mapping>
+      <datalocation>
+        <parentnode name="observation">
+          <record description="mapping set for record/row">
+            <item>
+              <xpath>templateId/@root</xpath>
+              <type>Filter</type>
+              <column></column>
+              <match>2.16.840.1.113883.10.20.24.3.38</match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>code/@code</xpath>
+              <type>Data</type>
+              <column>Lab test</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/low/@value</xpath>
+              <type>Data</type>
+              <column>Order date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>effectiveTime/high/@value</xpath>
+              <type>Data</type>
+              <column>Result date</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath>value/@value</xpath>
+              <type>Data</type>
+              <column>Result value</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Location</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal>NEIGHBORHOOD PHYSICAN PRACTICE</matchVal>
+              <matchFunction></matchFunction>
+            </item>
+            <item>
+              <xpath></xpath>
+              <type>Static</type>
+              <column>Pat SSN</column>
+              <match></match>
+              <matchAttrib></matchAttrib>
+              <matchVal></matchVal>
+              <matchFunction></matchFunction>
+            </item>
+          </record>
+        </parentnode>
+      </datalocation>
+    </worksheet>
+  </worksheets>
+</QRDAConfig>
