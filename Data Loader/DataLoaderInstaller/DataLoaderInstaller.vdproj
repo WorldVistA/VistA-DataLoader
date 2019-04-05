@@ -21,6 +21,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1B6BB4F48E414E14AD859AD9099DF81B"
+        "OwnerKey" = "8:_7A09CD47636746E298C277C48D8E8701"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1B6BB4F48E414E14AD859AD9099DF81B"
+        "OwnerKey" = "8:_CDC3105FB4E249799308001685B5DDF5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1BCDF41D029F46889374DAF86E48E5CE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -57,14 +69,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6BE9ABB2A91FCAFA4158A50D81F23DCE"
-        "OwnerKey" = "8:_7A09CD47636746E298C277C48D8E8701"
+        "MsmKey" = "8:_72C0A24E495E40B9A5283CF713997BE4"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_72C0A24E495E40B9A5283CF713997BE4"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_73A2614FAE58E3EDCEAF203E532D4CF2"
+        "OwnerKey" = "8:_7A09CD47636746E298C277C48D8E8701"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -123,12 +135,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F06D34C6FE0C8FF1711A25F6E17A5258"
-        "OwnerKey" = "8:_7A09CD47636746E298C277C48D8E8701"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_CDC3105FB4E249799308001685B5DDF5"
         "MsmSig" = "8:_UNDEFINED"
@@ -148,13 +154,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6BE9ABB2A91FCAFA4158A50D81F23DCE"
+        "OwnerKey" = "8:_1B6BB4F48E414E14AD859AD9099DF81B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F06D34C6FE0C8FF1711A25F6E17A5258"
+        "OwnerKey" = "8:_73A2614FAE58E3EDCEAF203E532D4CF2"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -270,6 +276,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1B6BB4F48E414E14AD859AD9099DF81B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:VistA.DataLoader.Broker, Version=2.0.0.5, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1B6BB4F48E414E14AD859AD9099DF81B"
+                    {
+                    "Name" = "8:VistA.DataLoader.Broker.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:VistA.DataLoader.Broker.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_7765405ED7C84A80B786490E4D4907BB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1BCDF41D029F46889374DAF86E48E5CE"
@@ -392,32 +429,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6BE9ABB2A91FCAFA4158A50D81F23DCE"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:VistA.DataLoader.Broker, Version=2.0.0.5, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:VistA.DataLoader.Broker.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_7765405ED7C84A80B786490E4D4907BB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72C0A24E495E40B9A5283CF713997BE4"
             {
             "SourcePath" = "8:..\\..\\Documentation\\DataLoader_User_Setup.txt"
@@ -436,6 +447,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_73A2614FAE58E3EDCEAF203E532D4CF2"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DataLoader.Common, Version=2.0.0.5, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_73A2614FAE58E3EDCEAF203E532D4CF2"
+                    {
+                    "Name" = "8:DataLoader.Common.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DataLoader.Common.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_7765405ED7C84A80B786490E4D4907BB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7DD7187866654A0F859491CDE2BD5332"
@@ -569,37 +611,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F06D34C6FE0C8FF1711A25F6E17A5258"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DataLoader.Common, Version=2.0.0.5, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F06D34C6FE0C8FF1711A25F6E17A5258"
-                    {
-                    "Name" = "8:DataLoader.Common.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DataLoader.Common.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_7765405ED7C84A80B786490E4D4907BB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -669,26 +680,15 @@
                     "Property" = "8:_59E7303F2A474A52873F4645E66AFD0B"
                         "Folders"
                         {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_7A7C2EB51F264A27B431EFC5EBEE991B"
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_3C500508624F4AC0A01EDEEEB0A9AE84"
                             {
-                            "Name" = "8:Tools"
+                            "Name" = "8:Data Loader"
                             "AlwaysCreate" = "11:TRUE"
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
-                            "Property" = "8:_D2D7BFC268E149F793579EF5205761C3"
+                            "Property" = "8:_4DD6ED1349104A478E80D1BB7AB6BAEC"
                                 "Folders"
                                 {
-                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_E55FB97F964A4BF69362CD00F14AC800"
-                                    {
-                                    "Name" = "8:Data Loader"
-                                    "AlwaysCreate" = "11:TRUE"
-                                    "Condition" = "8:"
-                                    "Transitive" = "11:FALSE"
-                                    "Property" = "8:_4DD6ED1349104A478E80D1BB7AB6BAEC"
-                                        "Folders"
-                                        {
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -712,7 +712,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Data Loader"
         "ProductCode" = "8:{BF514DA0-3D46-4DB5-8345-6512741EE043}"
-        "PackageCode" = "8:{23049902-6D5E-4AA9-BCBA-CF158DE80A0C}"
+        "PackageCode" = "8:{8CB65253-7F5B-4578-9CED-B45E2FC1270B}"
         "UpgradeCode" = "8:{4FB6CFFD-781D-46E3-8D2C-692F9001A6BF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -834,14 +834,14 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2FDD288024814AFFAE94C6564F67CD5B"
             {
-            "Name" = "8:Shortcut to Primary output from Window (Active)"
+            "Name" = "8:VistA Data Loader"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_7A09CD47636746E298C277C48D8E8701"
-            "Folder" = "8:_7A7C2EB51F264A27B431EFC5EBEE991B"
+            "Folder" = "8:_3C500508624F4AC0A01EDEEEB0A9AE84"
             "WorkingFolder" = "8:_7765405ED7C84A80B786490E4D4907BB"
             "Icon" = "8:_32A852F46BB14C73B875F7A539F07CCF"
             "Feature" = "8:"
@@ -1261,7 +1261,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7A09CD47636746E298C277C48D8E8701"
             {
-            "SourcePath" = "8:..\\Importer\\obj\\x86\\Release\\DataLoader.exe"
+            "SourcePath" = "8:..\\Importer\\obj\\x86\\Debug\\DataLoader.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7765405ED7C84A80B786490E4D4907BB"
@@ -1289,7 +1289,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CDC3105FB4E249799308001685B5DDF5"
             {
-            "SourcePath" = "8:..\\Importer.Common\\obj\\Release\\DataLoader.Common.dll"
+            "SourcePath" = "8:..\\Importer.Common\\obj\\Debug\\DataLoader.Common.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7765405ED7C84A80B786490E4D4907BB"
