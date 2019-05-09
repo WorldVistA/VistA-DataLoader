@@ -1,27 +1,5 @@
 ISIIMPU4 ;ISI GROUP/MLS -- PROBLEM IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
  ;
  ; Column definitions for MISCDEF table (below):
@@ -113,14 +91,10 @@ VALPROB(ISIMISC)
  S VALUE=ISIMISC("PROBLEM")
  S (OUT,EXPIEN)=""
  ;
- N ISISNOMD,LINDX S ISISNOMD=0,LINDX="ACODE"
- I $D(^LEX(757.02,"CODE",VALUE_" ")) S LINDX="CODE"
- I $D(^LEX(757.02,LINDX,VALUE_" ")) D  
+ N ISISNOMD S ISISNOMD=0
+ I $D(^LEX(757.02,"ACODE",VALUE_" ")) D  
  . S X=VALUE I $S(X?.1A2.3N1".".2N:1,X?.1A2.3N1"+":1,1:0) Q  ;no ICD9 Lookup, only snomed
- . N LEXVDT S LEXVDT=$S($G(ISIMISC("ONSET")):$G(ISIMISC("ONSET")),$G(ISIMISC("ENTERED")):$G(ISIMISC("ENTERED")),1:DT) 
- . S LEXIEN=0 F  S LEXIEN=$O(^LEX(757.02,LINDX,VALUE_" ",LEXIEN)) Q:'LEXIEN!$$STATIEN^LEXABC(LEXIEN)  
- . Q:'LEXIEN
- . S ISISNOMD=LEXIEN
+ . S ISISNOMD=$O(^LEX(757.02,"ACODE",VALUE_" ",0))
  . N LST D LEX^ORQQPL4(.LST,VALUE,"PLS",0)
  . Q:'$D(@LST)
  . N STRNG S STRNG=@LST@(1) Q:'(+STRNG)
@@ -199,8 +173,6 @@ VALPROB(ISIMISC)
  ;
  I $G(ISIMISC("RECORDED")) S ISIMISC("RECORDED")=$P(ISIMISC("RECORDED"),".")
  I '$G(ISIMISC("RECORDED")) S ISIMISC("RECORDED")=ISIMISC("ENTERED")
- ;
- ;I '$G(ISIMISC("ONSET")) S ISIMISC("ONSET")=ISIMISC("ENTERED")
  ;
  ;-- TYPE (not required, if none use 'A'ccute) --
  I $G(ISIMISC("TYPE"))="" S ISIMISC("TYPE")="A"

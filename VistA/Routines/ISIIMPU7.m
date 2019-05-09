@@ -1,27 +1,5 @@
-ISIIMPU7 ;ISI GROUP/MLS -- IMPORT Utility LABS ; 17 Sep 2018 12:30 PM
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ISIIMPU7 ;;ISI GROUP/MLS -- IMPORT Utility LABS
+ ;;1.0;;;Jun 26,2012;Build 58
  Q  
 MISCDEF ;;+++++ DEFINITIONS OF LAB MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
@@ -102,7 +80,6 @@ VALLAB(ISIMISC)
  I '$D(ISIMISC("LAB_TEST")) Q "-1^Missing LAB_TEST."
  I $D(ISIMISC("LAB_TEST")) D  
  . S VALUE=$G(ISIMISC("LAB_TEST")) I VALUE="" S EXIT=1,MSG="Missing value for LAB_TEST (#60)." Q
- . I VALUE["-" N LIEN S LIEN=$$LOINCCHK(VALUE) I LIEN S VALUE=$P(^LAB(60,LIEN,0),U)
  . I '$D(^LAB(60,"B",VALUE)) S EXIT=1,MSG="Couldn't find ien for LAB_TEST (#60)." Q
  . S Y=$O(^LAB(60,"B",VALUE,"")) I Y="" S EXIT=1,MSG="Couldn't find ien for LAB_TEST (#60)." Q
  . S Z=$P($G(^LAB(60,Y,0)),U,4) I Z'="CH" S EXIT=1,MSG="LAB_TEST incorrect. SUBSCRIPT (#60,4) must by 'CH'." Q
@@ -156,42 +133,4 @@ VALLAB(ISIMISC)
  . Q
  Q:EXIT "-1^Invalid LOCATION value (#44,.01)."
  ;
- I $$LABDUP(ISIMISC("DFN"),ISIMISC("RESULT_DT"),LABNAME) Q "-1^Duplicate Lab Test entry for patient."
  Q 1
- ;
-LOINCCHK(LOINC)
- N IEN,LIEN,NODE,TMP,WARRAY,WIEN,WINDX,LTESTI 
- S IEN=0,LOINC=$G(LOINC)
- ; check loinc is in #95.3
- S LIEN=+LOINC
- I '$D(^LAB(95.3,LIEN)) Q 0 ; no lab loinc found
- S NODE=$G(^LAB(95.3,LIEN,0))
- S TMP=$P(NODE,U)_"-"_$P(NODE,U,15) ;build full loinc w/check digit
- I TMP'=LOINC Q 0 ;doesn't match
- ; Check #64 WKLD CODE
- F WINDX="AI","AH" D  
- . S WIEN=0 F  S WIEN=$O(^LAM(WINDX,LIEN,WIEN)) Q:'WIEN  D  
- . . I '$D(^LAB(60,"AC",WIEN)) Q ;no entry in #60 (Lab Test)
- . . S WARRAY(WIEN)=""
- . . Q
- . Q
- ; Get Lab test from #60
- S WIEN=0 F  S WIEN=$O(WARRAY(WIEN)) Q:'WIEN!IEN  D  
- . S LTESTI=0 F  S LTESTI=$O(^LAB(60,"AC",WIEN,LTESTI)) Q:'LTESTI!IEN  D  
- . . I '$D(^LAB(60,"AF",LIEN,LTESTI)) Q ;check Lab Loinc x-ref against test
- . . S IEN=LTESTI
- . . Q
- . Q
- ;
- Q IEN
- ;
-LABDUP(DFN,DTTM,LTEST)
- N LRDFN,LRDN,LTIEN,RVDT,EXIT
- S EXIT=0
- S LRDFN=$$LRDFN^LRPXAPIU(DFN)
- I 'LRDFN Q 0
- S LTIEN=$O(^LAB(60,"B",LTEST,0))
- S LRDN=$$LRDN^LRPXAPIU(LTIEN)
- S RVDT=$$LRIDT^LRPXAPIU(DTTM)
- I $D(^LR(LRDFN,"CH",RVDT,LRDN)) S EXIT=1
- Q EXIT

@@ -1,27 +1,5 @@
 ISIIMP07 ;ISI Group/MLS -- Problem Create Utility
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
 VALIDATE() 
  ; Validate import array contents
@@ -65,13 +43,13 @@ CREATE(ISIMISC)
  S GMPFLD(".03")=0 ;
  S GMPFLD(".05")="^"_ISIMISC("EXPNM") ;Expression text
  S GMPFLD(".08")=$G(ISIMISC("ENTERED")) ; DATE ENTERED 
- S GMPFLD(".12")=$G(ISIMISC("STATUS")) ;Active/Inactive
- S GMPFLD(".13")=$G(ISIMISC("ONSET")) ;Onset date
- S GMPFLD("1.01")=$G(ISIMISC("EXPIEN"))_"^"_$G(ISIMISC("EXPNM")) ;^LEX(757.01 ien,descip
+ S GMPFLD(".12")=ISIMISC("STATUS") ;Active/Inactive
+ S GMPFLD(".13")=ISIMISC("ONSET") ;Onset date
+ S GMPFLD("1.01")=ISIMISC("EXPIEN")_"^"_ISIMISC("EXPNM") ;^LEX(757.01 ien,descip
  S GMPFLD("1.02")="P" ;CONDITION (1.01)
- S GMPFLD("1.03")=$G(ISIMISC("PROVIDER")) ;Entered by
- S GMPFLD("1.04")=$G(ISIMISC("PROVIDER")) ;Recording provider
- S GMPFLD("1.05")=$G(ISIMISC("PROVIDER")) ;Responsible provider
+ S GMPFLD("1.03")=ISIMISC("PROVIDER") ;Entered by
+ S GMPFLD("1.04")=ISIMISC("PROVIDER") ;Recording provider
+ S GMPFLD("1.05")=ISIMISC("PROVIDER") ;Responsible provider
  S GMPFLD("1.06")=$S($O(^DIC(49,"B","MEDICINE","")):$O(^DIC(49,"B","MEDICINE","")),1:1) ;SERVICE/SECTION (#49)
  S GMPFLD("1.07")=$G(ISIMISC("RESOLVED")) ; Date resolved
  S GMPFLD("1.08")=$G(ISIMISC("LOCATION")) ; Clinic (#44)

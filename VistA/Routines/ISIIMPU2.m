@@ -1,27 +1,5 @@
 ISIIMPU2 ;ISI GROUP/MLS -- IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
  ;
  ; Column definitions for MISCDEF table (below):
@@ -108,7 +86,7 @@ VALAPPT()
  ;
  I $P(ADATE,".",2)="" Q "-1^Missing time for appt. (ADATE)."
  ; check Date/time against fileman date/time field 
- S FILE=2.98,FIELD=.001,VALUE=ADATE,FLAG="" D  
+ S FILE=2.98,FIELD=.001,VALUE=ADATE
  . S Y=VALUE D DD^%DT S VALUE=Y ;Convert to external
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
@@ -141,7 +119,6 @@ VALAPPT()
  I $G(ISIMISC("PROVIDER"))'="" D  
  . S PROV=ISIMISC("PROVIDER")
  . I 'PROV S PROV=$O(^VA(200,"B",PROV,""))
- . I '$L(PROV) S EXIT=1 Q
  . I '$D(^VA(200,PROV,0)) S EXIT=1 Q
  . Q
  Q:EXIT "-1^Bad Provider entry (#200)"

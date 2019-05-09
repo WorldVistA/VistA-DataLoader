@@ -1,27 +1,5 @@
 ISIIMPU1 ;ISI GROUP/MLS -- Patient Import Utility
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
  ;
  ; Column definitions for MISCDEF table (below):
@@ -253,11 +231,6 @@ VALIDATE(ISIMISC)
  . S FIELD=$P(MISCDEF("RACE"),"|",2)
  . S FILE=$P(FIELD,","),FIELD=$P(FIELD,",",2) ;race information is multiple
  . S VALUE=ISIMISC("RACE")
- . I VALUE?4N.NP D  
- . . N ISITMP S ISITMP=$O(^DIC(10,"AHL7",VALUE,0))
- . . I 'ISITMP S ISITMP=$O(^DIC(10,"D",VALUE,0))
- . . I ISITMP S VALUE=$P($G(^DIC(10,ISITMP,0)),U)
- . . Q
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1 Q
  . S FILE=2 ;set back to default
  . I RESULT S ISIMISC("RACE")=RESULT
@@ -269,11 +242,6 @@ VALIDATE(ISIMISC)
  . S FIELD=$P(MISCDEF("ETHNICITY"),"|",2)
  . S FILE=$P(FIELD,","),FIELD=$P(FIELD,",",2) ;ethnicity information is multiple
  . S VALUE=ISIMISC("ETHNICITY")
-  . I VALUE?4N.NP D  
- . . N ISITMP S ISITMP=$O(^DIC(10.2,"AHL7",VALUE,0))
- . . I 'ISITMP S ISITMP=$O(^DIC(10.2,"D",VALUE,0))
- . . I ISITMP S VALUE=$P($G(^DIC(10.2,ISITMP,0)),U)
- . . Q
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1 Q
  . S FILE=2 ;set back to default
  . I RESULT S ISIMISC("ETHNICITY")=RESULT

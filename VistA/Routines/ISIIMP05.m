@@ -1,27 +1,5 @@
 ISIIMP05 ;ISI Group/MLS -- Appointment Create Utility
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
  ;
 VALIDATE() 
@@ -86,7 +64,8 @@ APPT(ADATE,SC,DFN,CDATE)
  ;Create encounter
  D ENCOUNTER Q:+ISIRC<0 ISIRC
  ;
- D PCE(DFN,VISIT,PROVIEN,ICD,CPT,SC,ADATE)
+ ;Outpatient diagnosis
+ ;D DIAG(OEPTR,ICD) Q:+ISIRC<0 ISIRC
  ;
  ;Check out
  D DT^SDCO1(DFN,ADATE,SC,SDY,0,CDATE)
@@ -131,7 +110,7 @@ CHKVST() ;Chec for duplicate entries
  Q VDATE
  ;
 ENCOUNTER ;
- N DIE,FDA,MSG,NIEN
+ N DIE,FDA,MSG
  I '$D(^SCE(0)) S ISIRC="-1^VistA Error.  No top level node for OUTPATIENT ENCOUNTER (SCE(0))" Q
  S OEPTR=$P($G(^SCE(0)),U,3)
  K DIE,FDA,MSG
@@ -145,11 +124,18 @@ ENCOUNTER ;
  S FDA(409.68,"+1,",.09)=SDY
  S FDA(409.68,"+1,",.1)=9
  S FDA(409.68,"+1,",.11)=$S($P(^SC(SC,0),U,15):$P(^(0),"^",15),1:+$O(^DG(40.8,0)))
- D UPDATE^DIE("","FDA","NIEN","MSG")
+ D UPDATE^DIE("","FDA","","MSG")
  I $D(MSG) S ISIRC="-1^Problem saving Outpatient Encounter information (#409.68) "_$G(MSG("DIERR",1,"TEXT",1))
  Q:+ISIRC<0
- S OEPTR=+NIEN(1)
+ I $P($G(^SCE(0)),U,3)'>OEPTR S ISIRC="-1^Problem getting Oupatient Encounter pointer (#409.69" Q
+ S OEPTR=$P($G(^SCE(0)),U,3)
  S ISIRC=1
+ Q
+ ;
+DIAG(OEPTR,ICD)
+ ;DIAGNOSIS (409.43,.01) POINTER TO ICD DIAGNOSIS FILE (#80)
+ ;OUTPATIENT ENCOUNTER (409.43,.02) POINTER OUTPATIENT ENCOUNTER FILE (#409.68)
+ ;DIAGNOSIS RANKING (409.43,.03)    FREE TEXT
  Q
  ;
 PATAPPT ;
@@ -168,34 +154,3 @@ PATAPPT ;
  Q:+ISIRC<0
  S ISIRC=1
  Q
- ;
-PCE(DFN,VISIT,PROVIEN,ICD,CPT,ISC,APTDT)
- I '$G(DFN) Q
- I '$G(APTDT) Q
- S ISC=$G(ISC),PROVIEN=$G(PROVIEN),ICD=$G(ICD),CPT=$G(CPT)
- N DATA,ERROR,ARRAY,Y,PACKAGE,SOURCE
- S PACKAGE=35 ;ORDER ENTRY/RESULTS REPORTING
- S SOURCE=36 ;TEXT INTEGRATION UTILITIES
- K DATA
- S DATA("ENCOUNTER",1,"ENC D/T")=APTDT,DATA("ENCOUNTER",1,"HOS LOC")=ISC
- S DATA("ENCOUNTER",1,"PATIENT")=DFN,DATA("ENCOUNTER",1,"SERVICE CATEGORY")="A"
- S DATA("ENCOUNTER",1,"ENCOUNTER TYPE")="P"
- ;
- S:PROVIEN DATA("PROVIDER",1,"NAME")=PROVIEN,DATA("PROVIDER",1,"PRIMARY")=1 ;Primary provider
- ;
- I ICD D  
- . S DATA("DX/PL",1,"PRIMARY")=1 D
- . S DATA("DX/PL",1,"DIAGNOSIS")=ICD
- ;
- I CPT D  
- . I PROVIEN D  
- . . S DATA("PROCEDURE",1,"ENC PROVIDER")=PROVIEN
- . . S DATA("PROCEDURE",1,"ORD PROVIDER")=PROVIEN
- . . Q
- . S DATA("PROCEDURE",1,"EVENT D/T")=APTDT
- . S DATA("PROCEDURE",1,"PROCEDURE")=CPT
- . I ICD S DATA("PROCEDURE",1,"DIAGNOSIS")=ICD
- . S DATA("PROCEDURE",1,"QTY")=1
- ;
- S Y=$$DATA2PCE^PXAPI($NA(DATA),PACKAGE,SOURCE,VISIT,,,.ERROR,,.ARRAY)
- Q $S(Y<-1:"D2P: ~PXAPI Err "_$E(Y,1,4),1:"")

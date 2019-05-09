@@ -1,27 +1,5 @@
 ISIIMPU9 ;;ISI GROUP/MLS -- MED IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q  
 MISCDEF ;;+++++ DEFINITIONS OF MED MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
@@ -119,7 +97,7 @@ VALMEDS(ISIMISC)
  ;
  I $D(ISIMISC("DRUG")) D  
  . S VALUE=ISIMISC("DRUG")
- . I '$D(^PSDRUG(VALUE,0)) S VALUE=$O(^PSDRUG("B",VALUE,""),-1) ;reverse to get latest
+ . I '$D(^PSDRUG(VALUE,0)) S VALUE=$O(^PSDRUG("B",VALUE,""))
  . I 'VALUE S EXIT=1 Q
  . I $P($G(^PSDRUG(VALUE,2)),U,1)="" S EXIT=1 Q ;Missing pointer to Orderable item #50.7
  . ;I $P($G(^PSDRUG(VALUE,0)),U,3)="" S EXIT=1 Q ;Missing DEA value
@@ -140,7 +118,6 @@ VALMEDS(ISIMISC)
  . S VALUE=ISIMISC("SIG")
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . S VALUE=$O(^PS(51,"B",VALUE,""))
- . I '$L(VALUE) Q ; file not always populated
  . I $P(^PS(51,VALUE,0),U,4)>1 S EXIT=1 Q ;#51,30 Intended use is Inpatient only
  . Q
  Q:EXIT "-1^Invalid Medication Instruction/SIG (#51,.01) value."

@@ -1,27 +1,5 @@
-ISIIMP13 ;ISI GROUP/MLS -- LABS IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ISIIMP13 ;ISI GROUP/MLS -- LABS IMPORT CONT.;2019-01-29  10:06 AM
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
  ;
 VALIDATE()      ;
@@ -45,12 +23,14 @@ IMPRTLAB(ISIMISC) ;Create lab entry
  ;
  N NODE,DFN
  ;
+ N ZTQUEUED S ZTQUEUED=1
  I ^%ZOSF("OS")["GT.M" N ZIO K ZIO M ZIO=IO N IO M IO=ZIO S %ZIS="OH",IOP="NULL" D ^%ZIS S XWBNULL=IO,IO(0)=IO O IO(0) U IO(0)
  ;
  D PREP Q:+ISIRC<0 ISIRC
  D LAB
  ;
- I ^%ZOSF("OS")["GT.M" U XWBTDEV:(nowrap:nodelimiter:ioerror="TRAP")
+ ; OSE/SMH ; XWBTDEV is not necessarily defined.
+ ; I ^%ZOSF("OS")["GT.M" U XWBTDEV:(nowrap:nodelimiter:ioerror="TRAP")
  ;
  Q ISIRC
  ;

@@ -1,27 +1,5 @@
 ISIIMP03 ;ISI GROUP/MLS -- PATIENT IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ;;1.0;;;Jun 26,2012;Build 58
  Q
  ;
 VALIDATE()      ;
@@ -125,13 +103,7 @@ PREPVAL ;Prep import values
  I STRT1="" S STRT1=$$STREET
  S STRT2=$G(ISIMISC("STREET_ADD2")) 
  S CITY=$G(ISIMISC("CITY")) I CITY="" S CITY=$$CITY
- S STATE=$G(ISIMISC("STATE")) 
- I '+STATE,STATE'="" D  ;DHP/ART fix to use state codes as input
- . S STATE=$O(^DIC(5,"C",$$UP^XLFSTR(STATE),""))
- . Q:STATE'=""
- . S STATE=$G(ISIMISC("STATE"))
- . S STATE=$O(^DIC(5,"B",$$UP^XLFSTR(STATE),""))
- I STATE="" S STATE=$$STATE
+ S STATE=$G(ISIMISC("STATE")) I STATE="" S STATE=$$STATE
  S ZIP=$G(ISIMISC("ZIP")) I ZIP="" S ZIP=$$MASK("ZIP",$G(ISIMISC("ZIP_4_MASK")))
  S MARSTAT=$G(ISIMISC("MARITAL_STATUS")) I MARSTAT="" S MARSTAT=$$MARSTAT
  S PHON=$G(ISIMISC("PH_NUM")) I PHON="" S PHON=$$MASK("PHONE",$G(ISIMISC("PH_NUM_MASK")))
@@ -145,17 +117,9 @@ PREPVAL ;Prep import values
  S MERGE=$G(ISIMISC("MRG_SOURCE"))
  Q
 CREATEPNT ;
- N FDA,MSG,ZIEN,DFN
+ N FDA,MSG 
  K FDA
- ; Check for dups
- S DFN=$O(^DPT("B",NAME,0))
- I DFN D
- . I $P(^DPT(DFN,0),U,2)'=SEX S DFN=0
- . I $P(^DPT(DFN,0),U,3)'=DOB S DFN=0
- . S ISIRESUL(ISIINCR)=DFN_"^"_$P(^DPT(DFN,0),U,9)_"^"_NAME
- . S ISIRESUL(0)=ISIINCR
- ;
- I 'DFN D  
+ D  
  . S FDA(2,"+1,",.01)=NAME
  . S FDA(2,"+1,",.02)=SEX
  . S FDA(2,"+1,",.03)=DOB
@@ -215,9 +179,8 @@ CREATEPNT ;
  . . ;ZW FDA
  . . W !,"<HIT RETURN TO PROCEED>" R X:5 
  . . Q
- . D UPDATE^DIE("","FDA","ZIEN","MSG")
+ . D UPDATE^DIE("","FDA",,"MSG")
  . I $D(MSG) S ISIRC="-1^"_$G(MSG("DIERR",1,"TEXT",1)) Q
- . S DFN=+$G(ZIEN(1)) D IHSPNT(DFN) ;create IHS Patient File entry
  . ;
  . I '$D(^DPT("SSN",$E(STRTSSN,2,10))) S ISIRC="-1^Problem generating pt." Q  
  . I $G(ISIMISC("DFN_NAME"))="Y" I $G(ISIMISC("NAME_MASK"))'="" I $G(ISIMISC("NAME"))="" D  
@@ -383,15 +346,4 @@ NUMTBL  ;
  S NUMCONV(8)="EIGHT"
  S NUMCONV(9)="NINE"
  S NUMCONV(0)="ZERO"
- Q
- ;
-IHSPNT(DFN)
- S DFN=+$G(DFN) I 'DFN Q
- I '$D(^DPT(DFN,0)) Q 
- I $D(^AUPNPAT(DFN)) Q
- N FDA,MSG,ZIEN
- S FDA(9000001,"?+1,",.01)=DFN
- S FDA(9000001,"?+1,",.02)=$G(DT)
- S FDA(9000001,"?+1,",.03)=$G(DT)
- D UPDATE^DIE("","FDA","ZIEN","MSG")
  Q

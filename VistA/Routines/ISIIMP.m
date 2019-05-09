@@ -1,5 +1,5 @@
-ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ; 
- ;;2.0;;;Jun 26,2012;Build 31
+ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;6/26/12
+ ;;2.0;;;Jun 26,2012;Build 58
  ;
  ; VistA Data Loader 2.0
  ;
@@ -10,18 +10,19 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; of the National Coordinator for Health Information Technology under Award
  ; Number #1U24OC000013-01.
  ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
+ ; All portions of this release that are modified from the original Freedom 
+ ; of Information Act release provided by the Department of Veterans Affairs 
+ ; is subject to the terms of the GNU Affero General Public License as published
+ ; by the Free Software Foundation, either version 3 of the License, or any 
+ ; later version.
  ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
+ ; This program is distributed in the hope that it will be useful, but WITHOUT
+ ; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ ; FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ ; details.
  ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
- ;
+ ; You should have received a copy of the GNU Affero General Public License 
+ ; along with this program.  If not, see http://www.gnu.org/licenses/.
  ;
  ; REVISION HISTORY
  ; ----------------
@@ -30,7 +31,6 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; V.2.1 UPDATE NOV 2014 made possible by Oroville Hospital, to support QRDA.
  ; V.2.2 Incrimental update: bug fixes, etc.
  ; V.2.5 Continued incrimental updates, bug fixes (2015)
- ; V.3.0 Merge updates, change to APACHE 2.0 License
  ;
  ; DECLARATIONS
  ; -------------------------------
@@ -105,7 +105,6 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; VIMMZ^ISIIMP27    -----  V IMMUNIZATION API 
  ; VCPT^ISIIMP27     -----  V CPT API
  ; VHF^ISIIMP27      -----  V HEALTH FACTOR API
- ; VPOV^ISIIMP27     -----  V POV API
  ; ENTRY^ISIIMPUA    -----  File fetch for external select lists
  ; ICD9^ISIIMPUA     -----  Fetches ICD description
  ;
@@ -123,14 +122,12 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; ISI IMPORT IMMUNIZATIONS       VIMMZ^ISIIMPR3      Creates V IMMUNIZATION entries
  ; ISI IMPORT LAB                 LABMAKE^ISIIMPR2    Creates Lab tests
  ; ISI IMPORT MED                 MEDMAKE^ISIIMPR2    Creates Medication orders
- ; ISI IMPORT NONVA MED           NVAMED^ISIIMPR2     Creates Non-VA Medication orders
  ; ISI IMPORT NOTE                NOTEMAKE^ISIIMPR2   Creates TIU/Progress note entries
  ; ISI IMPORT PAT                 PNTIMPRT^ISIIMPR1   Creates patient records
  ; ISI IMPORT PROB                PROBMAKE^ISIIMPR1   Creates Problem entries
  ; ISI IMPORT RAD ORDER           RADOMAKE^ISIIMPR1   Creates Radiology order entries
  ; ISI IMPORT SAVE TEMPLATE       TMPUPDTE^ISIIMPR1   Saves Template Updates
  ; ISI IMPORT TABLEFETCH          TABLEGET^ISIIMPR2   Exports select tables
- ; ISI IMPORT TFL                 TRTFACLS^ISIIMPR1   Creates Treating Facility List entries
  ; ISI IMPORT USER                USRCREAT^ISIIMPR1   Creates User (#200) entries
  ; ISI IMPORT V CPT               VCPT^ISIIMPR3       Creates V CPT entries
  ; ISI IMPORT V EXAM              VEXAM^ISIIMPR3      Creates V Exam entries
@@ -149,15 +146,12 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; VALLAB^ISIIMPU7   -- Labs import validation
  ; VALNOTE^ISIIMPU8  -- Notes import validation
  ; VALMEDS^ISIIMPU9  -- Meds import validation
- ; VALMEDS^ISIIMPUI  -- Non-VA Meds import validation
- ; VALTFL^ISIIMPUH   -- Treating Facility List validation
  ; VALCONS^ISIIMPUB  -- Consult import validation
  ; VALRADO^ISIIMPUC  -- Rad Orders Import validation
  ; VALIDATE^ISIIMPUD -- User import validation
  ; VALHF^ISIIMPUG    -- V Health Factor validation
  ; VALIMZ^ISIIMPUG   -- V Immunization validation
  ; VALCPT^ISIIMPUG   -- V CPT validation
- ; VALPOV^ISIIMPUG   -- V POV validation
  ; VALIDATE^ISIIMPUE -- TEMPALATE validation
  ;
  ; Lab import spill over routines

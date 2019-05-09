@@ -1,26 +1,5 @@
 ISIIMPL8 ;ISI GROUP/MLS -- LAB IMPORT CONT.
- ;;1.0;;;JUN 26,2012;Build 31
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
+ ;;1.0;;;JUN 26,2012;Build 58
  ; 
 LRZVER4 ;DALOI/CJS/DALOI/FHS - LAB ROUTINE DATA VERIFICATION ;12/7/06 09:05
  ;;5.2;LAB SERVICE;**14,42,112,121,140,171,153,188,279,283,286**;Sep 27, 1994
@@ -42,12 +21,10 @@ LOOP ;
  ;W !,"Provider: "
  S LRLCT=LRLCT+2
  ;I LRPRAC'="",'$D(LRPRAC(LRPRAC,200)) W LRPRAC
- ; *** MLS/ISI 9.11.18 (start mod.) ***
- ; I LRPRAC,$D(LRPRAC(LRPRAC,200)) ; D     ; JFR changed
- ; . ;W LRPRAC(LRPRAC,200,LRPRAC_",",.01,"E"),?40," Voice pager: ",LRPRAC(LRPRAC,200,LRPRAC_",",.137,"E")
- ; . ;W !,"   Phone: ",LRPRAC(LRPRAC,200,LRPRAC_",",.132,"E"),?38," Digital pager: ",LRPRAC(LRPRAC,200,LRPRAC_",",.138,"E")
- ; . S LRLCT=LRLCT+1
- ; *** MLS/ISI (end mod.) ***
+ I LRPRAC,$D(LRPRAC(LRPRAC,200)) ; D     ; JFR changed
+ . ;W LRPRAC(LRPRAC,200,LRPRAC_",",.01,"E"),?40," Voice pager: ",LRPRAC(LRPRAC,200,LRPRAC_",",.137,"E")
+ . ;W !,"   Phone: ",LRPRAC(LRPRAC,200,LRPRAC_",",.132,"E"),?38," Digital pager: ",LRPRAC(LRPRAC,200,LRPRAC_",",.138,"E")
+ . S LRLCT=LRLCT+1
  ;
  N PRAC,PR
  D PRAC^LR7OMERG(LRAA,LRAD,LRAN,.PRAC)

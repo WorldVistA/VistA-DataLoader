@@ -1,27 +1,6 @@
 ISIIMPUA ;ISI GROUP/MLS -- Data Loader File Fetch
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;1.0;;;Jun 26,2012;Build 58
  ; Grabs local VistA file content to populate external import select lists
- ;
- ; VistA Data Loader 2.0
- ;
- ; Copyright (C) 2012 Johns Hopkins University
- ;
- ; VistA Data Loader is provided by the Johns Hopkins University School of
- ; Nursing, and funded by the Department of Health and Human Services, Office
- ; of the National Coordinator for Health Information Technology under Award
- ; Number #1U24OC000013-01.
- ;
- ;Licensed under the Apache License, Version 2.0 (the "License");
- ;you may not use this file except in compliance with the License.
- ;You may obtain a copy of the License at
- ;
- ;    http://www.apache.org/licenses/LICENSE-2.0
- ;
- ;Unless required by applicable law or agreed to in writing, software
- ;distributed under the License is distributed on an "AS IS" BASIS,
- ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ;See the License for the specific language governing permissions and
- ;limitations under the License.
  ;
  Q
  ;
@@ -66,8 +45,6 @@ PARAM(TABLE)
  I TABLE="IMZ" Q 30 ;Immunization
  I TABLE="EXAM" Q 31
  I TABLE="EDTOPIC" Q 32
- I TABLE="INST" Q 33
- I TABLE="NVAMEDS" Q 34 ; Non-VA Medications
  ;I TABLE="RB" Q 33 ;Room-Bed
  ;I TABLE="WARD" Q 34 ;WARD
  Q -1
@@ -115,8 +92,6 @@ ENTRY(ARRAY,LIST)
  I LIST=30 D IMZ Q ;Immunization
  I LIST=31 D EXAM Q ;EXAM
  I LIST=32 D EDTOPIC Q ;EDUCATION TOPICS
- I LIST=33 D INST Q ;Insitutions
- I LIST=34 D NVAMEDS Q ;Non-VA Meds
  ;I LIST=32 Q ;Room-Bed
  ;I LIST=33 Q ;WARD
  S ARRAY(0)="-1^Incorrect parameter passed" Q
@@ -338,31 +313,6 @@ LABTESTS ;#60
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
  Q
- ;
-INST ;#4
- N VALUE,IEN,CNT,FACTYP,FACNAME
- S VALUE="",CNT=0
- F  S VALUE=$O(^DIC(4,"B",VALUE)) Q:VALUE=""  S IEN=$O(^(VALUE,0)) D
- . ; Only return VAMC Facility Types
- . S FACTYP=$P($G(^DIC(4,IEN,3)),"^",1)
- . Q:'FACTYP
- . S FACNAME=$P($G(^DIC(4.1,FACTYP,0)),"^",1)
- . I FACNAME'="VAMC" Q
- . ; Don't return Z'd Facility Types
- . I $E(VALUE,1)="Z" Q
- . S CNT=CNT+1,ARRAY(CNT)=VALUE
- S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
- Q
- ;
-NVAMEDS ; Non-VA meds from Quick Order
- N LAST,LST,VALUE,OITM S VALUE=""
- S OITM=$O(^ORD(101.44,"B","ORWDSET NV RX",0))
- S LAST=$P(^ORD(101.44,OITM,20,0),U,3)
- D FVSUB^ORWUL(.LST,OITM,1,LAST)
- F  S VALUE=$O(LST(VALUE)) Q:VALUE=""  S ARRAY(VALUE)=$P(LST(VALUE),U,2)
- S ARRAY(0)=LAST I LAST=0 S ARRAY(0)="-1^No results found."
- Q
- ;
  ;
 GENDER ;#2,.02
  S ARRAY(0)=2
