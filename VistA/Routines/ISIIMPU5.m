@@ -1,5 +1,5 @@
 ISIIMPU5 ;ISI GROUP/MLS -- IMPORT Vitals Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPU5 ;ISI GROUP/MLS -- IMPORT Vitals Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF VITALS MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -35,7 +35,7 @@ MISCDEF ;;+++++ DEFINITIONS OF VITALS MISC PARAMETERS +++++
  Q
  ;
 VITMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -55,7 +55,7 @@ VITMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="DT_TAKEN" D  
+ . I PARAM="DT_TAKEN" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid DT_TAKEN date/time." Q
  . . S VALUE=RESULT
@@ -78,10 +78,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALVITAL(ISIMISC)
  ; Entry point to validate content of Vitals create/array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("VITAL_TYPE")="PULSE" 
+ ;     eg:  ISIMISC("VITAL_TYPE")="PULSE"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,VALUE,RESULT,MSG,MISCDEF,EXIT,OUT,Y,IDT,RDT
@@ -98,7 +98,7 @@ VALVITAL(ISIMISC)
  ;
  ;-- PAT_SSN (required) --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=ISIMISC("PAT_SSN") I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -113,7 +113,7 @@ VALVITAL(ISIMISC)
  D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG)
  Q:'(+RESULT) "-1^Invalid VITAL_TYPE (#120.5,.03)."
  ; Transform to internal value
- S Y=$O(^GMRD(120.51,"B",VALUE,"")) I Y="" D  
+ S Y=$O(^GMRD(120.51,"B",VALUE,"")) I Y="" D
  . S Y=$O(^GMRD(120.51,"C",VALUE,""))
  I Y="" Q "-1^Unable to find internal value for VITAL_TYPE (#120.5,.03)."
  S ISIMISC("VITAL_TYPE")=Y
@@ -136,7 +136,7 @@ VALVITAL(ISIMISC)
  ; -- LOCATION --
  I $G(ISIMISC("LOCATION"))="" Q "-1^Missing LOCATION entry."
  ;
- S Y=$O(^SC("B",ISIMISC("LOCATION"),"")) I Y'="" I $P($G(^SC(Y,0)),U,3)="Z" Q "-1^LOCATION, TYPE field (#44,2) cannot equal 'Z' [OTHER]." 
+ S Y=$O(^SC("B",ISIMISC("LOCATION"),"")) I Y'="" I $P($G(^SC(Y,0)),U,3)="Z" Q "-1^LOCATION, TYPE field (#44,2) cannot equal 'Z' [OTHER]."
  ;
  S FIELD=$P(MISCDEF("LOCATION"),"|",2),FILE=$P(FIELD,",")
  S FIELD=$P(FIELD,",",2),FLAG="",VALUE=ISIMISC("LOCATION")

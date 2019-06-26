@@ -1,5 +1,5 @@
 ISIIMPU2 ;ISI GROUP/MLS -- IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -27,12 +27,12 @@ ISIIMPU2 ;ISI GROUP/MLS -- IMPORT Utility
  ; Column definitions for MISCDEF table (below):
  ; NAME=        name of parameter
  ; TYPE =       categories of values provided
- ;                      'PARAM' is internal used value 
+ ;                      'PARAM' is internal used value
  ;                      'FIELD' is a literal import value
  ;                      'MASK' is dynamic value w/ * wildcard
  ; DESC  =      description of value
  ;
- ; Array example: 
+ ; Array example:
  ;      MISC(1)="ADATE|T-1@12:00"
  ;      MISC(2)="CLIN|PRIMARY CARE"
  ;      MISC(4)="PATIENT|555005555"
@@ -48,9 +48,9 @@ MISCDEF ;;+++++ DEFINITIONS OF APPT MISC PARAMETERS +++++
  ;;PROVIDER         |FIELD      |9000010.06,.01 |PROVIDER
  Q
  ;
-APPTMISC(MISC,ISIMISC) 
+APPTMISC(MISC,ISIMISC)
  ;
- ;INPUT: 
+ ;INPUT:
  ;  MISC - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -64,7 +64,7 @@ APPTMISC(MISC,ISIMISC)
  S ISIRC=$$APPTMISC1("ISIMISC")
  Q ISIRC ;return code
  ;
-APPTMISC1(DSTNODE) 
+APPTMISC1(DSTNODE)
  N PARAM,VALUE,DATE,RESULT,MSG,EXIT
  S (EXIT,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""  D  Q:EXIT
@@ -72,7 +72,7 @@ APPTMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM["DATE" D  
+ . I PARAM["DATE" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid appointment date:"_$G(PARAM)_"="_$G(VALUE) Q
  . . I $P(RESULT,".",2)="" S $P(RESULT,".",2)="12"
@@ -94,7 +94,7 @@ LOADMISC(MISCDEF) ;
  . S MISCDEF(NAME)=TYPE_"|"_FIELD
  Q
  ;
-VALAPPT() 
+VALAPPT()
  ; Input - ADATE (Appointment date)
  ;       - SC    (HOSPITAL LOCATION #44)
  ;       - DFN   (SSN or DFN #2)
@@ -107,15 +107,15 @@ VALAPPT()
  I $G(DFN)="" Q "-1^Missing patient identifier (#2)."
  ;
  I $P(ADATE,".",2)="" Q "-1^Missing time for appt. (ADATE)."
- ; check Date/time against fileman date/time field 
- S FILE=2.98,FIELD=.001,VALUE=ADATE,FLAG="" D  
+ ; check Date/time against fileman date/time field
+ S FILE=2.98,FIELD=.001,VALUE=ADATE,FLAG="" D
  . S Y=VALUE D DD^%DT S VALUE=Y ;Convert to external
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
  Q:EXIT "-1^Invalid appt date/time (ADATE)."
  ;
- S CDATE=$G(CDATE) ; pulled from ISIMISC("CDATE") 
- I CDATE D  
+ S CDATE=$G(CDATE) ; pulled from ISIMISC("CDATE")
+ I CDATE D
  . I $P(CDATE,".",2)="" S EXIT="-1^CDATE must be in datetime format" Q
  . I CDATE<ADATE S EXIT="-1^CDATE must be after ADATE" Q
  . Q
@@ -138,7 +138,7 @@ VALAPPT()
  I '$D(^DPT(DFN,0)) S EXIT=1
  Q:EXIT "-1^No entry found for PATIENT (#2)"
  ;
- I $G(ISIMISC("PROVIDER"))'="" D  
+ I $G(ISIMISC("PROVIDER"))'="" D
  . S PROV=ISIMISC("PROVIDER")
  . I 'PROV S PROV=$O(^VA(200,"B",PROV,""))
  . I '$L(PROV) S EXIT=1 Q

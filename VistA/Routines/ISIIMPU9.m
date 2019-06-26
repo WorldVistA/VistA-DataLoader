@@ -1,5 +1,5 @@
 ISIIMPU9 ;;ISI GROUP/MLS -- MED IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPU9 ;;ISI GROUP/MLS -- MED IMPORT Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF MED MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -38,7 +38,7 @@ MISCDEF ;;+++++ DEFINITIONS OF MED MISC PARAMETERS +++++
  Q
  ;
 MEDMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list ovalues from RPC client
  ;
  ;OUTPUT:
@@ -58,13 +58,13 @@ MEDMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="DATE" D  
+ . I PARAM="DATE" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date/time." Q
  . . S VALUE=RESULT
  . . I $P(VALUE,".",2)="" S VALUE=VALUE_".1200"
  . . Q
-  . I PARAM="EXPIRDT" D  
+  . I PARAM="EXPIRDT" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date." Q
  . . S VALUE=RESULT
@@ -86,10 +86,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALMEDS(ISIMISC)
  ; Entry point to validate content of MEDS create array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("DRUG")="ASPRIN" 
+ ;     eg:  ISIMISC("DRUG")="ASPRIN"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,DFN,VALUE,RESULT,MSG,MISCDEF,EXIT,Y,RESULT,PSOSITE
@@ -98,7 +98,7 @@ VALMEDS(ISIMISC)
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -108,16 +108,16 @@ VALMEDS(ISIMISC)
  ;
  ; -- DRUG --
  ; Check VA PRODUCT file for RX NORM value (OROVILLE specific)
- I $D(^PSNDF(50.68,"VARXCUI",$G(ISIMISC("DRUG")))) D  
- . N VAPROD,DRUG S (VAPROD,DRUG)=0 
- . F  S VAPROD=$O(^PSNDF(50.68,"VARXCUI",ISIMISC("DRUG"),VAPROD)) Q:'VAPROD!DRUG  D  
+ I $D(^PSNDF(50.68,"VARXCUI",$G(ISIMISC("DRUG")))) D
+ . N VAPROD,DRUG S (VAPROD,DRUG)=0
+ . F  S VAPROD=$O(^PSNDF(50.68,"VARXCUI",ISIMISC("DRUG"),VAPROD)) Q:'VAPROD!DRUG  D
  . . S DRUG=$O(^PSDRUG("AC0P",VAPROD,"")) I DRUG S ISIMISC("DRUG")=$P($G(^PSDRUG(DRUG,0)),U)
  . . Q
  . Q
  ;
  I $G(ISIMISC("DRUG"))="" Q "-1^Missing DRUG (#50,.01) value."
  ;
- I $D(ISIMISC("DRUG")) D  
+ I $D(ISIMISC("DRUG")) D
  . S VALUE=ISIMISC("DRUG")
  . I '$D(^PSDRUG(VALUE,0)) S VALUE=$O(^PSDRUG("B",VALUE,""),-1) ;reverse to get latest
  . I 'VALUE S EXIT=1 Q
@@ -126,15 +126,15 @@ VALMEDS(ISIMISC)
  . ;I $P($G(^PSDRUG(VALUE,660)),U,6)="" S EXIT=1 Q ;Missing unit price
  . S ISIMISC("DRUG")=VALUE
  . Q
- Q:EXIT "-1^Invalid DRUG (#50,.01) value." 
+ Q:EXIT "-1^Invalid DRUG (#50,.01) value."
  ;
  ; -- DATE --
  I $G(ISIMISC("DATE"))="" Q "-1^Missing Fill Date"
- I $G(ISIMISC("EXPIRDT"))="" Q "-1^Missing Expire Date" 
+ I $G(ISIMISC("EXPIRDT"))="" Q "-1^Missing Expire Date"
  ;
- ; -- SIG -- 
+ ; -- SIG --
  I $G(ISIMISC("SIG"))="" Q "-1^Missing SIG (#51,.01) value."
- I $D(ISIMISC("SIG")) D  
+ I $D(ISIMISC("SIG")) D
  . S FIELD=$P(MISCDEF("SIG"),"|",2)
  . S FILE=$P(FIELD,","),FIELD=$P(FIELD,",",2)
  . S VALUE=ISIMISC("SIG")
@@ -158,18 +158,18 @@ VALMEDS(ISIMISC)
  S VALUE=ISIMISC("QTY") I VALUE'?1N.N Q "-1^Invalid REFILL (# or refills) value. Must be number."
  ;
  ; -- PROV --
- I $G(ISIMISC("PROV"))'="" D  
+ I $G(ISIMISC("PROV"))'="" D
  . S FIELD=$P(MISCDEF("PROV"),"|",2)
  . S FILE=$P(FIELD,","),FIELD=$P(FIELD,",",2)
  . S VALUE=ISIMISC("PROV")
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1 Q
  . ;if multiple entries, check for valid entry
  . S EXIT=1
- . S Y=0 F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  
+ . S Y=0 F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D
  . . I +$G(^VA(200,Y,"PS"))'=1 Q ;Authorized to write medical orders check
  . . S EXIT=0,ISIMISC("PROV")=Y
  . . Q
- I $G(ISIMISC("PROV"))="" D  
+ I $G(ISIMISC("PROV"))="" D
  . S EXIT=1
  . I +$G(^VA(200,DUZ,"PS"))'=1 Q ;
  . S ISIMISC("PROV")=DUZ,EXIT=0

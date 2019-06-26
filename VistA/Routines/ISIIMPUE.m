@@ -1,5 +1,5 @@
-ISIIMPUE ;ISI GROUP/MLS -- TEMPLATE SAVE Utility
- ;;1.0;;;May 15,2014;Build 31
+ISIIMPUE ;ISI GROUP/MLS -- TEMPLATE SAVE Utility ; 6/26/19 11:33am
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -27,18 +27,18 @@ ISIIMPUE ;ISI GROUP/MLS -- TEMPLATE SAVE Utility
  ; Column definitions for MISCDEF table (below):
  ; NAME=        name of parameter
  ; TYPE =       categories of values provided
- ;                      'PARAM' is internal used value 
+ ;                      'PARAM' is internal used value
  ;                      'FIELD' is a literal import value
  ;                      'MASK' is dynamic value w/ * wildcard
  ; FIELD(#2)=the corresponding field in USER(#200) file
  ; DESC  =      description of value
  ;
- ; Array example: 
+ ; Array example:
  ;      MISC(1)="TEMPLATE|DEFAULT"
  ;      MISC(2)="NAME_MASK|*,USER"
  ;      MISC(4)="SEX|F"
  ;      MISC(5)="SSN_MASK|000*"
- ; 
+ ;
 MISCDEF ;;+++++ DEFINITIONS OF USER MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FIELD(#200) |DESC
  ;;---------------------------------------------------------------
@@ -67,7 +67,7 @@ MISCDEF ;;+++++ DEFINITIONS OF USER MISC PARAMETERS +++++
  ;
 TMPMISC(MISC,ISIMISC) 
  ;
- ;INPUT: 
+ ;INPUT:
  ;  MISC - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -79,7 +79,7 @@ TMPMISC(MISC,ISIMISC)
  S ISIRC=$$TMPMISC1("ISIMISC")
  Q ISIRC
  ;
-TMPMISC1(DSTNODE)
+TMPMISC1(DSTNODE) 
  N RETURN,ERRCNT,I,EXIT,PARAM,VALUE,TMPL,IENS,TYPE,FIELD,DATE,RESULT,MSG
  S (EXIT,TMPL,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""!EXIT  D  Q:EXIT
@@ -89,11 +89,11 @@ TMPMISC1(DSTNODE)
  . ; Process TEMPLATE first, then overlay with passed params
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed:"_$G(PARAM),EXIT=1 Q
  . S TYPE=$P(MISCDEF(PARAM),"|"),FIELD=$P(MISCDEF(PARAM),"|",2)
- . I PARAM["DOB" D  
+ . I PARAM["DOB" D
  . . S DATE=VALUE D DT^DILF("",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid date value in EDOB or LDOB field." Q
  . . S VALUE=RESULT
- . I TYPE="FIELD" D  
+ . I TYPE="FIELD" D
  . . S @DSTNODE@(PARAM)=VALUE
  . . Q
  . Q
@@ -109,7 +109,7 @@ LOADMISC(MISCDEF) ;
  . S MISCDEF(NAME)=TYPE_"|"_FIELD
  Q
  ;
-VALIDATE(ISIMISC)
+VALIDATE(ISIMISC) 
  ; Entry point to Validate content of template create/array
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,VALUE,RESULT,MSG,EXIT,Y,PARAM,MISCDEF
@@ -126,68 +126,68 @@ VALIDATE(ISIMISC)
  . I $G(VALUE)="" Q
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  Q:EXIT "-1^Invalid "_$G(PARAM)_"(#"_FILE_","_$G(FIELD)_") : "_$G(VALUE)
- 
+ ;
  ;-- NAME --
  I $G(ISIMISC("NAME"))="" S ISIRC="-1^Missing Template NAME (9001,.01)" Q ISIRC
- ; 
+ ;
  ;-- LOW_DOB --
- I $G(ISIMISC("LOW_DOB"))'="" D  
+ I $G(ISIMISC("LOW_DOB"))'="" D
  . S FIELD=$P(MISCDEF("LOW_DOB"),"|",2),VALUE=ISIMISC("LOW_DOB")
  . S Y=VALUE D DD^%DT S VALUE=Y ;Convert to external
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1 Q
- . I $G(ISIMISC("UP_DOB"))'="" D  
+ . I $G(ISIMISC("UP_DOB"))'="" D
  . . I ISIMISC("LOW_DOB")>ISIMISC("UP_DOB") S EXIT=1 Q
  . Q
  Q:EXIT "-1^Invalid LOW_DOB (#200,5)"
  ;
  ;-- UP_DOB --
- I $G(ISIMISC("UP_DOB"))'="" D  
+ I $G(ISIMISC("UP_DOB"))'="" D
  . S FIELD=$P(MISCDEF("UP_DOB"),"|",2),VALUE=ISIMISC("UP_DOB")
  . S Y=VALUE D DD^%DT S VALUE=Y ;Convert to external
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1 Q
- . I $G(ISIMISC("LOW_DOB"))'="" D  
+ . I $G(ISIMISC("LOW_DOB"))'="" D
  . . I ISIMISC("LOW_DOB")>ISIMISC("UP_DOB") S EXIT=1 Q
  . . Q
  . Q
  Q:EXIT "-1^Invalid UP_DOB (#200,5)"
  ;
- ;-- SSN_MASK -- 
- I $G(ISIMISC("SSN_MASK"))'="" D  
+ ;-- SSN_MASK --
+ I $G(ISIMISC("SSN_MASK"))'="" D
  . S FIELD=4,VALUE=ISIMISC("SSN_MASK")
  . D CHK^DIE(9001,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
  Q:EXIT "-1^Invalid SSN_MASK"
  ;
  ;-- CITY --
-  I $G(ISIMISC("CITY"))'="" D  
+  I $G(ISIMISC("CITY"))'="" D
  . S FIELD=$P(MISCDEF("CITY"),"|",2),VALUE=ISIMISC("CITY")
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
  Q:EXIT "-1^Invalid CITY (#200,.114)"
  ;
  ;-- STATE --
-  I $G(ISIMISC("STATE"))'="" D  
+  I $G(ISIMISC("STATE"))'="" D
  . S FIELD=$P(MISCDEF("STATE"),"|",2),VALUE=ISIMISC("STATE")
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
  Q:EXIT "-1^Invalid STATE (#200,.115)"
  ;
  ;ZIP_4_MASK
- I $G(ISIMISC("ZIP_4_MASK"))'="" D  
+ I $G(ISIMISC("ZIP_4_MASK"))'="" D
  . S FIELD=9,VALUE=ISIMISC("ZIP_4_MASK")
  . D CHK^DIE(9001,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
  Q:EXIT "-1^Invalid ZIP_4_MASK.  5 digits max.  Only numbers"
  ;
  ;PH_NUM_MASK
- I $G(ISIMISC("PH_NUM_MASK"))'="" D  
+ I $G(ISIMISC("PH_NUM_MASK"))'="" D
  . S FIELD=10,VALUE=ISIMISC("PH_NUM_MASK")
  . D CHK^DIE(9001,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
  Q:EXIT "-1^Invalid PH_NUM_MASK. Numeric between 0 and 999999"
  ;
  ;SERVICE
- I $G(ISIMISC("SERVICE"))'="" D  
+ I $G(ISIMISC("SERVICE"))'="" D
  . S FIELD=$P(MISCDEF("SERVICE"),"|",2),VALUE=ISIMISC("SERVICE")
  . D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
  . Q
@@ -197,7 +197,7 @@ VALIDATE(ISIMISC)
  S X=$E($G(ISIMISC("DFN_NAME"))) S ISIMISC("DFN_NAME")=$S(X="Y":"Y",1:"N")
  ;
  ;EMPLOY_STAT
- I $G(ISIMISC("EMPLOY_STAT"))'="" D  
+ I $G(ISIMISC("EMPLOY_STAT"))'="" D
  . N VALUE S VALUE=$G(ISIMISC("EMPLOY_STAT"))
  . I VALUE=1!(VALUE="EMPLOYED FULL TIME") S ISIMISC("EMPLOY_STAT")="EMPLOYED FULL TIME" Q
  . I VALUE=2!(VALUE="EMPLOYED PART TIME") S ISIMISC("EMPLOY_STAT")="EMPLOYED PART TIME" Q
@@ -213,9 +213,9 @@ VALIDATE(ISIMISC)
  ;USER_MASK
  ;ESIG_APND
  ;ACCESS_APND
- I $G(ISIMISC("ACCESS_APND"))'="" D  
+ I $G(ISIMISC("ACCESS_APND"))'="" D
  . N LEN,CHAR,I S EXIT=1
- . S LEN=$L(ISIMISC("ACCESS_APND")) F I=1:1:LEN S CHAR=$E(ISIMISC("ACCESS_APND"),I) D  
+ . S LEN=$L(ISIMISC("ACCESS_APND")) F I=1:1:LEN S CHAR=$E(ISIMISC("ACCESS_APND"),I) D
  . . I CHAR?1N S EXIT=0 Q
  . . Q
  . Q

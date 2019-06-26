@@ -1,5 +1,5 @@
 ISIIMPL2 ;ISI GROUP/MLS -- LABS IMPORT UTILITY
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -63,7 +63,7 @@ LEDI ;
  I $G(LRRSTAT)="I",$G(LRRSITE("SMID"))'="",$G(LRSD("RUID"))'="" D  I $O(LROT(0)) G BAR
  . D EN^LRORDB(LRSD("RUID"),LRRSITE("SMID"))
  G:LRWP'>1 Q13A
- ;W ! W:'LRFIRST "'?' for list,  " 
+ ;W ! W:'LRFIRST "'?' for list,  "
  S LRFIRST=0
  ;R "TEST number(s): ",LRSX:DTIME S:LRSX["?" LRFIRST=1 G LRFIRST:LRFIRST
  S LRFIRST=1 ;MLS
@@ -117,7 +117,7 @@ URGG ;W !,"For ",$P(^TMP("LRSTIK",$J,LRSSX),U,2)
  Q
  ;
  ;
-DROP ;W !!,"ORDER CANCELED",$C(7),!! 
+DROP ;W !!,"ORDER CANCELED",$C(7),!!
  Q:$D(LROR)  G L2
  ;
  ;

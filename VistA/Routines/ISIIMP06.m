@@ -1,5 +1,5 @@
 ISIIMP06 ;ISI GROUP/MLS -- Problem Import API
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -24,7 +24,7 @@ ISIIMP06 ;ISI GROUP/MLS -- Problem Import API
  ;
  Q
  ;
-PROBLEM(ISIRESUL,ISIMISC)       
+PROBLEM(ISIRESUL,ISIMISC)
  ;Validate input array
  S ISIRC=$$VALIDATE^ISIIMP07 Q:+ISIRC<0 ISIRC
  ;

@@ -1,5 +1,5 @@
-ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ; 
- ;;2.0;;;Jun 26,2012;Build 31
+ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -38,20 +38,20 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; The software has not been designed, coded, or tested for use in any clinical
  ; or production setting.
  ;
- ; This should be considered a work in progress.  If folks are interested in 
- ; collaborating on future versions of the utility set should please contact 
+ ; This should be considered a work in progress.  If folks are interested in
+ ; collaborating on future versions of the utility set should please contact
  ; Mike Stark (starklogic@gmail.com) or ISI GROUP, LLC, Bethesda, MD.
  ;
  ;
  ; CREDITS
  ; ------------
  ; Some of the utilities used inside this package were first used inside the
- ; "CAMP MASTER" VistA training system used at the VA's VEHU conference 
- ; (available through FOIA). These are not "production" utilities and are 
- ; not properly attributed to their authors.  Most of them were coded by 
- ; by folks in their spare time out of generosity and dedication to the 
- ; VA's mission.  
- ; 
+ ; "CAMP MASTER" VistA training system used at the VA's VEHU conference
+ ; (available through FOIA). These are not "production" utilities and are
+ ; not properly attributed to their authors.  Most of them were coded by
+ ; by folks in their spare time out of generosity and dedication to the
+ ; VA's mission.
+ ;
  ; Where it is not possible to properly give credit, I apologize.  Below is a
  ; list of routines borrowed from and their author initials.  I'm listing them
  ; here for proper credit --  all mistakes & bugs are my own (see DECLARATIONS
@@ -102,7 +102,7 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; ADMIT^ISIIMP25    -----  ADMIT API -- DO NOT USE (*** still in development***)
  ; DISCHRGE^ISIIMP26 -----  DISCHARGE API -- DO NOT USE (*** still in development***)
  ; VEXAM^ISIIMP27    -----  V EXAM entry API
- ; VIMMZ^ISIIMP27    -----  V IMMUNIZATION API 
+ ; VIMMZ^ISIIMP27    -----  V IMMUNIZATION API
  ; VCPT^ISIIMP27     -----  V CPT API
  ; VHF^ISIIMP27      -----  V HEALTH FACTOR API
  ; VPOV^ISIIMP27     -----  V POV API
@@ -116,7 +116,7 @@ ISIIMP ;ISI GROUP/MLS -- VistA DATA LOADER 2.0 ;
  ; ISI IMPORT ALLERGY             ALGMAKE^ISIIMPR2    Load allergy entries
  ; ISI IMPORT APPT                APPMAKE^ISIIMPR1    Load appt and encounters
  ; ISI IMPORT CONSULT             CONMAKE^ISIIMPR2    Creates and sign consults
- ; ISI IMPORT GET TEMPLATES       FETCHTMP^ISIIMPUA   Fetch TEMPLATE (#9001) list 
+ ; ISI IMPORT GET TEMPLATES       FETCHTMP^ISIIMPUA   Fetch TEMPLATE (#9001) list
  ; ISI IMPORT GET TEMPLATE DETLS  TEMPLATE^ISIIMPUA   Fetches TEMPLATE (#9001) details
  ; ISI IMPORT HFACTOR             HFACTOR^ISIIMPR3    Creates V HEALTH FACTOR entries
  ; ISI IMPORT ICDFIND             ICD9GET^ISIIMPR2    Fetches ICD9 Descriptions

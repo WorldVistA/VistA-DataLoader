@@ -1,5 +1,5 @@
 ISIIMP19 ;ISI GROUP/MLS -- CONSULTS IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
   ;
  ; VistA Data Loader 2.0
  ;
@@ -37,11 +37,11 @@ MAKECONS() ;
 CONS(ISIMISC) ;Create and sign Consult entry
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("DFN")= 123456 
+ ;     eg:  ISIMISC("DFN")= 123456
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0)=1 [if successful]
- ;          ISIRESUL(1)="success" [if successful] 
+ ;          ISIRESUL(1)="success" [if successful]
  ;
  N ORVP,ORNP,ORL,DLG,ORDG,ORIT,ORIFN,ORDIALOG,ORDEA,ORAPPT,ORSRC,OREVTDF,RESULT
  N ORNP,ORL,ES,ORWREC

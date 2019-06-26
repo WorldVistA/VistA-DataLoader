@@ -1,5 +1,5 @@
 ISIIMPU6 ;;ISI GROUP/MLS -- IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPU6 ;;ISI GROUP/MLS -- IMPORT Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF ALLERGIES MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -36,7 +36,7 @@ MISCDEF ;;+++++ DEFINITIONS OF ALLERGIES MISC PARAMETERS +++++
  Q
  ;
 ALGMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -56,7 +56,7 @@ ALGMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="ORIG_DATE"!(PARAM="OBSRV_DT") D  
+ . I PARAM="ORIG_DATE"!(PARAM="OBSRV_DT") D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date/time." Q
  . . S VALUE=RESULT
@@ -79,10 +79,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALALG(ISIMISC)
  ; Entry point to validate content of ALLERGY create/array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("ALLERGEN")="POLLEN" 
+ ;     eg:  ISIMISC("ALLERGEN")="POLLEN"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,VALUE,RESULT,MSG,MISCDEF,EXIT,TEMP,Y,Z
@@ -92,7 +92,7 @@ VALALG(ISIMISC)
  ; -- ALLERGEN --
  ; Using GRMD(120.82
  I '$D(ISIMISC("ALLERGEN")) Q "-1^Missing ALLERGEN."
- I $D(ISIMISC("ALLERGEN")) D  
+ I $D(ISIMISC("ALLERGEN")) D
  . I '$D(^GMRD(120.82,"B",ISIMISC("ALLERGEN"))) S EXIT=1 Q
  . S Y=$O(^GMRD(120.82,"B",ISIMISC("ALLERGEN"),"")) I Y="" S EXIT=1 Q
  . S ISIMISC("GMRAGNT")=ISIMISC("ALLERGEN")_"^"_Y_";GMRD(120.82,"
@@ -113,10 +113,10 @@ VALALG(ISIMISC)
  . S TEMP=Z_U_Y_U_U_U S ISIMISC("GMRASYMP",X)=TEMP
  . Q
  I EXIT=1 Q "-1^Invalid SYMPTOM (#120.83)."
- ; 
+ ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=ISIMISC("PAT_SSN") I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -151,7 +151,7 @@ VALALG(ISIMISC)
  ;
  ; -- OBSRV_DT --
  I ISIMISC("HISTORIC")=0,$G(ISIMISC("OBSRV_DT"))="" Q "-1^Missing OBSRV_DT entry."
- I ISIMISC("HISTORIC")=0 D  
+ I ISIMISC("HISTORIC")=0 D
  . S FIELD=$P(MISCDEF("ORIG_DATE"),"|",2),FILE=$P(FIELD,",") ; OBSERV_DT is multiple entry
  . S FIELD=$P(FIELD,",",2),FLAG="",VALUE=ISIMISC("OBSRV_DT")
  . S Y=VALUE D DD^%DT S VALUE=Y ;Convert to external

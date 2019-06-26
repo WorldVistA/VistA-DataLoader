@@ -1,5 +1,5 @@
 ISIIMPR2 ;ISI GROUP/MLS -- DATA LOADER RPC (2)
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -36,7 +36,7 @@ ALGMAKE(ISIRESUL,MISC)
  ;
  D
  . S ISIRC=$$ALGMISC^ISIIMPU6(.MISC,.ISIMISC) Q:ISIRC<0
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"++Read in values+++",!
  . . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . . Q
@@ -60,7 +60,7 @@ LABMAKE(ISIRESUL,MISC)
  ;
  D
  . S ISIRC=$$LABMISC^ISIIMPU7(.MISC,.ISIMISC) Q:ISIRC<0
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"++Read in values+++",!
  . . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . . Q
@@ -85,7 +85,7 @@ NOTEMAKE(ISIRESUL,MISC)
  ;
  D
  . S ISIRC=$$NOTMISC^ISIIMPU8(.MISC,.ISIMISC) Q:ISIRC<0
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"++Read in values+++",!
  . . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . . Q
@@ -110,7 +110,7 @@ MEDMAKE(ISIRESUL,MISC)
  ;
  D
  . S ISIRC=$$MEDMISC^ISIIMPU9(.MISC,.ISIMISC) Q:ISIRC<0
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"++Read in values+++",!
  . . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . . Q
@@ -147,7 +147,7 @@ CONMAKE(ISIRESUL,MISC)
  ;
  D
  . S ISIRC=$$CONMISC^ISIIMPUB(.MISC,.ISIMISC) Q:ISIRC<0
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"++Read in values+++",!
  . . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . . Q
@@ -178,9 +178,9 @@ TMPSAVE(ISIRESUL,MISC)
  . I $D(MISC) S X="" F  S X=$O(MISC(X)) Q:X=""  W !,$G(MISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
  . Q
- ; 
- D  
- . S ISIRC=$$TMPMISC^ISIIMPUE(.MISC,.ISIMISC) Q:ISIRC<0 
+ ;
+ D
+ . S ISIRC=$$TMPMISC^ISIIMPUE(.MISC,.ISIMISC) Q:ISIRC<0
  . K MISC
  . S ISIRC=$$TMPSAVE^ISIIMP24(.ISIRESUL,.ISIMISC)
  . Q
@@ -204,7 +204,7 @@ NVAMED(ISIRESUL,MISC) ; Non-VA Meds Make
  ;
  D
  . S ISIRC=$$MEDMISC^ISIIMPUI(.MISC,.ISIMISC) Q:ISIRC<0
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"++Read in values+++",!
  . . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . . Q

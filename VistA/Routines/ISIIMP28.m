@@ -1,5 +1,5 @@
 ISIIMP28 ;ISI GROUP/MLS -- Treating Facility List Import API
- ;;3.0;ISI;;Jun 26,2012;Build 69
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -23,7 +23,7 @@ ISIIMP28 ;ISI GROUP/MLS -- Treating Facility List Import API
  ;limitations under the License.
  ;
  Q
-TFL(ISIRESUL,ISIMISC)       
+TFL(ISIRESUL,ISIMISC)
  N ERR,VAL
  N:'$G(ISIPARAM("DEBUG")) ISIPARAM
  K ISIRESUL S (ISIRESUL(0),ISIRC)=0
@@ -47,11 +47,11 @@ MAKETFL() ;
 CTFL(ISIMISC) ;Create Treating Facility Entry
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("DFN")=123455 
+ ;     eg:  ISIMISC("DFN")=123455
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0)=1 [if successful]
- ;          ISIRESUL(1)=TFLIEN [if successful] 
+ ;          ISIRESUL(1)=TFLIEN [if successful]
  ;
  N DFN,INST,ADTHL7,ISSDT
  ;

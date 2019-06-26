@@ -1,5 +1,5 @@
 ISIIMPUA ;ISI GROUP/MLS -- Data Loader File Fetch
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ; Grabs local VistA file content to populate external import select lists
  ;
  ; VistA Data Loader 2.0
@@ -26,7 +26,7 @@ ISIIMPUA ;ISI GROUP/MLS -- Data Loader File Fetch
  Q
  ;
 PARAM(TABLE)
- ;INPUT: 
+ ;INPUT:
  ;  TABLE="NOTE" - txt to designate VistA file fetched
  ;
  ;OUTPUT:
@@ -73,7 +73,7 @@ PARAM(TABLE)
  Q -1
  ;
 ENTRY(ARRAY,LIST)
- ;INPUT: 
+ ;INPUT:
  ;  ARRAY = output Array
  ;  LIST = numeric to choose FILE
  ;
@@ -130,7 +130,7 @@ HDR ;not used -- was thinking about producing entire "TABLES" worksheet as outpu
 TIULIST ;#8925.1
  N VALUE,IEN,RESULT,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^TIU(8925.1,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^TIU(8925.1,"B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^TIU(8925.1,"B",VALUE,"")) I IEN="" Q
  . N ZREC S ZREC=$G(^TIU(8925.1,IEN,0)) I ZREC="" Q
  . I $P(ZREC,U,4)'="DOC" Q  ; TIU Type of DOC
@@ -143,7 +143,7 @@ TIULIST ;#8925.1
 DRUGLIST ;#50
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^PSDRUG("B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^PSDRUG("B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^PSDRUG("B",VALUE,""))
  . I $P($G(^PSDRUG(IEN,2)),"^",1)="" Q ;Missing pointer to Orderable item #50.7
  . I $P($G(^PSDRUG(IEN,0)),"^",3)="" Q ;Missing DEA value
@@ -156,8 +156,8 @@ DRUGLIST ;#50
 SIGLIST ;#51
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^PS(51,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^PS(51,"B",VALUE,"")) 
+ F  S VALUE=$O(^PS(51,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^PS(51,"B",VALUE,""))
  . I $P(^PS(51,IEN,0),U,4)>1 Q ;#51,30 Intended use is Inpatient only
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
@@ -167,8 +167,8 @@ SIGLIST ;#51
 PROVLIST ;#200
  N VALUE,IEN,DTC,IDT,CNT,NAME
  D NOW^%DTC S DTC=X,VALUE="",CNT=0
- F  S VALUE=$O(^VA(200,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^VA(200,"B",VALUE,"")) 
+ F  S VALUE=$O(^VA(200,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^VA(200,"B",VALUE,""))
  . I +$G(^VA(200,IEN,"PS"))'=1 Q ;Authorized to write medical orders check
  . S IDT=$P($G(^VA(200,IEN,"PS")),U,4) I IDT'="" I IDT<DTC Q
  . S NAME=$P($G(^VA(200,IEN,0)),U)
@@ -181,8 +181,8 @@ PROVLIST ;#200
 USERLIST ;#200
  N VALUE,IEN,DTC,IDT,CNT
  D NOW^%DTC S DTC=X,VALUE="",CNT=0
- F  S VALUE=$O(^VA(200,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^VA(200,"B",VALUE,"")) 
+ F  S VALUE=$O(^VA(200,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^VA(200,"B",VALUE,""))
  . S IDT=$P($G(^VA(200,IEN,"PS")),U,4) I IDT'="" I IDT<DTC Q
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  . Q
@@ -193,29 +193,29 @@ RACE ;#10
  N VALUE,IEN,DTC,IDT,CNT
  S CNT=0
  D NOW^%DTC S DTC=X,VALUE="",CNT=0
- F  S VALUE=$O(^DIC(10,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^DIC(10,"B",VALUE,"")) 
+ F  S VALUE=$O(^DIC(10,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^DIC(10,"B",VALUE,""))
  . S IDT=$P($G(^DIC(10,IEN,.02)),U,2) I IDT'="" I IDT<DTC Q
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
- Q 
+ Q
  ;
 ETHNICITY ;#10.2
  N VALUE,IEN,DTC,IDT,CNT
  D NOW^%DTC S DTC=X,VALUE="",CNT=0
- F  S VALUE=$O(^DIC(10.2,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^DIC(10.2,"B",VALUE,"")) 
+ F  S VALUE=$O(^DIC(10.2,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^DIC(10.2,"B",VALUE,""))
  . S IDT=$P($G(^DIC(10.2,IEN,.02)),U,2) I IDT'="" I IDT<DTC Q
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
- Q 
+ Q
  ;
 EMPLOYSTAT ;#2,.31115 (TABLE)
  S ARRAY(1)="EMPLOYED FULL TIME"
  S ARRAY(2)="EMPLOYED PART TIME"
- S ARRAY(3)="NOT EMPLOYED" 
+ S ARRAY(3)="NOT EMPLOYED"
  S ARRAY(4)="SELF EMPLOYED"
  S ARRAY(5)="RETIRED"
  S ARRAY(6)="ACTIVE MILITARY DUTY"
@@ -226,8 +226,8 @@ EMPLOYSTAT ;#2,.31115 (TABLE)
 INSURANCE ;INSURANCE COMPANY #36
  N VALUE,IEN,DTC,IDT,CNT
  D NOW^%DTC S DTC=X,VALUE="",CNT=0
- F  S VALUE=$O(^DIC(36,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^DIC(36,"B",VALUE,"")) 
+ F  S VALUE=$O(^DIC(36,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^DIC(36,"B",VALUE,""))
  . S IDT=$P($G(^DIC(36,IEN,0)),U,5) I IDT'="" I IDT<DTC Q
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  . Q
@@ -237,8 +237,8 @@ INSURANCE ;INSURANCE COMPANY #36
 LOCATION ;HOSPITAL LOCATION #44
  N VALUE,IEN,DTC,RDT,IDT,CNT
  D NOW^%DTC S DTC=X,VALUE="",CNT=0
- F  S VALUE=$O(^SC("B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^SC("B",VALUE,"")) 
+ F  S VALUE=$O(^SC("B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^SC("B",VALUE,""))
  . S IDT=$P($G(^SC(IEN,"I")),U)
  . S RDT=$P($G(^SC(IEN,"I")),U,2)
  . I IDT'="" I RDT="" I IDT<DTC Q
@@ -262,7 +262,7 @@ ICD9(ARRAY,TXT) ; Partially implimented
  Q
  ;
 ICDFIND ; PERFECT MATCH
- I $D(^LEX(757.01,"B",TXT)) D  
+ I $D(^LEX(757.01,"B",TXT)) D
  . S X=$$ICD9CHK(TXT)
  . I +X<0 Q
  . S CHECK($P(X,U,2))=""
@@ -273,7 +273,7 @@ ICDFIND1 ; FIRST WORD MATCHES
  N CHECK,PATTERN
  S CHECK=$P(TXT," ",1)
  S PATTERN="1"""_CHECK_""".E"
- F  S CHECK=$O(^LEX(757.01,"B",CHECK)) Q:CHECK=""  Q:CHECK'?@PATTERN  D  
+ F  S CHECK=$O(^LEX(757.01,"B",CHECK)) Q:CHECK=""  Q:CHECK'?@PATTERN  D
  . S X=$$ICD9CHK(CHECK)
  . I +X<0 Q
  . I $D(CHECK($P(X,U,2))) Q
@@ -303,7 +303,7 @@ ICD9CHK(TXT)
 VITALTYPE ;#120.51
  N VALUE,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^GMRD(120.51,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^GMRD(120.51,"B",VALUE)) Q:VALUE=""  D
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
@@ -312,7 +312,7 @@ VITALTYPE ;#120.51
 ALLERGEN ;#120.82
  N VALUE,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^GMRD(120.82,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^GMRD(120.82,"B",VALUE)) Q:VALUE=""  D
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
  Q
@@ -320,7 +320,7 @@ ALLERGEN ;#120.82
 SYMPTOM ;#120.83
  N VALUE,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^GMRD(120.83,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^GMRD(120.83,"B",VALUE)) Q:VALUE=""  D
  . S CNT=CNT+1,ARRAY(CNT)=VALUE
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
  Q
@@ -328,7 +328,7 @@ SYMPTOM ;#120.83
 LABTESTS ;#60
  N VALUE,IEN,Z,Y,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^LAB(60,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^LAB(60,"B",VALUE)) Q:VALUE=""  D
  . I '$D(^LAB(60,"B",VALUE)) Q
  . S IEN=$O(^LAB(60,"B",VALUE,""))
  . S Z=$P($G(^LAB(60,IEN,0)),U,4) I Z'="CH" Q
@@ -395,7 +395,7 @@ CONSULT ;#123.5
 RAPROC ;#71
  N VALUE,CNT,Y,I
  S VALUE="",CNT=0
- F  S VALUE=$O(^RAMIS(71,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^RAMIS(71,"B",VALUE)) Q:VALUE=""  D
  . S Y=$O(^RAMIS(71,"B",VALUE,"")) Q:'Y
  . S I=$P($G(^RAMIS(71,Y,"I")),U) I I I I<DT Q ;Inactive
  . ;I $P($G(^RAMIS(71,Y,0)),U,6)="P" Q ;parent
@@ -407,7 +407,7 @@ RAPROC ;#71
 IMAGLOC ;#79.1
  N VALUE,CNT,Y,I
  S X="",VALUE="",CNT=0
- F  S X=$O(^RA(79.1,"B",X)) Q:'X  D  
+ F  S X=$O(^RA(79.1,"B",X)) Q:'X  D
  . S Y=$O(^RA(79.1,"B",X,""))
  . S I=$P($G(^RA(79.1,Y,0)),U,19) I I I I<DT S EXIT=1 Q ;inactive
  . S VALUE=$P($G(^SC(X,0)),U)
@@ -422,7 +422,7 @@ TEMPLATE(ISIRESUL) ;return list of TEMPLATES (#9001 ISI PT IMPORT TEMPLATE)
  N VALUE,CNT,Y,I
  K ISIRESUL
  S X="",VALUE="",CNT=0,ISIRESUL(0)=CNT
- F  S X=$O(^ISI(9001,"B",X)) Q:X=""  D  
+ F  S X=$O(^ISI(9001,"B",X)) Q:X=""  D
  . S Y=$O(^ISI(9001,"B",X,""))
  . S CNT=CNT+1,ISIRESUL(CNT)=Y_U_X
  . Q
@@ -433,7 +433,7 @@ FETCHTMP(ISIRESUL,TMPLIEN)
  ; Used for RPC (#8994): ISI IMPORT GET TEMPLATE DETLS
  ; IN:   ISIRESUL -- results array (pointer)
  ;       TMPLIEN  -- ien of #9001 (ISI PT IMPORT TEMPLATE FILE)
- ; 
+ ;
  ; OUT:  ISIRESUL(n)  = NAME^TYPE^NAME MASK^SSN MASK^SEX^EARLIEST DOB^LATEST DOB^MARITAL STATUS^ZIP MASK^
  ;                    ...PH MASK^CITY^STATE^VETERAN^DFN_NAME^EMPLOY STAT^SERVICE^EMAIL MASK^USER MASK
  ;
@@ -447,7 +447,7 @@ FETCHTMP(ISIRESUL,TMPLIEN)
  D GETS^DIQ(9001,IENS,"*","IE","ARRAY")
  I $G(DIERR) S ISIRESUL(0)="-1^Fileman Error (FETCHTMP+16~ISIIMPUA)" Q
  S (X,CNT)=0
- F  S X=$O(ARRAY(9001,IENS,X)) Q:'X  D  
+ F  S X=$O(ARRAY(9001,IENS,X)) Q:'X  D
  . I $G(ARRAY(9001,IENS,X,"E"))="" Q
  . S CNT=CNT+1 S ISIRESUL(CNT)=X_U_$G(ARRAY(9001,IENS,X,"E"))_U_$G(ARRAY(9001,IENS,X,"I"))
  . Q
@@ -458,8 +458,8 @@ PNTTYPE ;Patient Type (#391)
  ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^DG(391,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^DG(391,"B",VALUE,"")) 
+ F  S VALUE=$O(^DG(391,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^DG(391,"B",VALUE,""))
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
@@ -469,8 +469,8 @@ MARSTAT ;Marital Status (#11)
  ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^DIC(11,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^DIC(11,"B",VALUE,"")) 
+ F  S VALUE=$O(^DIC(11,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^DIC(11,"B",VALUE,""))
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
@@ -480,8 +480,8 @@ STATE ; STATE (#5)
  ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^DIC(5,"B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^DIC(5,"B",VALUE,"")) 
+ F  S VALUE=$O(^DIC(5,"B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^DIC(5,"B",VALUE,""))
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
@@ -492,10 +492,10 @@ SERVICE ; SERVICE/SECTION (#49)
  N VALUE,IEN,CNT,EXIT,DTC
  S VALUE="",CNT=0,EXIT=0
  D NOW^%DTC S DTC=X
- F  S VALUE=$O(^DIC(49,"B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^DIC(49,"B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^DIC(49,"B",VALUE,""))
  . ; Check DATE CLOSED (49.07)
- . I $D(^DIC(49,IEN,3)) N ZDT S ZDT=0 F  S ZDT=$O(^DIC(49,IEN,3,ZDT)) Q:'ZDT  D  
+ . I $D(^DIC(49,IEN,3)) N ZDT S ZDT=0 F  S ZDT=$O(^DIC(49,IEN,3,ZDT)) Q:'ZDT  D
  . . I ZDT>DTC Q
  . . N Z S Z=$P($G(^DIC(49,IEN,3,X,0)),U,2) I Z,Z<DTC Q
  . . S EXIT=1
@@ -509,18 +509,18 @@ SERVICE ; SERVICE/SECTION (#49)
 HFACTOR ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^AUTTHF("B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^AUTTHF("B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^AUTTHF("B",VALUE,0))
  . I $P($G(^AUTTHF(IEN,0)),U,11) Q ;inactive
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
- S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found." 
+ S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
  Q ;Health Factors
  ;
-ICPT ; 
+ICPT ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^ICPT("B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^ICPT("B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^ICPT("B",VALUE,""))
  . I $P($G(^ICPT(IEN,0)),U,4) Q  ;Inactive
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
@@ -531,8 +531,8 @@ ICPT ;
 PRVNAR ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^AUTNPOV("B",VALUE)) Q:VALUE=""  D  
- . S IEN=$O(^AUTNPOV("B",VALUE,"")) 
+ F  S VALUE=$O(^AUTNPOV("B",VALUE)) Q:VALUE=""  D
+ . S IEN=$O(^AUTNPOV("B",VALUE,""))
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
  S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
@@ -542,7 +542,7 @@ EDTOPIC ;
  ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^AUTTEDT("B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^AUTTEDT("B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^AUTTEDT("B",VALUE,""))
  . Q:$P($G(^AUTTEDT(IEN,0)),U,3)
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
@@ -553,23 +553,23 @@ EDTOPIC ;
 IMZ ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^AUTTIMM("B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^AUTTIMM("B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^AUTTIMM("B",VALUE,0))
- . I $P($G(^AUTTIM(IEN,0)),U,7) Q ;inactive 
+ . I $P($G(^AUTTIM(IEN,0)),U,7) Q ;inactive
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
- S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found." 
+ S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
  Q ;Immunization
  ;
 EXAM ;
  N VALUE,IEN,CNT
  S VALUE="",CNT=0
- F  S VALUE=$O(^AUTTEXAM("B",VALUE)) Q:VALUE=""  D  
+ F  S VALUE=$O(^AUTTEXAM("B",VALUE)) Q:VALUE=""  D
  . S IEN=$O(^AUTTEXAM("B",VALUE,0))
- . I $P($G(^AUTTEXAM(IEN,0)),U,4) Q ;inactive 
+ . I $P($G(^AUTTEXAM(IEN,0)),U,4) Q ;inactive
  . S CNT=CNT+1 S ARRAY(CNT)=VALUE
  . Q
- S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found." 
+ S ARRAY(0)=CNT I CNT=0 S ARRAY(0)="-1^No results found."
  Q ;Immunization
  Q
  ;
@@ -616,12 +616,12 @@ CPTFIND3 ; INTERNAL WORD MATCH
  S (CHK,CHK1)=""
  S Z=1,W=0,Y=0
  F Y=1:1:$L(TXT) I $E(TXT,Y)=" " S Z=Z+1
- ;  
- F W=1:1:Z S CHK=$P(TXT," ",W) I $D(@ZTMP@(CHK)) D  
+ ;
+ F W=1:1:Z S CHK=$P(TXT," ",W) I $D(@ZTMP@(CHK)) D
  . S CHK1=""
- . F  S CHK1=$O(@ZTMP@(CHK,CHK1)) Q:'CHK1  D  
+ . F  S CHK1=$O(@ZTMP@(CHK,CHK1)) Q:'CHK1  D
  . . S CHK2=""
- . . F  S CHK2=$O(@ZTMP@(CHK,CHK1,CHK2)) Q:'CHK2  D  
+ . . F  S CHK2=$O(@ZTMP@(CHK,CHK1,CHK2)) Q:'CHK2  D
  . . . I $D(CHECK(@ZTMP@(CHK2))) Q
  . . . S CNT=CNT+1
  . . . ;"1^"_CPT_U_CPTIEN_U_$P($G(^ICPT(CPTIEN,0)),U,2)
@@ -651,18 +651,18 @@ CPTCHK(TXT)
  ;
 BLDCPTIN ;
  ;Building CPT XTMP index
- I '$D(@ZTMP@(0)) D  
+ I '$D(@ZTMP@(0)) D
  . N X1,X2,X S X1=DT,X2=30 D C^%DTC ;calculate fileman date +30
  . S @ZTMP@(0)=(X)_U_DT_U_"BLDCPTIN~ISIIMPUA: Create Index for CPTs"
  . Q
  ;
  N W,X,Y,V,Z
  S X="",Y="",V=""
- F  S X=$O(^ICPT("G",X)) Q:X=""  D  
- . F  S V=$O(^ICPT("G",X,V)) Q:V=""  D  
+ F  S X=$O(^ICPT("G",X)) Q:X=""  D
+ . F  S V=$O(^ICPT("G",X,V)) Q:V=""  D
  . . S W=0
  . . S Y=$L(X) F Z=1:1:Y I $E(X,Z)=" " s W=W+1
- . . F Y=1:1:W D  
+ . . F Y=1:1:W D
  . . . S CHECK=$P(X," ",Y)
  . . . I CHECK="OF"!(CHECK="FOR")!(CHECK="OR")!(CHECK="TO")!(CHECK="AND")!(CHECK="WITH")!(CHECK="W/")!(CHECK="AND")!(CHECK="W/O") Q
  . . . S @ZTMP@($P(X," ",Y),Y,V)=X

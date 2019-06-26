@@ -1,5 +1,5 @@
 ISIIMPUH ;;ISI GROUP/MLS -- TREATING FACILITY LIST IMPORT Utility
- ;;3.0;ISI;;Jun 26,2012;Build 69
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -32,7 +32,7 @@ MISCDEF ;;+++++ DEFINITIONS OF MED MISC PARAMETERS +++++
  Q
  ;
 TFLMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list ovalues from RPC client
  ;
  ;OUTPUT:
@@ -52,7 +52,7 @@ TFLMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="DATE" D  
+ . I PARAM="DATE" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date/time." Q
  . . S VALUE=RESULT
@@ -78,10 +78,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALTFL(ISIMISC) ;
  ; Entry point to validate content of MEDS create array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("INST")="ASPRIN" 
+ ;     eg:  ISIMISC("INST")="ASPRIN"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,DFN,VALUE,RESULT,MSG,MISCDEF,EXIT,Y,RESULT,PSOSITE
@@ -90,7 +90,7 @@ VALTFL(ISIMISC) ;
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q

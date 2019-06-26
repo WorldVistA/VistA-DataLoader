@@ -1,5 +1,5 @@
 ISIIMP23 ;ISI GROUP/MLS -- Merge Users Utility 2.0 ;6/26/12
- ;;2.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -122,12 +122,12 @@ BEGIN(FPROV,TPROV) ;
  I $D(^VA(200,FPROV,"LM3")) M ^VA(200,TPROV,"LM3")=^VA(200,FPROV,"LM3")
  I $D(^VA(200,FPROV,"LM4")) M ^VA(200,TPROV,"LM4")=^VA(200,FPROV,"LM4")
  I $D(^VA(200,FPROV,"NPI")) M ^VA(200,TPROV,"NPI")=^VA(200,FPROV,"NPI")
- I $D(^VA(200,FPROV,"ORD")) M ^VA(200,TPROV,"ORD")=^VA(200,FPROV,"ORD") 
+ I $D(^VA(200,FPROV,"ORD")) M ^VA(200,TPROV,"ORD")=^VA(200,FPROV,"ORD")
  I $D(^VA(200,FPROV,"PS")) M ^VA(200,TPROV,"PS")=^VA(200,FPROV,"PS")
  I $D(^VA(200,FPROV,"PS1")) M ^VA(200,TPROV,"PS1")=^VA(200,FPROV,"PS1")
  I $D(^VA(200,FPROV,"PS2")) M ^VA(200,TPROV,"PS2")=^VA(200,FPROV,"PS2")
  I $D(^VA(200,FPROV,"PS2")) S ^VA(200,TPROV,"PS2")=^VA(200,FPROV,"PS2")
- I $D(^VA(200,FPROV,"RAC")) M ^VA(200,TPROV,"RAC")=^VA(200,FPROV,"RAC") 
+ I $D(^VA(200,FPROV,"RAC")) M ^VA(200,TPROV,"RAC")=^VA(200,FPROV,"RAC")
  I $D(^VA(200,FPROV,"RAL")) M ^VA(200,TPROV,"RAL")=^VA(200,FPROV,"RAL")
  I $D(^VA(200,FPROV,"USC1")) M ^VA(200,TPROV,"USC1")=^VA(200,FPROV,"USC1")
  I $D(^VA(200,FPROV,"USC2")) M ^VA(200,TPROV,"USC2")=^VA(200,FPROV,"USC2")
@@ -179,7 +179,7 @@ PNTFETCH ;
  D TRANSLAT
  ;
  Q ISIRC
- ; 
+ ;
 LOADMAP(ISIMAP) ;
  N BUF,FILE,FIELD,I,ELEMENT,TRANSFORM
  K ISIMAP
@@ -201,7 +201,7 @@ MAPTOEXT ;; +++ Element translation table ***
 TRANSLAT ;
  N NODE,ELEMENT,TRANS,TRANS1,VALUE,DESCR,LINE,FILE,FIELD
  N ISII S ISII=0
- F  S ISII=$O(@ISIVPR@(ISII)) Q:'ISII  D  
+ F  S ISII=$O(@ISIVPR@(ISII)) Q:'ISII  D
  . S NODE=$G(@ISIVPR@(ISII))
  . I $L(NODE)=0 Q
  . S ELEMENT=$TR($P(NODE," "),"<>","")
@@ -234,19 +234,19 @@ VITAL ;
  I ZNUM'=1 Q
  S ZLINE=$P($G(ZARY(1)),U)
  S ZENT=$P(ZLINE,"value='",2)
- S ZENT=$P(ZENT,"'") 
+ S ZENT=$P(ZENT,"'")
  I $L(ZENT)=0 S ZENT=$$NOW^XLFDT
  ; grab test values
  K ZARY S ZNUM=$$NESTED(.ZARY,ISII,"measurement","/measurements")
  I 'ZNUM Q
- N Z,Y F Z=1:1:ZNUM S ZLINE=$P($G(ZARY(Z)),U) D  
+ N Z,Y F Z=1:1:ZNUM S ZLINE=$P($G(ZARY(Z)),U) D
  . I ZLINE'["measurement " Q
  . K ZMISC
  . ; Grab Vital Type
  . S ZTEST=$P(ZLINE,"name='",2)
  . Q:$L(ZTEST)=0
  . S ZTEST=$P(ZTEST,"'") Q:$L(ZTEST)=0
- . S Y=$O(^GMRD(120.51,"B",ZTEST,"")) I Y="" D  
+ . S Y=$O(^GMRD(120.51,"B",ZTEST,"")) I Y="" D
  . . S Y=$O(^GMRD(120.51,"C",ZTEST,""))
  . . Q
  . S ZMISC("VITAL_TYPE")=Y
@@ -258,7 +258,7 @@ VITAL ;
  . S ZMISC("ENTERED_BY")=$G(DUZ)
  . S ZMISC("LOCATION")=ZLOC
  . S ZMISC("DT_TAKEN")=ZENT
- . S ISIRC=$$IMPORTVT^ISIIMP09(.ZMISC)  
+ . S ISIRC=$$IMPORTVT^ISIIMP09(.ZMISC)
  . Q
  ;
  Q
@@ -278,7 +278,7 @@ PROBLEM ;
  K ZARY S ZNUM=$$NESTED(.ZARY,ISII,"onset","/problem")
  S ZLINE=$P($G(ZARY(1)),U)
  S ZENT=$P(ZLINE,"value='",2)
- S ZENT=$P(ZENT,"'") 
+ S ZENT=$P(ZENT,"'")
  I $L(ZENT)=0 S ZENT=$$NOW^XLFDT
  S ZMISC("ONSET")=ZENT
  ; grab Provider ID
@@ -286,14 +286,14 @@ PROBLEM ;
  S ZLINE=$P($G(ZARY(1)),U)
  S ZPROV=$P(ZLINE,"code='",2)
  S ZPROV=$P(ZPROV,"'")
- Q:'ZPROV  
+ Q:'ZPROV
  S ZMISC("PROVIDER")=ZPROV
  ; grab Status value
  K ZARY S ZNUM=$$NESTED(.ZARY,ISII,"status","/problem")
  S ZLINE=$P($G(ZARY(1)),U)
  S ZSTAT=$P(ZLINE,"code='",2)
  S ZSTAT=$P(ZSTAT,"'")
- Q:$L(ZSTAT)=0 
+ Q:$L(ZSTAT)=0
  S ZMISC("STATUS")=ZSTAT
  ; Grab Problem (ICD9) values
  ;  #1 grab icd value
@@ -357,7 +357,7 @@ ALLERGY ;
  ; Grab Symptom
  K ZARY S ZMISC("SYMPTOM")=""
  S ZNUM=$$NESTED(.ZARY,ISII,"reaction","/reactions")
- F X=1:1:ZNUM D  
+ F X=1:1:ZNUM D
  . S ZLINE=$P($G(ZARY(1)),U)
  . S ZSYMP=$P(ZLINE,"name='",2)
  . S ZSYMP=$P(ZSYMP,"' ")
@@ -410,7 +410,7 @@ MEDS ;
  S ZLINE=$P($G(ZARY(1)),U)
  S ZDT=$P(ZLINE,"value='",2)
  S ZDT=$P(ZDT,"' ")
- I 'ZDT D  
+ I 'ZDT D
  . K ZARY S ZNUM=$$NESTED(.ZARY,ISII,"ordered","/med")
  . S ZLINE=$P($G(ZARY(1)),U)
  . S ZDT=$P(ZLINE,"value='",2)
@@ -444,7 +444,7 @@ MEDS ;
  S ZLINE=$P($G(ZARY(1)),U)
  S ZSUP=$P(ZLINE,"value='",2)
  S ZSUP=$P(ZSUP,"' ")
- I 'ZSUP D  
+ I 'ZSUP D
  . S ZSUP=0 K ZARY S ZNUM=$$NESTED(.ZARY,ISII,"dose","/doses")
  .  S ZLINE=$P($G(ZARY(1)),U)
  . S ZSUP=+$P(ZLINE,"dose='",2)
@@ -483,17 +483,17 @@ NESTED(ZARY,ZISII,ZMATCH,ZTERM)
  ;   ZMATCH = matching element
  ;   ZTERM = terminating element
  ;
- ; OUT: 
+ ; OUT:
  ;    ZCNT = number of recs found
  ;    ZARY(ZCNT) = node_U_ien location
  ;
  N ZNODE,ZELEM,ZCNT,EXIT
  S (ZCNT,EXIT)=0 K ZARY
- S ZISII=+$G(ZISII) Q:'ZISII  
+ S ZISII=+$G(ZISII) Q:'ZISII
  S ZMATCH=$G(ZMATCH) Q:$L(ZMATCH)=0
  S ZTERM=$G(ZTERM)
  ;
- F  S ZISII=$O(@ISIVPR@(ZISII)) Q:'ZISII!(EXIT)  D  
+ F  S ZISII=$O(@ISIVPR@(ZISII)) Q:'ZISII!(EXIT)  D
  . S ZNODE=$G(@ISIVPR@(ZISII))
  . I $L(ZNODE)=0 Q
  . S ZELEM=$TR($P(ZNODE," "),"<>","")

@@ -1,5 +1,5 @@
 ISIIMPL3 ;ISI GROUP/MLS -- LABS IMPORT UTILITY
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -112,7 +112,7 @@ SHOW ;call with LRSN,LRODT, from LRCENDEL, LRTSTJAN
  ;W !,"Order  Test",?20,"Urgency",?30,"Status",?64,"Accession" ;MLS
  D ORDER Q
 WAIT Q:$Y<(IOSL-3)  I $E(IOST)'="C" Q ;W @IOF Q ;MLS
- ;W !,"  PRESS '^' TO STOP " R X:DTIME 
+ ;W !,"  PRESS '^' TO STOP " R X:DTIME
  S X=1 S LREND=".^"[X Q:$G(LREND)  ;W @IOF
  Q
 CANC ;For Canceled tests

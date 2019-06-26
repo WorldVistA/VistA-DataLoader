@@ -1,5 +1,5 @@
 ISIIMPU8 ;;ISI GROUP/MLS -- NOTE IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPU8 ;;ISI GROUP/MLS -- NOTE IMPORT Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF NOTE MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -35,7 +35,7 @@ MISCDEF ;;+++++ DEFINITIONS OF NOTE MISC PARAMETERS +++++
  Q
  ;
 NOTMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list ovalues from RPC client
  ;
  ;OUTPUT:
@@ -55,7 +55,7 @@ NOTMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="VDT" D  
+ . I PARAM="VDT" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date/time." Q
  . . S VALUE=RESULT
@@ -78,10 +78,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALNOTE(ISIMISC)
  ; Entry point to validate content of Notes create/array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("VLOC")="PRIMARY CARE" 
+ ;     eg:  ISIMISC("VLOC")="PRIMARY CARE"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,DFN,VALUE,RESULT,MSG,MISCDEF,EXIT,Y,RESULT,IDT,RDT
@@ -90,7 +90,7 @@ VALNOTE(ISIMISC)
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -101,7 +101,7 @@ VALNOTE(ISIMISC)
  ; -- TIU_NAME --
  ; TIU DEFINITION NAME (8925.1)
  I '$D(ISIMISC("TIU_NAME")) Q "-1^Missing TIU_NAME."
- I $D(ISIMISC("TIU_NAME")) D  
+ I $D(ISIMISC("TIU_NAME")) D
  . S VALUE=$G(ISIMISC("TIU_NAME")) I VALUE="" S EXIT=1 Q
  . S VALUE=$O(^TIU(8925.1,"B",VALUE,"")) I VALUE="" S EXIT=1 Q
  . N ZREC S ZREC=$G(^TIU(8925.1,VALUE,0)) I ZREC="" S EXIT=1 Q
@@ -113,11 +113,11 @@ VALNOTE(ISIMISC)
  ;
  ; -- VDT --
  I '$D(ISIMISC("VDT")) Q "-1^Missing value for VDT (Visit Date/time)."
- S VALUE=$G(ISIMISC("VDT")) Q:VALUE="" "-1^Missing value for VDT (Visit Date/Time)."  
+ S VALUE=$G(ISIMISC("VDT")) Q:VALUE="" "-1^Missing value for VDT (Visit Date/Time)."
  ;
  ; -- VLOC --
  I '$D(ISIMISC("VLOC")) Q "-1^Missing VLOC (Hospital Location #44)."
- I $D(ISIMISC("VLOC")) D  
+ I $D(ISIMISC("VLOC")) D
  . S VALUE=$G(ISIMISC("VLOC")) I VALUE="" S EXIT=1 Q
  . S Y=$O(^SC("B",VALUE,"")) I Y="" S EXIT=1 Q
  . S IDT=$P($G(^SC(Y,"I")),U)
@@ -129,10 +129,10 @@ VALNOTE(ISIMISC)
  . Q
  Q:EXIT "-1^Invalid LOCATION (VLOC) value (#44,.01)."
  ;
- ; -- PROV -- 
+ ; -- PROV --
  ; Provider entering/signing note
  I '$D(ISIMISC("PROV")) Q "-1^Missing PROV (#200,.01)"
- I $D(ISIMISC("PROV")) D  
+ I $D(ISIMISC("PROV")) D
  . S VALUE=$G(ISIMISC("PROV")) I VALUE="" S EXIT=1 Q
  . S Y="" F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  Q:EXIT=1
  . . I +$G(^VA(200,Y,"PS"))=1 S EXIT=1 Q
@@ -147,7 +147,7 @@ VALNOTE(ISIMISC)
  ;
  ; -- ES --
  S ISIMISC("ES")=$P($G(^VA(200,ISIMISC("PROV"),20)),U,4)
- Q:$G(ISIMISC("ES"))="" "-1^PROVIDER (#200) missing Electronic Signature." 
+ Q:$G(ISIMISC("ES"))="" "-1^PROVIDER (#200) missing Electronic Signature."
  ;
  ;One time only doc
  N VISIT

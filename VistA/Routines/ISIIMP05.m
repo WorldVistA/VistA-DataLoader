@@ -1,5 +1,5 @@
 ISIIMP05 ;ISI Group/MLS -- Appointment Create Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -24,7 +24,7 @@ ISIIMP05 ;ISI Group/MLS -- Appointment Create Utility
  ;
  Q
  ;
-VALIDATE() 
+VALIDATE()
  ;
  S ADATE=$G(ISIMISC("ADATE"))
  S SC=$G(ISIMISC("CLIN"))
@@ -52,15 +52,15 @@ APPT(ADATE,SC,DFN,CDATE)
  ;          DFN   (Patient DFN #2)
  ;
  ; Output - ISIRC [return code]
- ;      
+ ;
  N COLLAT,SDY,COV,SDYC,OEPTR,ISIVIEN
  S ADATE=$G(ADATE),SC=$G(SC),DFN=$G(DFN),CDATE=$G(CDATE)
  ;
  I $D(^DPT(DFN,"S",ADATE,0)),$P($G(^DPT(DFN,"S",ADATE,0)),U,2)'="C" Q "-9^Duplicate Appointment"
  ;
  S ^DPT(DFN,"S",ADATE,0)=SC
- S ^SC(SC,"S",ADATE,0)=ADATE 
- S:'$D(^DPT(DFN,"S",0)) ^(0)="^2.98P^^" 
+ S ^SC(SC,"S",ADATE,0)=ADATE
+ S:'$D(^DPT(DFN,"S",0)) ^(0)="^2.98P^^"
  S:'$D(^SC(SC,"S",0)) ^(0)="^44.001DA^^"
  ;
  F SDY=1:1 I '$D(^SC(SC,"S",ADATE,1,SDY)) S:'$D(^(0)) ^(0)="^44.003PA^^" S ^(SDY,0)=DFN_U_15 Q
@@ -183,12 +183,12 @@ PCE(DFN,VISIT,PROVIEN,ICD,CPT,ISC,APTDT)
  ;
  S:PROVIEN DATA("PROVIDER",1,"NAME")=PROVIEN,DATA("PROVIDER",1,"PRIMARY")=1 ;Primary provider
  ;
- I ICD D  
+ I ICD D
  . S DATA("DX/PL",1,"PRIMARY")=1 D
  . S DATA("DX/PL",1,"DIAGNOSIS")=ICD
  ;
- I CPT D  
- . I PROVIEN D  
+ I CPT D
+ . I PROVIEN D
  . . S DATA("PROCEDURE",1,"ENC PROVIDER")=PROVIEN
  . . S DATA("PROCEDURE",1,"ORD PROVIDER")=PROVIEN
  . . Q

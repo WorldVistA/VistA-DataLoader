@@ -1,5 +1,5 @@
 ISIIMP15 ;ISI GROUP/MLS -- NOTES IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -37,11 +37,11 @@ MAKENOTE() ;
 IMPRTNOT(ISIMISC) ;Create Progress Note entry
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("DFN")=12345 
+ ;     eg:  ISIMISC("DFN")=12345
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0)=1 [if successful]
- ;          ISIRESUL(1)=TIUDA [if successful] 
+ ;          ISIRESUL(1)=TIUDA [if successful]
  ;
  N DFN,VDT,ARRAY,SUPPRESS,NOASF,RESULT,VLOC,TIUDA,TITLE,TEXT,SIGN,VSTR,PROV
  S ISIRC=1,RESULT=""

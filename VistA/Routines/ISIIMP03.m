@@ -1,5 +1,5 @@
 ISIIMP03 ;ISI GROUP/MLS -- PATIENT IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -44,7 +44,7 @@ CREATEPTS() ;
 IMPORTPT(ISIMISC)
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("NAME")="FIRST,LAST" 
+ ;     eg:  ISIMISC("NAME")="FIRST,LAST"
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0) = CNT
@@ -54,7 +54,7 @@ IMPORTPT(ISIMISC)
  I ISIMISC("IMP_TYPE")="I" D INDIVIDUAL
  Q ISIRC
  ;
-INDIVIDUAL      
+INDIVIDUAL
  N SSN,SSNMASK,RETURN,STRTSSN,ENDSSN,ISINUM,ISIINCR
  N NAME,SEX,DOB,STRT1,STRT2,CITY,STATE,ZIP,MARSTAT,PHON,VETERAN
  N RACE,ETHN,INSUR,OCCUP,EMPLOY,MERGE
@@ -73,9 +73,9 @@ INDIVIDUAL
  . D PREPVAL I +ISIRC<0 Q
  . D CREATEPNT
  . Q
- I SSN="" D  
+ I SSN="" D
  . S SSNMASK=$G(ISIMISC("SSN_MASK"))
- . I SSNMASK="" S SSNMASK="000" 
+ . I SSNMASK="" S SSNMASK="000"
  . S RETURN=$$EVALSSNMASK(SSNMASK)
  . I (+RETURN)<1 S SSNMASK="666" S RETURN=$$EVALSSNMASK(SSNMASK)
  . I (+RETURN)<1 S ISIRC="-1^Error: unable to create SSN (ISIIMP03)" Q  ; We've run out of non-standard SSN's! Time to refresh your database.
@@ -88,7 +88,7 @@ INDIVIDUAL
  . Q
  Q
  ;
-BATCH ; 
+BATCH ;
  N ISIINCR,I,ISINUM,RETURN,SSNMASK,SSN,STRTSSN,ENDSSN,EXIT
  N NAME,SEX,DOB,STRT1,STRT2,CITY,STATE,ZIP,MARSTAT,PHON,VETERAN
  N RACE,ETHN,INSUR,OCCUP,EMPLOY,MERGE
@@ -123,9 +123,9 @@ PREPVAL ;Prep import values
  S DOB=$G(ISIMISC("DOB")) I DOB="" S LDOB=$G(ISIMISC("LOW_DOB")),UDOB=$G(ISIMISC("UP_DOB")) S DOB=$$DOB
  S STRT1=$G(ISIMISC("STREET_ADD1"))
  I STRT1="" S STRT1=$$STREET
- S STRT2=$G(ISIMISC("STREET_ADD2")) 
+ S STRT2=$G(ISIMISC("STREET_ADD2"))
  S CITY=$G(ISIMISC("CITY")) I CITY="" S CITY=$$CITY
- S STATE=$G(ISIMISC("STATE")) 
+ S STATE=$G(ISIMISC("STATE"))
  I '+STATE,STATE'="" D  ;DHP/ART fix to use state codes as input
  . S STATE=$O(^DIC(5,"C",$$UP^XLFSTR(STATE),""))
  . Q:STATE'=""
@@ -155,7 +155,7 @@ CREATEPNT ;
  . S ISIRESUL(ISIINCR)=DFN_"^"_$P(^DPT(DFN,0),U,9)_"^"_NAME
  . S ISIRESUL(0)=ISIINCR
  ;
- I 'DFN D  
+ I 'DFN D
  . S FDA(2,"+1,",.01)=NAME
  . S FDA(2,"+1,",.02)=SEX
  . S FDA(2,"+1,",.03)=DOB
@@ -202,25 +202,25 @@ CREATEPNT ;
  . S FDA(2,"+1,",1010.15)="Y"    ; RECIEVED VA CARE PREVIOUSLY
  . S FDA(2,"+1,",994)="N"        ; MULTIPLE BIRTH INDICATOR
  . ;S FDA(2.03,"+1,+1,",.01)=$P(DATA,"^",6)
- . I RACE'="" D  
+ . I RACE'="" D
  . . S FDA(2.02,"+2,+1,",.01)=RACE
  . . S FDA(2.02,"+2,+1,",.02)="S"
- . I ETHN'="" D  
+ . I ETHN'="" D
  . . S FDA(2.06,"+3,+1,",.01)=ETHN
  . . S FDA(2.06,"+3,+1,",.02)="S"
- . I INSUR'="" D  
+ . I INSUR'="" D
  . . S FDA(2.312,"+4,+1,",.01)=INSUR
- . I $G(ISIPARAM("DEBUG"))>0 D  
+ . I $G(ISIPARAM("DEBUG"))>0 D
  . . W !,"+++ FDA Array before patient set +++"
  . . ;ZW FDA
- . . W !,"<HIT RETURN TO PROCEED>" R X:5 
+ . . W !,"<HIT RETURN TO PROCEED>" R X:5
  . . Q
  . D UPDATE^DIE("","FDA","ZIEN","MSG")
  . I $D(MSG) S ISIRC="-1^"_$G(MSG("DIERR",1,"TEXT",1)) Q
  . S DFN=+$G(ZIEN(1)) D IHSPNT(DFN) ;create IHS Patient File entry
  . ;
- . I '$D(^DPT("SSN",$E(STRTSSN,2,10))) S ISIRC="-1^Problem generating pt." Q  
- . I $G(ISIMISC("DFN_NAME"))="Y" I $G(ISIMISC("NAME_MASK"))'="" I $G(ISIMISC("NAME"))="" D  
+ . I '$D(^DPT("SSN",$E(STRTSSN,2,10))) S ISIRC="-1^Problem generating pt." Q
+ . I $G(ISIMISC("DFN_NAME"))="Y" I $G(ISIMISC("NAME_MASK"))'="" I $G(ISIMISC("NAME"))="" D
  . . S NAME=$$MASK("NAME",$G(ISIMISC("NAME_MASK")),$O(^DPT("SSN",$E(STRTSSN,2,10),"")))
  . . S ISIRC=$$CHNGNAME^ISIIMPU3($O(^DPT("SSN",$E(STRTSSN,2,10),"")),NAME)
  . . Q
@@ -237,19 +237,19 @@ MASK(TYPE,VALUE,ISIINCR)
  S RETURN=""
  S TYPE=$G(TYPE),VALUE=$G(VALUE),ISIINCR=$G(ISIINCR)
  ;
- I TYPE="ZIP" D  
+ I TYPE="ZIP" D
  . I VALUE="" S VALUE="00000"
  . S I="" F X=$L(VALUE)+1:1:9 S I=I_"9"
- . S L=$L(I),I=$R(I)+1 F X=$L(I)+1:1:L S I="0"_I 
+ . S L=$L(I),I=$R(I)+1 F X=$L(I)+1:1:L S I="0"_I
  . S RETURN=VALUE_"-"_I
  . Q
- I TYPE="PHONE" D  
+ I TYPE="PHONE" D
  . I VALUE="" S VALUE="555555"
  . S I="" F X=$L(VALUE)+1:1:10 S I=I_"9"
- . S L=$L(I),I=$R(I)+1 F X=$L(I)+1:1:L S I="0"_I 
- . S RETURN=VALUE_I  
+ . S L=$L(I),I=$R(I)+1 F X=$L(I)+1:1:L S I="0"_I
+ . S RETURN=VALUE_I
  . Q
- I TYPE="NAME" D  
+ I TYPE="NAME" D
  . D NUMTBL
  . S I="" F X=1:1:$L(ISIINCR) S I=I_NUMCONV($E(ISIINCR,X))
  . S L=I
@@ -261,14 +261,14 @@ MASK(TYPE,VALUE,ISIINCR)
  . . Q
  . S RETURN=VALUE
  . Q
- I TYPE="EMAIL" D  
+ I TYPE="EMAIL" D
  . N ZNAME,ZEMAIL S ZNAME=$G(NAME) I ZNAME="" S ZNAME="USER,USER"
  . D STDNAME^XLFNAME(.ZNAME,"C")
  . I VALUE="" S VALUE="HOSP.NET"
  . S ZEMAIL=$E(ZNAME("GIVEN"))_"."_ZNAME("FAMILY")_"@"_VALUE
  . S RETURN=ZEMAIL
  . Q
- I $S(TYPE="ELSIG":1,TYPE="ACCESS":1,TYPE="VERIFY":1,1:0),VALUE["*",ISIINCR'="" D  
+ I $S(TYPE="ELSIG":1,TYPE="ACCESS":1,TYPE="VERIFY":1,1:0),VALUE["*",ISIINCR'="" D
  . F  D  Q:VALUE'["*"
  . . F X=1:1:$L(VALUE) I $E(VALUE,X)="*" D  Q
  . . . S VALUE=$E(VALUE,0,(X-1))_ISIINCR_$E(VALUE,(X+1),9999)
@@ -281,18 +281,18 @@ MASK(TYPE,VALUE,ISIINCR)
  ;
 EVALSSNMASK(VALUE)      ;
  N I,II,X,CNT
- S I=VALUE F X=$L(VALUE)+1:1:9 S $E(I,X)="0" 
+ S I=VALUE F X=$L(VALUE)+1:1:9 S $E(I,X)="0"
  S I="9"_I
- S II=VALUE F X=$L(VALUE)+1:1:9 S $E(II,X)="9" 
+ S II=VALUE F X=$L(VALUE)+1:1:9 S $E(II,X)="9"
  S II="9"_II
  S CNT=0 F X=I:1:II I '$D(^DPT("SSN",$E(X,2,10))) S CNT=CNT+1
  S I=$E(I,2,10),II=$E(II,2,10)
  Q CNT_"|"_I_"|"_II
  ;
-DOB()   
+DOB()
  N X,X1,X2,DIFF,TDAY,RESULT
  D NOW^%DTC S TDAY=X
- I $G(LDOB)'="" D  
+ I $G(LDOB)'="" D
  . D DT^DILF("E",LDOB,.RESULT)
  . S LDOB=RESULT
  I $G(LDOB)="" D  ; Generate Lower limit for DOB
@@ -304,11 +304,11 @@ DOB()
  S X1=LDOB S X2=$R(DIFF) D C^%DTC S DOB=X
  Q DOB
  ;
-SEX()   
+SEX()
  N Y S Y=$R(2) S SEX=$S(Y=0:"F",1:"M")
  Q SEX
  ;
-CITY()  
+CITY()
  N Y K Y
  S Y(1)="ANYTOWN"
  S Y(2)="SMALLVILLE"
@@ -342,7 +342,7 @@ STATE()
  F  Q:EXIT  S Y=$R(R)+1 I $P($G(^DIC(5,Y,0)),U)'="" I $P($G(^DIC(5,Y,0)),U,6)=1 S STATE=Y,EXIT=1
  Q STATE
  ;
-STREET()        
+STREET()
  N Y,YY
  S Y(1)="LANE"
  S Y(2)="STREET"
@@ -366,7 +366,7 @@ STREET()
  ;
  Q $R(1000)+1_" "_YY($R(7)+1)_" "_Y($R(9)+1)
  ;
-MARSTAT()       
+MARSTAT()
  N R,Y,EXIT
  S EXIT=0,R=$P(^DIC(11,0),"^",3)
  F  Q:EXIT  S Y=$R(R)+1 I $P($G(^DIC(11,Y,0)),U)'="" S MARSTAT=Y,EXIT=1
@@ -387,7 +387,7 @@ NUMTBL  ;
  ;
 IHSPNT(DFN)
  S DFN=+$G(DFN) I 'DFN Q
- I '$D(^DPT(DFN,0)) Q 
+ I '$D(^DPT(DFN,0)) Q
  I $D(^AUPNPAT(DFN)) Q
  N FDA,MSG,ZIEN
  S FDA(9000001,"?+1,",.01)=DFN

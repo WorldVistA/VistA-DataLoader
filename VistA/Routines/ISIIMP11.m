@@ -1,5 +1,5 @@
 ISIIMP11 ;;ISI GROUP/MLS -- ALLERGIES IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -37,11 +37,11 @@ MAKEALG() ;
 IMPRTALG(ISIMISC) ;Create allergy entry
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("GMRAORIG")=12345 
+ ;     eg:  ISIMISC("GMRAORIG")=12345
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0)=1 [if successful]
- ;          ISIRESUL(1)="success" [if successful]       
+ ;          ISIRESUL(1)="success" [if successful]
  ;
  N NODE,DFN,GMRARRAY,GMRAIEN,ORDFN
  ; Process No Known Allergies
@@ -57,7 +57,7 @@ PREP
  K ISIMISC("PAT_SSN"),ISIMISC("SYMPTOM")
  S NODE=$NAME(^TMP("GMRA",$J))
  K @NODE M @NODE=ISIMISC
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ Final values +++"
  . W !,"DFN:",DFN,!
  . I $D(ISIMISC) W $G(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,X,":",ISIMISC(X)

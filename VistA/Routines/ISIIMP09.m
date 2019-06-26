@@ -1,5 +1,5 @@
-ISIIMP09 ;ISI GROUP/MLS -- VITALS IMPORT CONT. ; 17 Sep 2018 12:00 PM
- ;;1.0;;;Jun 26,2012;Build 31
+ISIIMP09 ;ISI GROUP/MLS -- VITALS IMPORT CONT. ;2019-06-26  11:24 AM
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -38,9 +38,9 @@ MAKEVIT() ;
 IMPORTVT(ISIMISC) ;Create Vitals entry
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("DFN")=12345 
+ ;     eg:  ISIMISC("DFN")=12345
  ;
- ; Output - ISIRC [return code]       
+ ; Output - ISIRC [return code]
  N VTKNDT,DFN,TYP,RT,LOC,ENT
  D PREP
  I +$G(ISIRC)<0 Q ISIRC
@@ -75,10 +75,10 @@ GEN(TYPE) ;Generate values for vitals
  S:TYPE=2 READ=($R(2)+97)_"."_($R(9)+1)
  S:TYPE=3 READ=$R(8)+12
  S:TYPE=5 READ=$R(30)+65
- I TYPE=8 D  
+ I TYPE=8 D
  .S HGT=$S($P($G(^GMR(120.5,+$O(^PXRMINDX(120.5,"PI",DFN,8,+$O(^PXRMINDX(120.5,"PI",DFN,8,""),-1),0)),0)),U,8):$P(^(0),U,8),1:(60+$R(18)))
  .S READ=HGT
- I TYPE=9 D  
+ I TYPE=9 D
  . S WGT=$S($P($G(^GMR(120.5,+$O(^PXRMINDX(120.5,"PI",DFN,9,+$O(^PXRMINDX(120.5,"PI",DFN,9,""),-1),0)),0)),U,8):$P(^(0),U,8),1:(110+$R(150)))
  . S GORL=$R(2),LBS=$R(5),(READ,WGT)=WGT+($S(GORL=0:"-",1:"+")_LBS)
  S:TYPE=21 READ=$R(9)+91
@@ -98,7 +98,7 @@ CHECKDUP(DFN,VDATE,VTYPE,VLOC)
  ;
  I 'VTYPE,$L(VTYPE) S VTYPE=$O(^GMRD(120.51,"B",VTYPE,""))
  ;
- F  S VITIEN=$O(^GMR(120.5,"B",VDATE,VITIEN)) Q:('VITIEN!(EXIT!(+$G(ISIRC)<0)))  D  
+ F  S VITIEN=$O(^GMR(120.5,"B",VDATE,VITIEN)) Q:('VITIEN!(EXIT!(+$G(ISIRC)<0)))  D
  . S IENS=VITIEN_","
  . D GETS^DIQ(120.5,IENS,".02;.03;.05","I","ZBUF","ZMSG")
  . I $G(DIERR) S ISIRC="-1^Record Vitals Rpt: Fileman error" Q
@@ -109,5 +109,3 @@ CHECKDUP(DFN,VDATE,VTYPE,VLOC)
  . Q
  ;
  Q EXIT
-
- 

@@ -1,5 +1,5 @@
-ISIIMPUC ;;ISI GROUP/MLS -- RAD ORDERS IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ISIIMPUC ;;ISI GROUP/MLS -- RAD ORDERS IMPORT Utility ; 6/26/19 11:30am
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPUC ;;ISI GROUP/MLS -- RAD ORDERS IMPORT Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF RAD ORDERS MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -40,8 +40,8 @@ MISCDEF ;;+++++ DEFINITIONS OF RAD ORDERS MISC PARAMETERS +++++
  ;;EXAM_STATUS      |PARAM      |           |How far to advance order (O,R,E,C)
  Q
  ;
-RADMISC(MISC,ISIMISC)
- ;INPUT: 
+RADMISC(MISC,ISIMISC) 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list of values from RPC client
  ;
  ;OUTPUT:
@@ -53,7 +53,7 @@ RADMISC(MISC,ISIMISC)
  S ISIRC=$$RADMISC1("ISIMISC")
  Q ISIRC ;return code
  ;
-RADMISC1(DSTNODE)
+RADMISC1(DSTNODE) 
  N PARAM,VALUE,DATE,RESULT,MSG,EXIT
  S (EXIT,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""  D  Q:EXIT
@@ -61,7 +61,7 @@ RADMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="RADTE" D  
+ . I PARAM="RADTE" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid RADTE (Exam Date/Time)" Q
  . . S VALUE=RESULT
@@ -80,12 +80,12 @@ LOADMISC(MISCDEF) ;
  . S MISCDEF(NAME)=TYPE_"|"_FIELD
  Q
  ;
-VALRADO(ISIMISC)
+VALRADO(ISIMISC) 
  ; Entry point to validate content of Radiology Order create array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("RADPROC")="CHEST 2 VIEWS" 
+ ;     eg:  ISIMISC("RADPROC")="CHEST 2 VIEWS"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,DFN,VALUE,RESULT,MSG,MISCDEF,EXIT,Y,RESULT,I,TDY,IDT,RDT
@@ -95,7 +95,7 @@ VALRADO(ISIMISC)
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -105,7 +105,7 @@ VALRADO(ISIMISC)
  ;
  ; -- RAPROC --
  I '$D(ISIMISC("RAPROC")) Q "-1^Missing RAPROC (#71,.01)"
- I $D(ISIMISC("RAPROC")) D  
+ I $D(ISIMISC("RAPROC")) D
  . S VALUE=$G(ISIMISC("RAPROC")) I VALUE="" S EXIT=1 Q
  . I '$D(^RAMIS(71,"B",VALUE)) S EXIT=1 Q
  . S Y=$O(^RAMIS(71,"B",VALUE,"")) I 'Y S EXIT=1 Q
@@ -116,7 +116,7 @@ VALRADO(ISIMISC)
  ;
  ; -- MAGLOC --
  I '$D(ISIMISC("MAGLOC")) Q "-1^Missing MAGLOC (IMAGING LOCATIONS #79.1)."
- I $D(ISIMISC("MAGLOC")) D  
+ I $D(ISIMISC("MAGLOC")) D
  . S VALUE=$G(ISIMISC("MAGLOC")) I VALUE="" S EXIT=1 Q
  . S Y=$O(^SC("B",VALUE,"")) I Y="" S EXIT=1 Q ;#44 ien
  . S Y=$O(^RA(79.1,"B",Y,"")) I Y="" S EXIT=1 Q ;#79.1 ien
@@ -129,9 +129,9 @@ VALRADO(ISIMISC)
  S MAGTYP=$P($G(^RAMIS(71,ISIMISC("RAPROC"),0)),"^",12)
  I $P($G(^RA(79.1,ISIMISC("MAGLOC"),0)),U,6)'=MAGTYP Q "-1^TYPE OF IMAGING (#79.2) and IMAGING LOCATION (#79.1) don't match."
  ;
- ; -- PROV -- 
+ ; -- PROV --
  I '$D(ISIMISC("PROV")) Q "-1^Missing PROV."
- I $D(ISIMISC("PROV")) D  
+ I $D(ISIMISC("PROV")) D
  . S VALUE=$G(ISIMISC("PROV")) I VALUE="" S EXIT=1 Q
  . S Y="" F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  Q:EXIT=1
  . . I +$G(^VA(200,Y,"PS"))=1 S EXIT=1 Q
@@ -141,9 +141,9 @@ VALRADO(ISIMISC)
  . Q
  Q:EXIT "-1^Invalid PROV value (#200, .01)."
  ;
- ; -- TECH -- 
+ ; -- TECH --
  ; I '$D(ISIMISC("TECH")) Q "-1^Missing TECH."
- I $D(ISIMISC("TECH")) D  
+ I $D(ISIMISC("TECH")) D
  . S VALUE=$G(ISIMISC("TECH")) I VALUE="" S EXIT=1 Q
  . S Y="" F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  Q:EXIT=1
  . . I '$D(^VA(200,Y,"RAC")) Q ;no rad classification
@@ -154,30 +154,30 @@ VALRADO(ISIMISC)
  Q:EXIT "-1^Invalid TECH value (#200, .01)."
  ;
  I '$D(ISIMISC("EXAM_STATUS")) S ISIMISC("EXAM_STATUS")="O"
- I $D(ISIMISC("EXAM_STATUS")) D  
+ I $D(ISIMISC("EXAM_STATUS")) D
  . S X=$E(ISIMISC("EXAM_STATUS")) S X=$S(X="O":X,X="R":X,X="E":X,X="C":X,1:"O")
  . Q
  ;
  ; -- Check to see if Provider has RAD/NUC LOCATION ACCESS to Imaging Location (#200,74)
- ;S X="",EXIT=1 F  S X=$O(^VA(200,ISIMISC("PROV"),"RAL",X)) Q:X=""  D  
+ ;S X="",EXIT=1 F  S X=$O(^VA(200,ISIMISC("PROV"),"RAL",X)) Q:X=""  D
  ;. I $P($G(^VA(200,ISIMISC("PROV"),"RAL",X,0)),U)'=ISIMISC("MAGLOC") Q
  ;. S EXIT=0
  ;. Q
- ;Q:EXIT "-1^Provider does not have RAD/NUC LOCATION ACCESS (#200,.074) to Imaging Location." 
+ ;Q:EXIT "-1^Provider does not have RAD/NUC LOCATION ACCESS (#200,.074) to Imaging Location."
  ;
  ; -- RADTE --
  I $G(ISIMISC("RADTE"))="" Q "-1^Missing RADTE."
- 
- ; -- EXAMCAT -- 
+ ;
+ ; -- EXAMCAT --
  I '$D(ISIMISC("EXAMCAT")) S ISIMISC("EXAMCAT")="O" ;Outpatient default
- I $D(ISIMISC("EXAMCAT")) D  
+ I $D(ISIMISC("EXAMCAT")) D
  . S VALUE=$G(ISIMISC("EXAMCAT")) I VALUE'?1A S EXIT=1 Q
  . S EXIT=$S(VALUE="I":0,VALUE="O":0,VALUE="C":0,VALUE="S":0,VALUE="E":0,VALUE="R":0,1:1)
  Q:EXIT "-1^Invalid EXAMCAT (Radiology Exam Category #75.1,4)"
  ;
  ; -- REQLOC --
  I '$D(ISIMISC("REQLOC")) Q "-1^Missing REQLOC (HOSPITAL LOCATION #44)."
- I $D(ISIMISC("REQLOC")) D  
+ I $D(ISIMISC("REQLOC")) D
  . S VALUE=$G(ISIMISC("REQLOC")) I VALUE="" S EXIT=1 Q
  . S Y=$O(^SC("B",VALUE,"")) I Y="" S EXIT=1 Q
  . S IDT=$P($G(^SC(Y,"I")),U)

@@ -1,5 +1,5 @@
 ISIIMP21 ;ISI GROUP/MLS -- RAD ORDERS IMPORT CONT.
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -37,11 +37,11 @@ MAKERADO() ;
 RADO(ISIMISC) ;Create Radiology Order
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("MAG_LOC")= 23 
+ ;     eg:  ISIMISC("MAG_LOC")= 23
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0)=1 [if successful]
- ;          ISIRESUL(1)=RAOIFN [if successful] 
+ ;          ISIRESUL(1)=RAOIFN [if successful]
  ;
  N RADFN,RAPROC,RAMLC,RADTE,RACAT,REQLOC,REQPHYS,RAREASON,RAMISC,RAOIFN,RESTATUS
  ;
@@ -50,15 +50,15 @@ RADO(ISIMISC) ;Create Radiology Order
  ;
  S ISIRC=$$ORDER()
  I (+ISIRC<0) Q ISIRC
- I $G(RESTATUS)="O" Q 
+ I $G(RESTATUS)="O" Q
  ;
  S ISIRC=$$REGISTER()
  I (+ISIRC<0) Q ISIRC
- I $G(RESTATUS)="R" Q 
+ I $G(RESTATUS)="R" Q
  ;
  S ISIRC=$$EXAMINE()
  I (+ISIRC<0) Q ISIRC
- I $G(RESTATUS)="E" Q 
+ I $G(RESTATUS)="E" Q
  ;
  S ISIRC=$$COMPLETE()
  I (+ISIRC<0) Q ISIRC
@@ -69,7 +69,7 @@ RADO(ISIMISC) ;Create Radiology Order
  ;
 PREP()
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ PREP^ISIIMP21)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,"ISIMISC("_X_")="_$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -102,7 +102,7 @@ REGISTER()
  I '$G(RADFN) S RADFN=$G(ISIMISC("DFN")) I 'RADFN Q "-1^Missing RADFN (REGISTER ISIIMP21)."
  I '$G(RADTE) S RADTE=$G(ISIMISC("RADTE")) I 'RADTE Q "-1^Missing RADTE (REGISTER ISIIMP21)."
  I '$G(RAOIFN) Q "-1^Missing RAORINF (Order IEN) in REGISTER^ISIIMP21"
- N RACAT,ISIBUF,ISIMSG D  
+ N RACAT,ISIBUF,ISIMSG D
  . N IENS751 S IENS751=RAOIFN_","
  . D GETS^DIQ(75.1,IENS751,".01;4","I","ISIBUF","ISIMSG")
  . I $G(DIERR) S ISIRC="-1^VistA Error, pulling Order information (REGISTER ISIIMP21):"_DIERR Q
@@ -125,7 +125,7 @@ REGISTER()
  ;S RAMISC("TECH")=$G(ISIMISC("TECH")) ; Technologist
  ;S RAMISC("TECHCOMM")=$G(ISIMISC("TECHCOM"))  ; Tech comments Captured."
  ;S RAMISC("PRIMINTSTF")=REQPHYS
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ REGISTER^ISIIMP21)+++",!
  . I $D(RAMISC) S X="" F  S X=$O(RAMISC(X)) Q:X=""  W !,"RAMISC("_X_")="_$G(RAMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -142,7 +142,7 @@ REGISTER()
  ;
 EXAMINE()
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ EXAMINE^ISIIMP21)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,"ISIMISC("_X_")="_$G(ISIMISC(X))
  . W !,"RADFN:",$G(RADFN)
@@ -166,7 +166,7 @@ EXAMINE()
  ;
 COMPLETE()
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ COMPLETE^ISIIMP21 (ISIMISC)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,"ISIMISC("_X_")="_$G(ISIMISC(X))
  . W !,"RADFN:",$G(RADFN)
@@ -188,7 +188,7 @@ COMPLETE()
  ;S RAMISC("VERPHYS")=REQPHYS
  ;S RAMISC("PRIMDXCODE")=4
  ;S RAMISC("ELSIG")=""
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ COMPLETE^ISIIMP21 (RAMISC)+++",!
  . I $D(RAMISC) S X="" F  S X=$O(RAMISC(X)) Q:X=""  W !,"RAMISC("_X_")="_$G(RAMISC(X))
  . W !,"RACASE:",$G(RACASE)

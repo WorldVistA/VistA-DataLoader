@@ -1,5 +1,5 @@
 ISIIMPU4 ;ISI GROUP/MLS -- PROBLEM IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -27,12 +27,12 @@ ISIIMPU4 ;ISI GROUP/MLS -- PROBLEM IMPORT Utility
  ; Column definitions for MISCDEF table (below):
  ; NAME=        name of parameter
  ; TYPE =       categories of values provided
- ;                      'PARAM' is internal used value 
+ ;                      'PARAM' is internal used value
  ;                      'FIELD' is a literal import value
  ;                      'MASK' is dynamic value w/ * wildcard
  ; DESC  =      description of value
  ;
- ; Array example: 
+ ; Array example:
  ;      MISC(1)="PROBLEM|DIABETES"
  ;      MISC(2)="PROVIDER|ONE,DOCTOR"
  ;      MISC(4)="PAT_SSN|555005555"
@@ -53,9 +53,9 @@ MISCDEF ;;+++++ DEFINITIONS OF PROBLEM MISC PARAMETERS +++++
  ;;VPOV             |PARAM      |              |(Y/N) Try to create V POV entry
  Q
  ;
-PROBMISC(MISC,ISIMISC) 
+PROBMISC(MISC,ISIMISC)
  ;
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -67,7 +67,7 @@ PROBMISC(MISC,ISIMISC)
  S ISIRC=$$PROBMISC1("ISIMISC")
  Q ISIRC ;return code
  ;
-PROBMISC1(DSTNODE) 
+PROBMISC1(DSTNODE)
  N PARAM,VALUE,DATE,RESULT,MSG,EXIT
  S (EXIT,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""  D  Q:EXIT
@@ -75,7 +75,7 @@ PROBMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I (PARAM="ONSET"!((PARAM="ENTERED")!(PARAM="RESOLVED"))) D  
+ . I (PARAM="ONSET"!((PARAM="ENTERED")!(PARAM="RESOLVED"))) D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid ONSET, ENTERED, or RESOLVED date." Q
  . . S VALUE=RESULT
@@ -96,13 +96,13 @@ LOADMISC(MISCDEF) ;
  ;
 VALPROB(ISIMISC)
  ; Entry point to validate content of PROBLEM create/array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("PROBLEM")="DIABETES" 
+ ;     eg:  ISIMISC("PROBLEM")="DIABETES"
  ;
  ; Output - ISIRC [return code]
- ; 
+ ;
  N FILE,FIELD,FLAG,VALUE,RESULT,MSG,MISCDEF,EXIT,OUT,Y
  N MAJCON,CODE,ICD,ICDIEN,EXPIEN,DFN,EXPNM
  S (OUT,EXIT)=0,(MAJCON,CODE,ICD,ICDIEN,EXPIEN,DFN,EXPNM)=""
@@ -115,10 +115,10 @@ VALPROB(ISIMISC)
  ;
  N ISISNOMD,LINDX S ISISNOMD=0,LINDX="ACODE"
  I $D(^LEX(757.02,"CODE",VALUE_" ")) S LINDX="CODE"
- I $D(^LEX(757.02,LINDX,VALUE_" ")) D  
+ I $D(^LEX(757.02,LINDX,VALUE_" ")) D
  . S X=VALUE I $S(X?.1A2.3N1".".2N:1,X?.1A2.3N1"+":1,1:0) Q  ;no ICD9 Lookup, only snomed
- . N LEXVDT S LEXVDT=$S($G(ISIMISC("ONSET")):$G(ISIMISC("ONSET")),$G(ISIMISC("ENTERED")):$G(ISIMISC("ENTERED")),1:DT) 
- . S LEXIEN=0 F  S LEXIEN=$O(^LEX(757.02,LINDX,VALUE_" ",LEXIEN)) Q:'LEXIEN!$$STATIEN^LEXABC(LEXIEN)  
+ . N LEXVDT S LEXVDT=$S($G(ISIMISC("ONSET")):$G(ISIMISC("ONSET")),$G(ISIMISC("ENTERED")):$G(ISIMISC("ENTERED")),1:DT)
+ . S LEXIEN=0 F  S LEXIEN=$O(^LEX(757.02,LINDX,VALUE_" ",LEXIEN)) Q:'LEXIEN!$$STATIEN^LEXABC(LEXIEN)
  . Q:'LEXIEN
  . S ISISNOMD=LEXIEN
  . N LST D LEX^ORQQPL4(.LST,VALUE,"PLS",0)
@@ -128,20 +128,20 @@ VALPROB(ISIMISC)
  . S EXPIEN=+STRNG,EXPNM=$P(STRNG,U,2)
  . Q
  ;
- I ISISNOMD,'ICD D  
+ I ISISNOMD,'ICD D
  . S X=$G(^LEX(757.02,ISISNOMD,0)),EXPIEN=$P(X,U),MAJCON=$P(X,U,4)
  . S ICD="799.9" ;hard coded for Oroville
  . S EXPNM=$G(^LEX(757.01,EXPIEN,0))
  . Q
  ;
- I '$G(EXPIEN),$S(VALUE?.1A2.3N1".".2N:1,VALUE?.1A2.3N1"+":1,1:0) D  
+ I '$G(EXPIEN),$S(VALUE?.1A2.3N1".".2N:1,VALUE?.1A2.3N1"+":1,1:0) D
  . I $D(^LEX(757.01,"B",VALUE)) Q
  . S ICDIEN=+$$CODEN^ICDCODE(VALUE,"80")
  . S Y=$$ICD^VPRDVSIT(ICDIEN)
  . S VALUE=$P(Y,U,2)
  . Q
  ;
- I '$G(EXPIEN) D  
+ I '$G(EXPIEN) D
  . F  S EXPIEN=$O(^LEX(757.01,"B",VALUE,EXPIEN)) Q:'EXPIEN  D  Q:OUT=1
  . . S EXPNM=$G(^LEX(757.01,EXPIEN,0)) Q:EXPNM=""
  . . S MAJCON=$P($G(^LEX(757.01,EXPIEN,1)),"^") Q:MAJCON=""
@@ -162,19 +162,19 @@ VALPROB(ISIMISC)
  S ISIMISC("ICDIEN")=ICDIEN,ISIMISC("EXPNM")=EXPNM
  I ISISNOMD S ISIMISC("SNOMED")=ISIMISC("PROBLEM")
  ;
- ;-- PROVIDER (required)-- 
- I $D(ISIMISC("PROVIDER")) D  
+ ;-- PROVIDER (required)--
+ I $D(ISIMISC("PROVIDER")) D
  . S VALUE=$G(ISIMISC("PROVIDER")) I VALUE="" S EXIT=1 Q
  . I '$D(^VA(200,"AK.PROVIDER",VALUE)) S EXIT=1 Q
  . S ISIMISC("PROVIDER")=$O(^VA(200,"AK.PROVIDER",VALUE,""))
  . Q
  I EXIT Q "-1^Invalid data for PROVIDER."
  ;
- I '$D(ISIMISC("PROVIDER")) Q "-1^Missing PROVIDER (#2,.01)"  
+ I '$D(ISIMISC("PROVIDER")) Q "-1^Missing PROVIDER (#2,.01)"
  ;
  ;-- PAT_SSN (required) --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN (#2,.09)."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=ISIMISC("PAT_SSN") I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -188,7 +188,7 @@ VALPROB(ISIMISC)
  I "AI"'[ISIMISC("STATUS") S ISIMISC("STATUS")="A"
  ;
  ;-- ONSET (not required) --
- I $G(ISIMISC("ONSET")) S ISIMISC("ONSET")=$P(ISIMISC("ONSET"),".")  
+ I $G(ISIMISC("ONSET")) S ISIMISC("ONSET")=$P(ISIMISC("ONSET"),".")
  ;. S FILE=9000011,FIELD=.13,FLAG="",VALUE=ISIMISC("ONSET")
  ;. S Y=VALUE D DD^%DT S VALUE=Y ;Convert to external
  ;. D CHK^DIE(FILE,FIELD,FLAG,VALUE,.RESULT,.MSG) I RESULT="^" S EXIT=1
@@ -208,7 +208,7 @@ VALPROB(ISIMISC)
  I "AC"'[ISIMISC("TYPE") S ISIMISC("TYPE")="A" ;default
  ;
  ; -- LOCATION
- I $G(ISIMISC("LOCATION"))'="" D  
+ I $G(ISIMISC("LOCATION"))'="" D
  . N ISC S ISC=ISIMISC("LOCATION") I $D(^SC(ISC,0)) Q
  . S (ISC,EXIT)=0 F  S ISC=$O(^SC("B",ISIMISC("LOCATION"),ISC)) Q:'ISC!EXIT  I $P($G(^SC(ISC,0)),U,3)="C" S EXIT=ISC Q
  . I EXIT S ISIMISC("LOCATION")=EXIT,EXIT=0

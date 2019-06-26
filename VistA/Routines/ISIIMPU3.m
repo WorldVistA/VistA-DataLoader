@@ -1,5 +1,5 @@
-ISIIMPU3 ;ISI GROUP/MLS -- Data Import Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ISIIMPU3 ;ISI GROUP/MLS -- Data Import Utility ; 6/26/19 11:28am
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -24,7 +24,7 @@ ISIIMPU3 ;ISI GROUP/MLS -- Data Import Utility
  ;
  Q
  ;
-CHNGNAME(DFN,NAME)
+CHNGNAME(DFN,NAME) 
  ;Additonal utility for patient import called by ISIIMP03
  N MSG,FDA,tempFILE,tempFIELD,tempDFN
  K FDA
@@ -36,7 +36,7 @@ CHNGNAME(DFN,NAME)
  I $D(MSG) Q "-1^"_MSG
  Q 1
  ;
-ADDALIAS(DFN,ALIAS)     
+ADDALIAS(DFN,ALIAS) 
  ;Additonal utility for patient import called by ISIIMP03
  N MSG,FDA,tempFILE,tempFIELD,tempDFN
  k FDA
@@ -48,7 +48,7 @@ ADDALIAS(DFN,ALIAS)
  I $D(MSG) Q "-1^"_MSG
  Q 1
  ;
-CHNGUSER(IEN,NAME)
+CHNGUSER(IEN,NAME) 
  ;Additonal utility for User import called by ISIIMP22
  N MSG,FDA,tempFILE,tempFIELD
  Q:'$D(^VA(200,IEN,0))
@@ -59,4 +59,3 @@ CHNGUSER(IEN,NAME)
  D FILE^DIE("K","FDA","MSG")
  I $D(MSG) Q "-1^"_MSG
  Q 1
- 

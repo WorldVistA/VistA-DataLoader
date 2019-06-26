@@ -1,5 +1,5 @@
 ISIIMPUF ;ISI GROUP/MLS -- IMPORT Utility (ADMIT)
- ;;1.0;;;Jun 26,2012;Build 46
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -27,12 +27,12 @@ ISIIMPUF ;ISI GROUP/MLS -- IMPORT Utility (ADMIT)
  ; Column definitions for MISCDEF table (below):
  ; NAME =       name of parameter
  ; TYPE =       categories of values provided
- ;                      'PARAM' is internal used value 
+ ;                      'PARAM' is internal used value
  ;                      'FIELD' is a literal import value
  ;                      'MASK' is dynamic value w/ * wildcard
  ; DESC  =      description of value
  ;
- ; Array example: 
+ ; Array example:
  ;      MISC(1)="ADATE|T-1@12:00"
  ;      MISC(2)="WARD|3E NORTH"
  ;      MISC(3)="RMBD|3E-100-5"
@@ -45,20 +45,20 @@ MISCDEF ;;+++++ DEFINITIONS OF ADMIT MISC PARAMETERS +++++
  ;;PAT_SSN          |FIELD      |2,.09      |PATIENT (SSN or DFN)
  ;;ADATE            |FIELD      |           |ADMIT DATE/TIME
  ;;DDATE            |FIELD      |           |Disposition DATE/TIME
- ;;ATYPE            |FIELD      |           |Admission type 
+ ;;ATYPE            |FIELD      |           |Admission type
  ;;DTYPE            |FIELD      |           |Disposition Type
  ;;ADMREG           |FIELD      |           |ADMITTING Regulations
  ;;PROVIDER         |FIELD      |           |ADMITTING PHYSICIAN
  ;;FDEXC            |FIELD      |           |Facility Dirctry Exclude
  ;;FTSPEC           |FIELD      |           |Facility Treat Spec
  ;;SHDIAG           |FIELD      |           |Brief descr of the diag
- ;;WARD             |FIELD      |           |ADMITTING WARD 
-    ;;RMBD             |FIELD      |           |ADMITTING ROOM BED 
+ ;;WARD             |FIELD      |           |ADMITTING WARD
+    ;;RMBD             |FIELD      |           |ADMITTING ROOM BED
  Q
  ;
-ADMMISC(MISC,ISIMISC) 
+ADMMISC(MISC,ISIMISC)
  ;
- ;INPUT: 
+ ;INPUT:
  ;  MISC - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -70,7 +70,7 @@ ADMMISC(MISC,ISIMISC)
  S ISIRC=$$ADMMISC1("ISIMISC")
  Q ISIRC ;return code
  ;
-ADMMISC1(DSTNODE) 
+ADMMISC1(DSTNODE)
  N PARAM,VALUE,DATE,RESULT,MSG,EXIT
  S (EXIT,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""  D  Q:EXIT
@@ -78,7 +78,7 @@ ADMMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM["DATE" D  
+ . I PARAM["DATE" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid date." Q
  . . I $P(RESULT,".",2)="" S $P(RESULT,".",2)="12"
@@ -133,7 +133,7 @@ VALADMIT(ISIMISC)
  ; -- ROOM-BED --
  S ISIRMBD=$G(ISIMISC("RMBD"))
  I ISIRMBD,$D(^DG(405.4,ISIRMBD)) S ISIRMBD=$P($G(^DG(405.4,ISIRMBD,0)),U)
- S Y=$O(^DG(405.4,"B",ISIRMBD,0)) 
+ S Y=$O(^DG(405.4,"B",ISIRMBD,0))
  I 'Y Q "-1^Invalid ROOM-BED (#405.4)."
  S (ISIRMBDIEN,ISIMISC("RMBD"))=Y
  ;
@@ -142,9 +142,9 @@ VALADMIT(ISIMISC)
  S ISITYPEIEN=$O(^DG(405.1,"B",ISITYPE,0)) ; FACILITY MOVEMENT TYPE
  I 'ISITYPEIEN Q "-1^Cannot determine Admission Type (#405.1)"
  S ISIMISC("ATYPE")=ISITYPEIEN
- ; 
+ ;
  S ISIFTS=$G(ISIMISC("FTSPEC")) I $L(ISIFTS)=0 S ISIFTS="MEDICAL"
- S ISIFTSIEN=$O(^DIC(45.7,"B",ISIFTS,"")) ; 
+ S ISIFTSIEN=$O(^DIC(45.7,"B",ISIFTS,"")) ;
  I 'ISIFTSIEN S ISIFTS=$O(^DIC(45.7,"B",ISIFTS)),ISIFTSIEN=$O(^DIC(45.7,"B",ISIFTS,0))
  I 'ISIFTSIEN Q "-1^Cannot determine Facility treating specialty."
  S ISIMISC("FTSPEC")=ISIFTSIEN
@@ -155,7 +155,7 @@ VALADMIT(ISIMISC)
  ;
  S ISIPROV=$G(ISIMISC("PROVIDER"))
  S ISIPROV=$O(^VA(200,"B",ISIPROV,0))
- I 'ISIPROV Q "-1^Input Error: no match on PROVIDER" 
+ I 'ISIPROV Q "-1^Input Error: no match on PROVIDER"
  S ISIMISC("PROVIDER")=ISIPROV
  ;
  S ISIREG=$G(ISIMISC("ADMREG"))
@@ -185,7 +185,7 @@ VALDSCHG(ISIMISC)
  ;S ISIMISC("ADMIFN")=ADMITIEN
  ;
  S Y=ADATE X ^DD("DD") S ISIMISC("admitDate")=Y
- 	S Y=ISIMISC("DDATE") X ^DD("DD") S ISIMISC("dischargeDateTime")=Y  ;
- 	S ISIMISC("typeOfMovement")=DTYPE
- 	S ISIMISC("masMovementType")="REGULAR"
+  S Y=ISIMISC("DDATE") X ^DD("DD") S ISIMISC("dischargeDateTime")=Y  ;
+  S ISIMISC("typeOfMovement")=DTYPE
+  S ISIMISC("masMovementType")="REGULAR"
  Q 1

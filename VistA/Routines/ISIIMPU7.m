@@ -1,5 +1,5 @@
 ISIIMPU7 ;ISI GROUP/MLS -- IMPORT Utility LABS ; 17 Sep 2018 12:30 PM
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPU7 ;ISI GROUP/MLS -- IMPORT Utility LABS ; 17 Sep 2018 12:30 PM
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF LAB MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -34,7 +34,7 @@ MISCDEF ;;+++++ DEFINITIONS OF LAB MISC PARAMETERS +++++
  Q
  ;
 LABMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -54,7 +54,7 @@ LABMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="RESULT_DT" D  
+ . I PARAM="RESULT_DT" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date/time." Q
  . . S VALUE=RESULT
@@ -77,10 +77,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALLAB(ISIMISC)
  ; Entry point to validate content of LAB create/array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("LAB_TEST")="CHOLESTEROL" 
+ ;     eg:  ISIMISC("LAB_TEST")="CHOLESTEROL"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,VALUE,RESULT,MSG,MISCDEF,EXIT,TEMP,Y,Z
@@ -90,7 +90,7 @@ VALLAB(ISIMISC)
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -100,7 +100,7 @@ VALLAB(ISIMISC)
  ;
  ; -- LAB_TEST --
  I '$D(ISIMISC("LAB_TEST")) Q "-1^Missing LAB_TEST."
- I $D(ISIMISC("LAB_TEST")) D  
+ I $D(ISIMISC("LAB_TEST")) D
  . S VALUE=$G(ISIMISC("LAB_TEST")) I VALUE="" S EXIT=1,MSG="Missing value for LAB_TEST (#60)." Q
  . I VALUE["-" N LIEN S LIEN=$$LOINCCHK(VALUE) I LIEN S VALUE=$P(^LAB(60,LIEN,0),U)
  . I '$D(^LAB(60,"B",VALUE)) S EXIT=1,MSG="Couldn't find ien for LAB_TEST (#60)." Q
@@ -115,10 +115,10 @@ VALLAB(ISIMISC)
  . S ISIMISC("C",TEMP,1)=1
  . Q
  Q:EXIT "-1^"_MSG
- ; 
+ ;
  ; -- RESULT_VAL --
  I '$D(ISIMISC("RESULT_VAL")) Q "-1^Missing RESULT_VAL."
- I $D(ISIMISC("RESULT_VAL")) D  
+ I $D(ISIMISC("RESULT_VAL")) D
  . S VALUE=$G(ISIMISC("RESULT_VAL")) I VALUE="" S EXIT=1 Q
  . ;S Y=VALUE,Z=""
  . ;I VALUE["." S Y=$P(VALUE,"."),Z=$P(VALUE,".",2) I Z'="" S Z=$E(Z,1,2) I Z'?1N.N S EXIT=1 Q
@@ -144,7 +144,7 @@ VALLAB(ISIMISC)
  ;
  ; -- LOCATION --
  I '$D(ISIMISC("LOCATION")) Q "-1^Missing LOCATION."
- I $D(ISIMISC("LOCATION")) D  
+ I $D(ISIMISC("LOCATION")) D
  . S VALUE=$G(ISIMISC("LOCATION")) I VALUE="" S EXIT=1 Q
  . S Y=$O(^SC("B",VALUE,"")) I Y="" S EXIT=1 Q
  . S IDT=$P($G(^SC(Y,"I")),U)
@@ -160,7 +160,7 @@ VALLAB(ISIMISC)
  Q 1
  ;
 LOINCCHK(LOINC)
- N IEN,LIEN,NODE,TMP,WARRAY,WIEN,WINDX,LTESTI 
+ N IEN,LIEN,NODE,TMP,WARRAY,WIEN,WINDX,LTESTI
  S IEN=0,LOINC=$G(LOINC)
  ; check loinc is in #95.3
  S LIEN=+LOINC
@@ -169,15 +169,15 @@ LOINCCHK(LOINC)
  S TMP=$P(NODE,U)_"-"_$P(NODE,U,15) ;build full loinc w/check digit
  I TMP'=LOINC Q 0 ;doesn't match
  ; Check #64 WKLD CODE
- F WINDX="AI","AH" D  
- . S WIEN=0 F  S WIEN=$O(^LAM(WINDX,LIEN,WIEN)) Q:'WIEN  D  
+ F WINDX="AI","AH" D
+ . S WIEN=0 F  S WIEN=$O(^LAM(WINDX,LIEN,WIEN)) Q:'WIEN  D
  . . I '$D(^LAB(60,"AC",WIEN)) Q ;no entry in #60 (Lab Test)
  . . S WARRAY(WIEN)=""
  . . Q
  . Q
  ; Get Lab test from #60
- S WIEN=0 F  S WIEN=$O(WARRAY(WIEN)) Q:'WIEN!IEN  D  
- . S LTESTI=0 F  S LTESTI=$O(^LAB(60,"AC",WIEN,LTESTI)) Q:'LTESTI!IEN  D  
+ S WIEN=0 F  S WIEN=$O(WARRAY(WIEN)) Q:'WIEN!IEN  D
+ . S LTESTI=0 F  S LTESTI=$O(^LAB(60,"AC",WIEN,LTESTI)) Q:'LTESTI!IEN  D
  . . I '$D(^LAB(60,"AF",LIEN,LTESTI)) Q ;check Lab Loinc x-ref against test
  . . S IEN=LTESTI
  . . Q

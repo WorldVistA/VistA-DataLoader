@@ -1,5 +1,5 @@
 ISIIMPUB ;;ISI GROUP/MLS -- CONSULTS IMPORT Utility
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPUB ;;ISI GROUP/MLS -- CONSULTS IMPORT Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF CONSULT MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -34,7 +34,7 @@ MISCDEF ;;+++++ DEFINITIONS OF CONSULT MISC PARAMETERS +++++
  Q
  ;
 CONMISC(MISC,ISIMISC)
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list ovalues from RPC client
  ;
  ;OUTPUT:
@@ -71,10 +71,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALCONS(ISIMISC)
  ; Entry point to validate content of CONSULT create array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("LOC")="PRIMARY CARE" 
+ ;     eg:  ISIMISC("LOC")="PRIMARY CARE"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,DFN,VALUE,RESULT,MSG,MISCDEF,EXIT,Y,RESULT,DFN
@@ -84,7 +84,7 @@ VALCONS(ISIMISC)
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -95,7 +95,7 @@ VALCONS(ISIMISC)
  ; -- CONSULT --
  ;
  I '$D(ISIMISC("CONSULT")) Q "-1^Missing CONSULT (#123.5)."
- I $D(ISIMISC("CONSULT")) D  
+ I $D(ISIMISC("CONSULT")) D
  . S VALUE=$G(ISIMISC("CONSULT")) I VALUE="" S EXIT=1 Q
  . D SVCSYN^ORQQCN2(.RESULT,1,1,1)
  . K ARRAY M ARRAY=@RESULT
@@ -109,7 +109,7 @@ VALCONS(ISIMISC)
  ;
  ; -- LOC --
  I '$D(ISIMISC("LOC")) Q "-1^Missing LOC (Hospital Location #44)."
- I $D(ISIMISC("LOC")) D  
+ I $D(ISIMISC("LOC")) D
  . S VALUE=$G(ISIMISC("LOC")) I VALUE="" S EXIT=1 Q
  . S Y=$O(^SC("B",VALUE,"")) I Y="" S EXIT=1 Q
  . S IDT=$P($G(^SC(Y,"I")),U)
@@ -121,13 +121,13 @@ VALCONS(ISIMISC)
  . Q
  Q:EXIT "-1^Invalid LOCATION value (#44,.01)."
  ;
- ; -- PROV -- 
+ ; -- PROV --
  ; Provider entering/signing note
  I '$D(ISIMISC("PROV")) D  ;Q "-1^Missing PROV."
  . S ISIMISC("PROV")=$P($G(^VA(200,DUZ,0)),U)
  . Q
  ;
- I $D(ISIMISC("PROV")) D  
+ I $D(ISIMISC("PROV")) D
  . S VALUE=$G(ISIMISC("PROV")) I VALUE="" S EXIT=1 Q
  . S Y="" F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  Q:EXIT=1
  . . I +$G(^VA(200,Y,"PS"))=1 S EXIT=1 Q
@@ -142,6 +142,6 @@ VALCONS(ISIMISC)
  ;
  ; -- ES --
  S ISIMISC("ES")=$P($G(^VA(200,ISIMISC("PROV"),20)),U,4)
- Q:$G(ISIMISC("ES"))="" "-1^PROVIDER missing Electronic Signature (#200,20.4)." 
+ Q:$G(ISIMISC("ES"))="" "-1^PROVIDER missing Electronic Signature (#200,20.4)."
  ;
  Q 1

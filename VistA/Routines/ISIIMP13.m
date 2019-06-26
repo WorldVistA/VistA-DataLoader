@@ -1,5 +1,5 @@
 ISIIMP13 ;ISI GROUP/MLS -- LABS IMPORT CONT.;2019-06-26  11:06 AM
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 31
  ;
  ; VistA Data Loader 2.0
  ;
@@ -37,11 +37,11 @@ MAKELAB() ;
 IMPRTLAB(ISIMISC) ;Create lab entry
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("RESULT_VAL")=110 
+ ;     eg:  ISIMISC("RESULT_VAL")=110
  ;
  ; Output - ISIRC [return code]
  ;          ISIRESUL(0)=1 [if successful]
- ;          ISIRESUL(1)="success" [if successful] 
+ ;          ISIRESUL(1)="success" [if successful]
  ;
  N NODE,DFN
  ;
@@ -58,7 +58,7 @@ IMPRTLAB(ISIMISC) ;Create lab entry
  ;
 PREP
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++ Pre-Prep values +++",!
  . I $D(ISIMISC) W $G(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,ISIMISC(X)
  . W !,"<HIT RETURN>" R X
@@ -101,7 +101,7 @@ L5 S Y=$$NOW^XLFDT S LRORDTIM=$P(Y,".",2),LRODT=$P(Y,".",1),X1=Y,X2=DT D ^%DTC ;
  ;S LRWP=1
  S:'$D(^LRO(69,LRODT,0)) ^(0)=$P(^LRO(69,0),U,1,2)_U_LRODT_U_(1+$P(^(0),U,4)),^LRO(69,LRODT,0)=LRODT,^LRO(69,"B",LRODT,LRODT)=""
  S LRURG="",LRAD=DT,LRWPD=LRWP\2+(LRWP#2)
- S LRQUIET=1 
+ S LRQUIET=1
  D LRZORD1^ISIIMPL2
  Q
  ;

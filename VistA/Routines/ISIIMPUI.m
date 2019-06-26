@@ -1,5 +1,5 @@
 ISIIMPUI ;;ISI GROUP/MLS -- NON-VA MED IMPORT Utility
- ;;3.0;ISI;;Jun 26,2012;Build 69
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -22,7 +22,7 @@ ISIIMPUI ;;ISI GROUP/MLS -- NON-VA MED IMPORT Utility
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
  ;
- Q  
+ Q
 MISCDEF ;;+++++ DEFINITIONS OF NON-VA MED MISC PARAMETERS +++++
  ;;NAME             |TYPE       |FILE,FIELD |DESC
  ;;-----------------------------------------------------------------------
@@ -36,7 +36,7 @@ MISCDEF ;;+++++ DEFINITIONS OF NON-VA MED MISC PARAMETERS +++++
  Q
  ;
 MEDMISC(MISC,ISIMISC) ;
- ;INPUT: 
+ ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list ovalues from RPC client
  ;
  ;OUTPUT:
@@ -56,7 +56,7 @@ MEDMISC1(DSTNODE) ;
  . S VALUE=$P(MISC(I),U,2)
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="DATE" D  
+ . I PARAM="DATE" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid "_PARAM_" date/time." Q
  . . S VALUE=RESULT
@@ -79,10 +79,10 @@ LOADMISC(MISCDEF) ;
  ;
 VALMEDS(ISIMISC) ;
  ; Entry point to validate content of MEDS create array
- ; 
+ ;
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("DRUG")="ASPRIN" 
+ ;     eg:  ISIMISC("DRUG")="ASPRIN"
  ;
  ; Output - ISIRC [return code]
  N FILE,FIELD,FLAG,DFN,VALUE,RESULT,MSG,MISCDEF,EXIT,Y,RESULT,PSOSITE
@@ -91,7 +91,7 @@ VALMEDS(ISIMISC) ;
  ;
  ; -- PAT_SSN --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=$G(ISIMISC("PAT_SSN")) I VALUE="" S EXIT=1 Q
  . I '$D(^DPT("SSN",VALUE)) S EXIT=1 Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S EXIT=1 Q
@@ -110,12 +110,12 @@ VALMEDS(ISIMISC) ;
  . I 'VALUE S EXIT=1 Q
  . S ISIMISC("DRUG")=+$P(^ORD(101.44,OITM,20,VALUE,0),U)
  . Q
- Q:EXIT "-1^Invalid Pharmacy Orderable Item value." 
+ Q:EXIT "-1^Invalid Pharmacy Orderable Item value."
  ;
  ; -- DATE --
  I $G(ISIMISC("DATE"))="" Q "-1^Missing Start Date"
  ;
- ; -- SIG -- 
+ ; -- SIG --
  I $G(ISIMISC("SIG"))="" Q "-1^Missing Schedule value."
  ;
  ; -- DOSAGE --

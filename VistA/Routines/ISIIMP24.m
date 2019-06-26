@@ -1,5 +1,5 @@
 ISIIMP24 ;ISI GROUP/MLS - Template Edit
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -24,7 +24,7 @@ ISIIMP24 ;ISI GROUP/MLS - Template Edit
  ;
  Q
  ;
-TEMPLATE(ISIRESUL,ISIMISC)       
+TEMPLATE(ISIRESUL,ISIMISC)
  N ERR,VAL
  K ISIRESUL S (ISIRESUL(0),ISIRC)=0
  ;Validate setup & parameters
@@ -49,7 +49,7 @@ VALIDATE()
 SAVE(ISIMISC)
  ; Input - ISIMISC(ARRAY)
  ; Format:  ISIMISC(PARAM)=VALUE
- ;     eg:  ISIMISC("NAME")="FIRST,LAST" 
+ ;     eg:  ISIMISC("NAME")="FIRST,LAST"
  ;
  ; Output - ISIRC [return code]
  ;

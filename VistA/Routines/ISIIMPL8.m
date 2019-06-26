@@ -1,5 +1,5 @@
 ISIIMPL8 ;ISI GROUP/MLS -- LAB IMPORT CONT.
- ;;1.0;;;JUN 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -21,7 +21,7 @@ ISIIMPL8 ;ISI GROUP/MLS -- LAB IMPORT CONT.
  ;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  ;See the License for the specific language governing permissions and
  ;limitations under the License.
- ; 
+ ;
 LRZVER4 ;DALOI/CJS/DALOI/FHS - LAB ROUTINE DATA VERIFICATION ;12/7/06 09:05
  ;;5.2;LAB SERVICE;**14,42,112,121,140,171,153,188,279,283,286**;Sep 27, 1994
  ;

@@ -1,5 +1,5 @@
 ISIIMPUG ;ISI GROUP/MLS -- IMPORT Utility (ENCOUNTER related...)
- ;;1.0;;;Jun 26,2012;Build 31
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
  ;
  ; VistA Data Loader 2.0
  ;
@@ -27,7 +27,7 @@ ISIIMPUG ;ISI GROUP/MLS -- IMPORT Utility (ENCOUNTER related...)
  ; Column definitions for MISCDEF table (below):
  ; NAME =       name of parameter
  ; TYPE =       categories of values provided
- ;                      'PARAM' is internal used value 
+ ;                      'PARAM' is internal used value
  ;                      'FIELD' is a literal import value
  ;                      'MASK' is dynamic value w/ * wildcard
  ; DESC  =      description of value
@@ -36,7 +36,7 @@ ISIIMPUG ;ISI GROUP/MLS -- IMPORT Utility (ENCOUNTER related...)
 MISCDEF ;;+++++ DEFINITIONS OF ENCOUNTER [related] MISC PARAMETERS +++++
  ;;NAME                  |TYPE       |FILE,FIELD        |DESC
  ;;--------------------------------------------------------------------------
- ;;PAT_SSN               |FIELD      |                  |PATIENT (SSN or DFN) 
+ ;;PAT_SSN               |FIELD      |                  |PATIENT (SSN or DFN)
  ;;HFACTOR               |FIELD      |9000010.23,.01    |HEALTH FACTOR
  ;;CPT                   |           |9000010.18,.01    |V CPT
  ;;PROVIDER_NARRATIVE    |FIELD      |9000010.18,.04    |V CPT
@@ -57,7 +57,7 @@ MISCDEF ;;+++++ DEFINITIONS OF ENCOUNTER [related] MISC PARAMETERS +++++
  ;
 ENMISC(MISC,ISIMISC)
  ;
- ;INPUT: 
+ ;INPUT:
  ;  MISC - raw list values from RPC client
  ;
  ;OUTPUT:
@@ -69,7 +69,7 @@ ENMISC(MISC,ISIMISC)
  S ISIRC=$$ENMISC1("ISIMISC")
  Q ISIRC ;return code
  ;
-ENMISC1(DSTNODE) 
+ENMISC1(DSTNODE)
  N PARAM,VALUE,DATE,RESULT,MSG,EXIT
  S (EXIT,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""  D  Q:EXIT
@@ -77,7 +77,7 @@ ENMISC1(DSTNODE)
  . S VALUE=$$TRIM^XLFSTR($P(MISC(I),U,2))
  . I '$D(MISCDEF(PARAM)) S ISIRC="-1^Bad parameter title passed: "_PARAM,EXIT=1 Q
  . I VALUE="" S ISIRC="-1^No data provided for parameter: "_PARAM,EXIT=1 Q
- . I PARAM="DATETIME" D  
+ . I PARAM="DATETIME" D
  . . S DATE=VALUE D DT^DILF("T",DATE,.RESULT,"",.MSG)
  . . I RESULT<0 S EXIT=1,ISIRC="-1^Invalid datetime." Q
  . . S VALUE=RESULT
@@ -101,7 +101,7 @@ VALHF() ;Health Factor Validation
  ;
  N EXIT,IDT,RDT,DFN,VALUE,VIEN
  S EXIT=0
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++BEFORE Validated array (VALHF^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -109,16 +109,16 @@ VALHF() ;Health Factor Validation
  S ISIRC=$$CHECKENC(.ISIMISC) I ISIRC<0 Q ISIRC
  N HFACTOR S HFACTOR=$G(ISIMISC("HFACTOR"))
  S HFACTOR=$O(^AUTTHF("B",HFACTOR,""))
- I 'HFACTOR Q "-1^ ~ Missing Health Factor" 
+ I 'HFACTOR Q "-1^ ~ Missing Health Factor"
  S ISIMISC("HFACTOR")=HFACTOR
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++AFTER Validations array (VALHF^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
  . Q
  N ALLOWDUPS S ALLOWDUPS=+$G(ISIMISC("ALLOWDUPS"))
- I 'ALLOWDUPS,$D(^AUPNVHF("AD",$E(VIEN,1,30))) D  
- . N HFIEN S HFIEN=0 F  S HFIEN=$O(^AUPNVHF("AD",$E(VIEN,1,30),HFIEN)) Q:'HFIEN!EXIT  D  
+ I 'ALLOWDUPS,$D(^AUPNVHF("AD",$E(VIEN,1,30))) D
+ . N HFIEN S HFIEN=0 F  S HFIEN=$O(^AUPNVHF("AD",$E(VIEN,1,30),HFIEN)) Q:'HFIEN!EXIT  D
  . . I +$G(^AUPNVHF(HFIEN,0))=HFACTOR S EXIT=HFIEN
  . Q
  I EXIT Q "-9^HF/VISIT combo already exists"
@@ -127,7 +127,7 @@ VALHF() ;Health Factor Validation
 VALIMZ() ;V IMMUNIZATION Validation
  N ISIRC,IZ,IZIEN,VIEN,EXIT
  S (EXIT,ISIRC)=0
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++BEFORE Validated array (VALIMZ^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -139,12 +139,12 @@ VALIMZ() ;V IMMUNIZATION Validation
  S ISIMISC("IZ")=IZIEN
  ;
  N ALLOWDUPS S ALLOWDUPS=+$G(ISIMISC("ALLOWDUPS"))
- I 'ALLOWDUPS,$D(^AUPNVIMM("AD",$E(VIEN,1,30))) D  
- . N IMIEN S IMIEN=0 F  S IMIEN=$O(^AUPNVIMM("AD",$E(VIEN,1,30),IMIEN)) Q:'IMIEN!EXIT  D  
+ I 'ALLOWDUPS,$D(^AUPNVIMM("AD",$E(VIEN,1,30))) D
+ . N IMIEN S IMIEN=0 F  S IMIEN=$O(^AUPNVIMM("AD",$E(VIEN,1,30),IMIEN)) Q:'IMIEN!EXIT  D
  . . I +$G(^AUPNVIMM(IMIEN,0))=IZIEN S EXIT=IMIEN
  . Q
  I EXIT Q "-9^IZ/VISIT combo already exists"
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++AFTER Validations array (VALIMZ^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -155,7 +155,7 @@ VALIMZ() ;V IMMUNIZATION Validation
 VALCPT()
  N ISIRC,CPT,CPTIEN,VIEN,PRVNAR,PRVNARI,EXIT
  S (EXIT,ISIRC)=0
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++BEFORE Validated array (VALCPT^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -167,8 +167,8 @@ VALCPT()
  S ISIMISC("CPT")=CPTIEN
  ;
  N ALLOWDUPS S ALLOWDUPS=+$G(ISIMISC("ALLOWDUPS"))
- I 'ALLOWDUPS,$D(^AUPNVCPT("AD",$E(VIEN,1,30))) D  
- . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVCPT("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D  
+ I 'ALLOWDUPS,$D(^AUPNVCPT("AD",$E(VIEN,1,30))) D
+ . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVCPT("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D
  . . I +$G(^AUPNVCPT(ZIEN,0))=CPTIEN S EXIT=ZIEN
  . Q
  I EXIT Q "-9^CPT/VISIT combo already exists"
@@ -179,7 +179,7 @@ VALCPT()
  I 'PRVNARI Q "-1^Missing/invalid Provider Narrative."
  S ISIMISC("PROVIDER_NARRATIVE")=PRVNARI
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++AFTER Validations array (VALCPT^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -190,7 +190,7 @@ VALCPT()
 VALEXAM()
  N ISIRC,EXAM,EXAMIEN,VIEN,EXIT
  S (EXIT,ISIRC)=0
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++BEFORE Validated array (VALEXAM^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -202,13 +202,13 @@ VALEXAM()
  S ISIMISC("EXAM")=EXAMIEN
  ;
  N ALLOWDUPS S ALLOWDUPS=+$G(ISIMISC("ALLOWDUPS"))
- I 'ALLOWDUPS,$D(^AUPNVXAM("AD",$E(VIEN,1,30))) D  
- . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVXAM("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D  
+ I 'ALLOWDUPS,$D(^AUPNVXAM("AD",$E(VIEN,1,30))) D
+ . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVXAM("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D
  . . I +$G(^AUPNVXAM(ZIEN,0))=EXAMIEN S EXIT=ZIEN
  . Q
  I EXIT Q "-9^EXAM/VISIT combo already exists"
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++AFTER Validations array (VALEXAM^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -219,7 +219,7 @@ VALEXAM()
 VALPOV()
  N ISIRC,ICD9,IICD9,VIEN,EXIT
  S (EXIT,ISIRC)=0
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++BEFORE Validated array (VALEXAM^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -231,13 +231,13 @@ VALPOV()
  S ISIMISC("ICD9")=IICD9
  ;
  N ALLOWDUPS S ALLOWDUPS=+$G(ISIMISC("ALLOWDUPS"))
- I 'ALLOWDUPS,$D(^AUPNVPOV("AD",$E(VIEN,1,30))) D  
- . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVPOV("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D  
+ I 'ALLOWDUPS,$D(^AUPNVPOV("AD",$E(VIEN,1,30))) D
+ . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVPOV("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D
  . . I +$G(^AUPNVPOV(ZIEN,0))=IICD9 S EXIT=ZIEN
  . Q
  I EXIT Q "-9^ICD9/VISIT combo already exists"
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++AFTER Validations array (VALEXAM^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -248,7 +248,7 @@ VALPOV()
 VALVPTED()
  N ISIRC,ETOPIC,IETOPIC,VIEN,EXIT
  S (EXIT,ISIRC)=0
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++BEFORE Validated array (VALVPTED^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -260,13 +260,13 @@ VALVPTED()
  S ISIMISC("ED_TOPIC")=IETOPIC
  ;
  N ALLOWDUPS S ALLOWDUPS=+$G(ISIMISC("ALLOWDUPS"))
- I 'ALLOWDUPS,$D(^AUPNVPED("AD",$E(VIEN,1,30))) D  
- . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVPED("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D  
+ I 'ALLOWDUPS,$D(^AUPNVPED("AD",$E(VIEN,1,30))) D
+ . N ZIEN S ZIEN=0 F  S ZIEN=$O(^AUPNVPED("AD",$E(VIEN,1,30),ZIEN)) Q:'ZIEN!EXIT  D
  . . I +$G(^AUPNVPED(ZIEN,0))=IETOPIC S EXIT=ZIEN
  . Q
  I EXIT Q "-9^EDUCATION TOPIC/VISIT combo already exists"
  ;
- I $G(ISIPARAM("DEBUG"))>0 D  
+ I $G(ISIPARAM("DEBUG"))>0 D
  . W !,"+++AFTER Validations array (VALEXAM^ISIIMPUG)+++",!
  . I $D(ISIMISC) S X="" F  S X=$O(ISIMISC(X)) Q:X=""  W !,$G(ISIMISC(X))
  . W !,"<HIT RETURN TO PROCEED>" R X:5
@@ -278,7 +278,7 @@ CHECKENC(ISIMISC)
  ;
  ;-- PAT_SSN (required) --
  I '$D(ISIMISC("PAT_SSN")) Q "-1^Missing Patient SSN (#2,.09)."
- I $D(ISIMISC("PAT_SSN")) D  
+ I $D(ISIMISC("PAT_SSN")) D
  . S VALUE=ISIMISC("PAT_SSN") I VALUE="" S ISIRC="-1^Invalid PAT_SSN (#2,.09)." Q
  . I '$D(^DPT("SSN",VALUE)) S ISIRC="-1^Invalid PAT_SSN (#2,.09)." Q
  . S DFN=$O(^DPT("SSN",VALUE,"")) I DFN="" S ISIRC="-1^Invalid PAT_SSN (#2,.09)." Q
@@ -286,7 +286,7 @@ CHECKENC(ISIMISC)
  . Q
  I +ISIRC<0 Q ISIRC
  ;
- ; -- DATETIME (required) -- 
+ ; -- DATETIME (required) --
  I '$G(ISIMISC("DATETIME")) Q "-1^Missing Datetime."
  ; Find Associated Visit for DATETIME
  S VIEN=$$VISITCHK(ISIMISC("DFN"),ISIMISC("DATETIME"))
@@ -305,7 +305,7 @@ CHECKENC(ISIMISC)
  ;
 VISITCHK(DFN,DATE)
  ; Grabs a visit ien if one is available
- ; INPUT = 
+ ; INPUT =
  ;   DFN is patient dfn
  ;   DATE is datetime
  ; OUTPUT =
@@ -320,7 +320,7 @@ VISITCHK(DFN,DATE)
  S RVDT=9999999-$P(DATE,".")_"."_$P(DATE,".",2)
  I '$D(^AUPNVSIT("AA",DFN,RVDT)) S X=$O(^AUPNVSIT("AA",DFN,RVDT),-1) I X S RVDT=X ;try previous visit
  S VIEN=$O(^AUPNVSIT("AA",DFN,RVDT,"")) I 'VIEN Q 0
- ;N VCHK,VIEN S (VIEN,VCHK)=0 F  S VCHK=$O(^AUPNVSIT("AA",DFN,RVDT,VCHK)) Q:'VCHK!VIEN  D  
+ ;N VCHK,VIEN S (VIEN,VCHK)=0 F  S VCHK=$O(^AUPNVSIT("AA",DFN,RVDT,VCHK)) Q:'VCHK!VIEN  D
  ;. I $P($G(^AUPNVSIT(VCHK,150)),U,2)'=0 Q ;only outpatients
  ;. S VIEN=VCHK
  ;. Q
