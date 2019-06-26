@@ -1,5 +1,5 @@
-ISIIMPUC ;;ISI GROUP/MLS -- RAD ORDERS IMPORT Utility
- ;;1.0;;;Jun 26,2012
+ISIIMPUC ;;ISI GROUP/MLS -- RAD ORDERS IMPORT Utility ; 6/26/19 11:30am
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019
  ;
  ; VistA Data Loader 2.0
  ;
@@ -40,7 +40,7 @@ MISCDEF ;;+++++ DEFINITIONS OF RAD ORDERS MISC PARAMETERS +++++
  ;;EXAM_STATUS      |PARAM      |           |How far to advance order (O,R,E,C)
  Q
  ;
-RADMISC(MISC,ISIMISC)
+RADMISC(MISC,ISIMISC) 
  ;INPUT:
  ;  MISC(0)=PARAM^VALUE - raw list of values from RPC client
  ;
@@ -53,7 +53,7 @@ RADMISC(MISC,ISIMISC)
  S ISIRC=$$RADMISC1("ISIMISC")
  Q ISIRC ;return code
  ;
-RADMISC1(DSTNODE)
+RADMISC1(DSTNODE) 
  N PARAM,VALUE,DATE,RESULT,MSG,EXIT
  S (EXIT,ISIRC)=0,(I,VALUE)=""
  F  S I=$O(MISC(I))  Q:I=""  D  Q:EXIT
@@ -80,7 +80,7 @@ LOADMISC(MISCDEF) ;
  . S MISCDEF(NAME)=TYPE_"|"_FIELD
  Q
  ;
-VALRADO(ISIMISC)
+VALRADO(ISIMISC) 
  ; Entry point to validate content of Radiology Order create array
  ;
  ; Input - ISIMISC(ARRAY)
@@ -167,7 +167,7 @@ VALRADO(ISIMISC)
  ;
  ; -- RADTE --
  I $G(ISIMISC("RADTE"))="" Q "-1^Missing RADTE."
-
+ ;
  ; -- EXAMCAT --
  I '$D(ISIMISC("EXAMCAT")) S ISIMISC("EXAMCAT")="O" ;Outpatient default
  I $D(ISIMISC("EXAMCAT")) D

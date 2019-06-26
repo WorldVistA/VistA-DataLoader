@@ -1,5 +1,5 @@
-ISIIMPT1 ;ISI GROUP/MLS - IMPORT Unit tests
- ;;1.0;;;Jun 26,2012
+ISIIMPT1 ;ISI GROUP/MLS - IMPORT Unit tests;2019-06-26  11:27 AM
+ ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019
  ;
  ; VistA Data Loader 2.0
  ;
@@ -320,7 +320,7 @@ T14 ;User batch creation testing
  W ! ;ZW ISIRESUL
  Q
  ;
-T15
+T15 ;
  ;
  S DUZ=1
  D ^XUP
@@ -343,7 +343,6 @@ T16 ;
  ;S MISC(6)="SEVERITY^"
  ;
  D HFACTOR^ISIIMPR3(.ISIRESUL,.MISC)
-
  W !,"ISIRESUL:",! ;ZW ISIRESUL
  W !,"ISIRC:",$G(ISIRC)
  ;
