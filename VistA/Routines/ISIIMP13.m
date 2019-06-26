@@ -1,4 +1,4 @@
-ISIIMP13 ;ISI GROUP/MLS -- LABS IMPORT CONT.
+ISIIMP13 ;ISI GROUP/MLS -- LABS IMPORT CONT.;2019-06-26  11:06 AM
  ;;1.0;;;Jun 26,2012;Build 31
  ;
  ; VistA Data Loader 2.0
@@ -45,12 +45,14 @@ IMPRTLAB(ISIMISC) ;Create lab entry
  ;
  N NODE,DFN
  ;
+ N ZTQUEUED S ZTQUEUED=1
  I ^%ZOSF("OS")["GT.M" N ZIO K ZIO M ZIO=IO N IO M IO=ZIO S %ZIS="OH",IOP="NULL" D ^%ZIS S XWBNULL=IO,IO(0)=IO O IO(0) U IO(0)
  ;
  D PREP Q:+ISIRC<0 ISIRC
  D LAB
  ;
- I ^%ZOSF("OS")["GT.M" U XWBTDEV:(nowrap:nodelimiter:ioerror="TRAP")
+ ; OSE/SMH ; XWBTDEV is not necessarily defined.
+ ; I ^%ZOSF("OS")["GT.M" U XWBTDEV:(nowrap:nodelimiter:ioerror="TRAP")
  ;
  Q ISIRC
  ;
