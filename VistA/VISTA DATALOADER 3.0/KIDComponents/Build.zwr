@@ -1,6 +1,6 @@
-^XTMP("K2VC","EXPORT","BLD",IEN,0)="ISI_DATA_LOADER 3.0^^0^3190626^n"
-^XTMP("K2VC","EXPORT","BLD",IEN,1,0)="^^16^16^3190405^"
-^XTMP("K2VC","EXPORT","BLD",IEN,1,1,0)="VistA Data Loader Tool 2.0"
+^XTMP("K2VC","EXPORT","BLD",IEN,0)="VISTA DATALOADER 3.0^VISTA DATALOADER^0^3190701^n"
+^XTMP("K2VC","EXPORT","BLD",IEN,1,0)="^^16^16^3190701^"
+^XTMP("K2VC","EXPORT","BLD",IEN,1,1,0)="VistA Data Loader Tool 3.0"
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,2,0)=" "
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,3,0)="VistA Data Loader is provided by the Johns Hopkins University School of "
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,4,0)="Nursing, and funded by the Department of Health and Human Services, "
@@ -8,7 +8,7 @@
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,6,0)="under Award Number #1U24OC000013-01."
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,7,0)="***"
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,8,0)=" "
-^XTMP("K2VC","EXPORT","BLD",IEN,1,9,0)="This KIDS package comprises the VistA side of the ISI Data Loader 1.0 "
+^XTMP("K2VC","EXPORT","BLD",IEN,1,9,0)="This KIDS package comprises the VistA side of the ISI Data Loader 3.0 "
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,10,0)="application. The ISI Importer application should ONLY be used for "
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,11,0)="training and demonstration purposes. It is NOT intended for any use in a "
 ^XTMP("K2VC","EXPORT","BLD",IEN,1,12,0)="clinical or production environment.  It was NOT designed, coded, or "
@@ -20,7 +20,8 @@
 ^XTMP("K2VC","EXPORT","BLD",IEN,4,9001,0)=9001
 ^XTMP("K2VC","EXPORT","BLD",IEN,4,9001,222)="y^y^f^^n^^y^o^n"
 ^XTMP("K2VC","EXPORT","BLD",IEN,4,"B",9001,9001)=""
-^XTMP("K2VC","EXPORT","BLD",IEN,6.3)=65
+^XTMP("K2VC","EXPORT","BLD",IEN,6.3)=69
+^XTMP("K2VC","EXPORT","BLD",IEN,"ABPKG")="n"
 ^XTMP("K2VC","EXPORT","BLD",IEN,"KRN",0)="^9.67PA^779.2^20"
 ^XTMP("K2VC","EXPORT","BLD",IEN,"KRN",.4,0)=.4
 ^XTMP("K2VC","EXPORT","BLD",IEN,"KRN",.401,0)=.401
