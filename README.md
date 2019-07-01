@@ -8,8 +8,8 @@ Here are steps to install the software (the following steps assumes that you wil
 
 git clone https://github.com/vista-dataloader.git
 
-1. Install the OSEHRA VistA instance based on the Plan 6 docker image - ov6 from the OSEHRA docker hub.
-2. Install the VistADataLoader.KID (located in the VistA subdirectory) on the running VistA
+1. Install the OSEHRA VistA or VEHU instance based on the Plan 6 docker image - ov6 or vehu6 from the OSEHRA docker hub.
+2. Install VISTA_DATALOADER_3P0.KID (located in the VistA subdirectory) on the running VistA
 3. Setup a user, i.e., fakedoc1 so that it will have access to the ISI DATA IMPORT routines SECONDARY MENU OPTIONS ISI DATA IMPORT
 4. Install Visual Studio community version (2017).
 5. Install MSI Installer plugin for Visual Studio - Download from https://marketplace.visualstudio.com/items?itemName=visualstudioclient.MicrosoftVisualStudio2017InstallerProjects
