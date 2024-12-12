@@ -131,17 +131,40 @@ GMRACHT           Array - (0)=counter, (.n)=chart edit datetime
 
 5) LABS Import API
 
-Entry point: IMPRTLAB^ISIIMP13
+Entry point: $$LAB^ISIIMP12(.RC,.ISIMISC)
 
-Input - ISIMISC(ARRAY)
-Format:  ISIMISC(PARAM)=VALUE
-    eg:  ISIMISC("RESULT_VAL")=110 
+Input differs between individual labs or panels
 
-Output - ISIRC [return code]
-         ISIRESUL(0)=1 [if successful]
-         ISIRESUL(1)="success" [if successful] 
+Individual labs:
 
-ISIMISC ARRAY Definitions:
+ ISIMISC("PAT_SSN")=Patient SSN
+ ISIMISC("LAB_TEST")=Lab Test
+ ISIMISC("RESULT_DT")=DateTime
+ ISIMISC("RESULT_VAL")=result value
+ ISIMISC("LOCATION")=Hospital Location
+ (optional) ISIMISC("COLLECTION_SAMPLE")="BLOOD/SERUM/PLASMA/SPUTUM/URINE/ARTERIAL BLOOD/CSF"
+
+Panel:
+
+ ISIMISC("PAT_SSN")=Patient SSN
+ ISIMISC("LAB_PANEL")=Panel Name
+ ISIMISC("LAB_TEST","Test 1")=result 1
+ ISIMISC("LAB_TEST","Test 2")=result 2
+ ISIMISC("LAB_TEST","Test 3")=result 3
+ etc for more tests
+ ISIMISC("RESULT_DT")=DateTime
+ ISIMISC("LOCATION")=Hospital Location
+ (optional) ISIMISC("COLLECTION_SAMPLE")="BLOOD/SERUM/PLASMA/SPUTUM/URINE/ARTERIAL BLOOD/CSF"
+
+See examples in Unit Test routine (not in KIDS build): ISIIMPLT
+
+NB: The .Net exe does not support lab panels.
+
+Output - $$ [return code]: 1 or -1^error reason
+         RC(0)=1 [if successful]; 0 [for failure]
+         RC(1)="success" [if successful]; not sent in case of failure
+
+ISIMISC ARRAY Definitions for individual lab:
 PARAM             TYPE        Description
 ----------------------------------------------------------------------------
 PAT_SSN          |FIELD      |PATIENT (#2) pointer
@@ -150,7 +173,19 @@ RESULT_DT        |FIELD      |Date/time of result
 RESULT_VAL       |FIELD      |Lab test result value
 LOCATION         |FIELD      |Lab test location
 
+ISIMISC ARRAY Definitions for individual panel:
+----------------------------------------------------------------------------
+PAT_SSN            |FIELD      |           |PATIENT (#2) pointer
+LAB_PANEL          |FIELD      |           |Laboratory panel name
+LAB_TEST           |FIELD      |           |Lab Test^value (multiple)
+RESULT_DT          |FIELD      |           |Date/time of result
+LOCATION           |FIELD      |           |Lab test location
+COLLECTION_SAMPLE  |FIELD      |           |Lab test Sample (BLOOD, URINE, etc.)
 
+There is also an API to test whether a lab is a member of a panel, to allow the
+Synthea Importer (https://github.com/WorldVistA/VistA-FHIR-Data-Loader) to
+dynamically decide whether to import a lab or not. It's
+`$$PMEM^ISIIMPU7("PANEL","LAB"), and returns 1 or 0.
 
 
 6) Notes Import API
