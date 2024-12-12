@@ -1,9 +1,10 @@
-ISIIMPL2 ;ISI GROUP/MLS -- LABS IMPORT UTILITY
- ;;3.0;ISI_DATA_LOADER;;Jun 26, 2019;Build 59
+ISIIMPL2 ;ISI GROUP/MLS -- LABS IMPORT UTILITY;2025/01/13
+ ;;3.1;VISTA DATALOADER;;Dec 23, 2024;Build 70
  ;
- ; VistA Data Loader 2.0
+ ; VistA Data Loader 3.1
  ;
  ; Copyright (C) 2012 Johns Hopkins University
+ ; Copyright (C) 2024-2025 DocMe360 LLC
  ;
  ; VistA Data Loader is provided by the Johns Hopkins University School of
  ; Nursing, and funded by the Department of Health and Human Services, Office
@@ -31,7 +32,7 @@ L2 Q:$G(LREND)
  ;I '$D(LRADDTST) K DFN,DIC S PNM="",DIC(0)="EMQ"_$S($P(LRPARAM,U,6)&$D(LRLABKY):"L",1:"") W ! D ^LRDPA I (LRDFN=-1)!$D(DUOUT)!$D(DTOUT) Q
  K DFN,DIC,X
  S X="`"_LRZPT
- S PNM="",DIC(0)="EMQ",DGSENFLG=1 D EN^LRDPA ; JFR must default patient
+ S PNM="",DIC(0)="MQ",DGSENFLG=1 D EN^LRDPA ; JFR must default patient
  I '+DFN G DROP
  I $D(LRADDTST),LRADDTST="" Q
  S LRORDR="WC"
@@ -100,6 +101,10 @@ Q14 ;D:$P(LRPARAM,U,17) ^LRORDD D ^LRORD2A    ;JFR  testing the max order stuff
  . S LRORDTIM=$P(Y,".",2)
  D NOW^%DTC S LRNT=% S:'LRECT LRCDT=LRNT_"^1"
  S LRIDT=9999999-LRCDT
+ ; DOC360ME/SMH - From this code, we cannot input required comments. So just nuke that out from the LROT array
+ ; See SETLROT+6^LRORDB
+ K LROT(LRSAMP,LRSPEC,1,2)
+ ; END change DOC360ME/SMH
  D ^LRORDST Q:$D(LROR)
  Q
 % S %="Y" ;***MLS MOD.*** R %:DTIME Q:%=""!(%["N")!(%["Y")  W !,"Answer 'Y' or 'N': " G %
@@ -109,7 +114,7 @@ MAX ; CHECK FOR MAXIUM ORDER FREQUENCY
  I $D(TT(LRTSTS,LRSPEC)),$D(^LAB(60,LRTSTS,3,"B",LRCS(LRCSN))) D EN2^LRORDD I %'["Y" Q
  S I7=0 F I9=0:0 S I9=$O(T(LRTSTS,I9)) Q:I9=""  I $D(^LAB(60,LRTSTS,3,+$O(^LAB(60,LRTSTS,3,"B",LRSAMP,0)),0)),+$P(^(0),U,5),LRSPEC=T(LRTSTS,I9) S I7=1
  I I7 S LRSN=0 F  S LRSN=$O(T(LRTSTS,LRSN)) Q:LRSN<1  S LRZT=LRTSTS D ORDER^LROS S LRTSTS=LRZT ;MLS
- I I7 S %="Y" Q ;D % ;MLS
+ I I7 S %="Y" Q  ;D % ;MLS
  Q
  ;
 URGG ;W !,"For ",$P(^TMP("LRSTIK",$J,LRSSX),U,2)
@@ -142,6 +147,6 @@ LOC ;get pt. location, called by LRPDA1
  S LREND=1 K DIC,LRIA,LRRE,%
  Q
 PRAC ;
- S LRPRAC=DUZ Q ;MLS
+ S LRPRAC=DUZ Q  ;MLS
  Q
 QUIT S LREND=1 Q

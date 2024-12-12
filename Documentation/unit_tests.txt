@@ -1,0 +1,46 @@
+DO ^ISIIMPLT
+
+---------------------------------- ISIIMPLT ----------------------------------
+FLAB - Full Lab RPC regression--------------------------------  [OK]   57.724ms
+FLABNOSECE - Full Lab RPC regression (no seconds external)----  [OK]  889.070ms
+LSSNE - SSN Error---------------------------------------------  [OK]    0.320ms
+LTESTE - Lab Test various errors------------------------------  [OK]    0.564ms
+RVE - Result Value errors-------------------------------------  [OK]    0.246ms
+RDE - Result Date error---------------------------------------  [OK]    0.561ms
+EEE - Entered by errors---------------------------------------  [OK]    0.234ms
+LE - Location errors------------------------------------------  [OK]    0.240ms
+PANELRPC1 - Load Partial Panel--------------------------------  [OK]   44.519ms
+PANELRPC2 - Load Full Panel-----------------------------------  [OK]  973.253ms
+LABDUP - Test lab duplicate-----------------------------------  [OK]  980.385ms
+PANELDUP - Load panel duplicate-------------------------------  [OK] 1020.485ms
+INVPANEL - Test that a non-existent panel throws an error-----  [OK]    0.366ms
+PANELNOLAB - Test for valid labs but don't belong to a panel--  [OK]    0.393ms
+PANELINVLAB - Test for invalid labs in a valid panel----------  [OK]    0.257ms
+LABSYN - Test lab entered using its synonym files properly----  [OK]  978.512ms
+LABNOCOLL - Test lab w/o config'd coll sample files properly--  [OK] 1007.019ms
+CBCNOCOLL - CBC Panel (one item is missing a collection sample) [OK] 1009.415ms
+CBCCOLL - CBC Panel with an explicit Collection Sample--------  [OK] 1007.193ms
+MODALLAB - Test a Modal Lab-----------------------------------  [OK]  978.146ms
+DECIMAL1 - Numeric lab with various proactive rounding--------  [OK] 1999.970ms
+DECMIAL2 - Rounding SPECIFIC GRAVITY causes a crash-----------  [OK]  996.328ms
+UA - Urine Analysis-------------------------------------------  [OK] 1037.583ms
+UAP - Partial Urine Analysis----------------------------------  [OK] 2000.238ms
+INVLVAL - Test Invalid atomic values--------------------------  [OK]    0.322ms
+INVPVAL - Test Invalid panel values---------------------------  [OK]    0.492ms
+INVMLAB - Test Invalid modal lab------------------------------  [OK]    0.614ms
+INVTLAB - Invalid lab text value------------------------------  [OK]    0.612ms
+LOINC - Lookup lab by LOINC-----------------------------------  [OK] 1961.789ms
+PLASMA - Test Blood/Serum/Plasma Collection Sample------------  [OK] 2997.727ms
+GLUURINE - Urine Glucose (to test a non-blood collection sample)[OK] 1001.888ms
+SPUTUM - Sputum Sample----------------------------------------  [OK] 1002.110ms
+CSF - Test CSF Sample-----------------------------------------  [OK]  999.400ms
+TDAPIE1 - Test direct API individual lab no errors------------  [OK]  998.608ms
+TDAPIE2 - Test direct API no errors---------------------------  [OK] 1021.338ms
+TDAPIE3 - Test direct API Missing Panel Name------------------  [OK]    0.146ms
+TDAPIE4 - Test direct API Missing SSN-------------------------  [OK]    0.128ms
+TDAPISYN1 - Synthea BMP---------------------------------------  [OK] 1044.290ms
+TDAPISYN2 - Synthea UA----------------------------------------  [OK]  971.547ms
+TDAPISYN3 - Synthea Lipid Panel-------------------------------  [OK] 1977.068ms
+TDAPISYN4 - Synthea CBC Panel---------------------------------  [OK] 1016.242ms
+TLABSEQ - Two labs in order; lab package does timeshift-------  [OK] 1005.212ms
+
