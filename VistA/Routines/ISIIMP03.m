@@ -125,13 +125,8 @@ PREPVAL ;Prep import values
  I STRT1="" S STRT1=$$STREET
  S STRT2=$G(ISIMISC("STREET_ADD2"))
  S CITY=$G(ISIMISC("CITY")) I CITY="" S CITY=$$CITY
- S STATE=$G(ISIMISC("STATE"))
- I '+STATE,STATE'="" D  ;DHP/ART fix to use state codes as input
- . S STATE=$O(^DIC(5,"C",$$UP^XLFSTR(STATE),""))
- . Q:STATE'=""
- . S STATE=$G(ISIMISC("STATE"))
- . S STATE=$O(^DIC(5,"B",$$UP^XLFSTR(STATE),""))
- I STATE="" S STATE=$$STATE
+ S STATE=$$STATEPTR($G(ISIMISC("STATE")))
+ I 'STATE S STATE=$$STATE
  S ZIP=$G(ISIMISC("ZIP")) I ZIP="" S ZIP=$$MASK("ZIP",$G(ISIMISC("ZIP_4_MASK")))
  S MARSTAT=$G(ISIMISC("MARITAL_STATUS")) I MARSTAT="" S MARSTAT=$$MARSTAT
  S PHON=$G(ISIMISC("PH_NUM")) I PHON="" S PHON=$$MASK("PHONE",$G(ISIMISC("PH_NUM_MASK")))
@@ -166,7 +161,7 @@ CREATEPNT ;
  . S FDA(2,"+1,",.111)=STRT1
  . S FDA(2,"+1,",.112)=STRT2
  . S FDA(2,"+1,",.114)=CITY
- . S FDA(2,"+1,",.115)=STATE
+ . I +$G(STATE)>0 S FDA(2,"+1,",.115)=+STATE
  . S FDA(2,"+1,",.1112)=ZIP
  . S FDA(2,"+1,",.131)=PHON
  . S FDA(2,"+1,",391)=TYPE
@@ -341,6 +336,26 @@ STATE()
  S EXIT=0,R=$P(^DIC(5,0),"^",3)
  F  Q:EXIT  S Y=$R(R)+1 I $P($G(^DIC(5,Y,0)),U)'="" I $P($G(^DIC(5,Y,0)),U,6)=1 S STATE=Y,EXIT=1
  Q STATE
+ ;
+STATEPTR(X) ; Resolve mixed state input to File #5 pointer
+ N IEN,RAW1,RAW2
+ S RAW1=$$TRIM^XLFSTR($P($G(X),"^",1))
+ S RAW2=$$TRIM^XLFSTR($P($G(X),"^",2))
+ I +RAW1>0,$D(^DIC(5,+RAW1,0)) Q +RAW1
+ I +RAW2>0,$D(^DIC(5,+RAW2,0)) Q +RAW2
+ S IEN=$$LOOKST(RAW1) I IEN>0 Q IEN
+ S IEN=$$LOOKST(RAW2) I IEN>0 Q IEN
+ Q 0
+ ;
+LOOKST(X) ; Resolve state code/name to File #5 pointer
+ N IEN
+ S X=$$UP^XLFSTR($$TRIM^XLFSTR($G(X)))
+ I X="" Q 0
+ S IEN=$O(^DIC(5,"C",X,0))
+ I IEN>0 Q +IEN
+ S IEN=$O(^DIC(5,"B",X,0))
+ I IEN>0 Q +IEN
+ Q 0
  ;
 STREET()
  N Y,YY
