@@ -4,8 +4,8 @@ Status date: 2026-06-09
 Branch at time of writing: `fix/patient-state-pointer-file5`
 
 Part of the VistA-on-FHIR workspace. Ecosystem-level context lives in
-`VistA-FHIR-Server-Codex/docs/PROJECT_OVERVIEW.md`; the cross-repo roadmap is
-`VistA-FHIR-Server-Codex/docs/PATH_FORWARD.md`.
+`Vista-on-FHIR/docs/PROJECT_OVERVIEW.md`; the cross-repo roadmap is
+`Vista-on-FHIR/docs/PATH_FORWARD.md`.
 
 ## Role of this repository
 
@@ -16,6 +16,14 @@ cases (Excel → ISI DATA IMPORT → FileMan). In the current stack it is the
 labs, and other filing operations. Its KIDS build
 (`VistA/VISTA_DATALOADER_3P1.KID`) is the required first install before the
 SYN KIDS.
+
+**Trajectory: transitional, then reference-only.** The C0FW framework in
+the FHIR server is the planned home of all FHIR-based updates to VistA,
+designed under a no-SYN/no-ISI constraint (temporarily loosened for meds,
+labs, and procedures). Once C0FW completes native coverage, no ISI routine
+is required in the solution and this repo is retained for reference only —
+it remains independently useful for its original Excel-based loading
+mission.
 
 ## What is working today
 
