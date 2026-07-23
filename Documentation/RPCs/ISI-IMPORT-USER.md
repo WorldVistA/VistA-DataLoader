@@ -7,10 +7,11 @@ Creates new User entries in the NEW PERSON file (#200). This RPC allows batch cr
 `ISI IMPORT USER`
 
 ## Entry Point
-`USRCREAT^ISIIMPR1`
+[`USRCREAT^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m#L147)
 
 ## API Entry Point
-`$$USER^ISIIMP22(.ISIRESUL,.ISIMISC)`
+[`$$USER^ISIIMP22`](../../VistA/Routines/ISIIMP22.m) - Main API  
+[`$$VALIDATE^ISIIMPUD`](../../VistA/Routines/ISIIMPUD.m) - Validation
 
 ## Input Parameters
 

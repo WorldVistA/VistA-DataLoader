@@ -7,10 +7,11 @@ Creates complete laboratory panels with multiple test results in VistA. This RPC
 `ISI IMPORT LAB PANEL`
 
 ## Entry Point
-`LABPANEL^ISIIMPR2`
+[`LABPANEL^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m)
 
 ## API Entry Point
-`$$LAB^ISIIMP12(.RC,.ISIMISC)`
+[`$$LAB^ISIIMP12`](../../VistA/Routines/ISIIMP12.m) - Main API (same as individual lab)  
+[`$$VALIDATE^ISIIMP13`](../../VistA/Routines/ISIIMP13.m) - Validation
 
 *Note: Same API as individual labs, distinguished by presence of LAB_PANEL parameter*
 

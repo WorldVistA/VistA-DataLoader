@@ -7,10 +7,11 @@ Creates TIU (Text Integration Utilities) progress notes and clinical documents i
 `ISI IMPORT NOTE`
 
 ## Entry Point
-`NOTEMAKE^ISIIMPR2`
+[`NOTEMAKE^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m)
 
 ## API Entry Point
-`$$NOTES^ISIIMP14(.ISIRESUL,.ISIMISC)`
+[`$$NOTES^ISIIMP14`](../../VistA/Routines/ISIIMP14.m) - Main API  
+[`$$VALIDATE^ISIIMP15`](../../VistA/Routines/ISIIMP15.m) - Validation
 
 ## Input Parameters
 

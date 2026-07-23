@@ -7,10 +7,11 @@ Creates appointment entries and associated outpatient encounters in VistA. This 
 `ISI IMPORT APPT`
 
 ## Entry Point
-`APPMAKE^ISIIMPR1`
+[`APPMAKE^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m)
 
 ## API Entry Point
-`APPOINT^ISIIMP04()`
+[`APPOINT^ISIIMP04`](../../VistA/Routines/ISIIMP04.m) - Main API  
+[`$$VALIDATE^ISIIMP05`](../../VistA/Routines/ISIIMP05.m) - Validation
 
 ## Input Parameters
 

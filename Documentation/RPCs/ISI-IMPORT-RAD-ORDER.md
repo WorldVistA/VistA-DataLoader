@@ -7,10 +7,11 @@ Creates radiology orders in VistA. This RPC generates imaging procedure orders i
 `ISI IMPORT RAD ORDER`
 
 ## Entry Point
-`RADOMAKE^ISIIMPR1`
+[`RADOMAKE^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m)
 
 ## API Entry Point
-`$$RADORDER^ISIIMP20(.ISIRESUL,.ISIMISC)`
+[`$$RADORDER^ISIIMP20`](../../VistA/Routines/ISIIMP20.m) - Main API  
+[`$$VALIDATE^ISIIMP21`](../../VistA/Routines/ISIIMP21.m) - Validation
 
 ## Input Parameters
 

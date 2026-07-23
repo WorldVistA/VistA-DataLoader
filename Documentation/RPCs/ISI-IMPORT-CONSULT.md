@@ -7,10 +7,12 @@ Creates consult requests in VistA. This RPC generates consultation orders for sp
 `ISI IMPORT CONSULT`
 
 ## Entry Point
-`CONMAKE^ISIIMPR2`
+[`CONMAKE^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m#L161)
 
 ## API Entry Point
-`$$CONSULTS^ISIIMP18(.ISIRESUL,.ISIMISC)`
+[`$$CONSULTS^ISIIMP18`](../../VistA/Routines/ISIIMP18.m#L26) - Main API  
+[`$$VALIDATE^ISIIMP19`](../../VistA/Routines/ISIIMP19.m#L27) - Validation  
+[`$$MAKECONS^ISIIMP19`](../../VistA/Routines/ISIIMP19.m#L32) - Creation
 
 ## Input Parameters
 

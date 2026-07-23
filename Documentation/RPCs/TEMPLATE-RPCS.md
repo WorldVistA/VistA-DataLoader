@@ -14,7 +14,7 @@ Fetches the list of available patient import templates.
 `ISI IMPORT GET TEMPLATES`
 
 ## Entry Point
-`FETCHTMP^ISIIMPUA`
+[`FETCHTMP^ISIIMPUA`](../../VistA/Routines/ISIIMPUA.m)
 
 ## Output
 - Array of template names from file #9001
@@ -30,7 +30,7 @@ Retrieves detailed configuration for a specific patient import template.
 `ISI IMPORT GET TEMPLATE DETLS`
 
 ## Entry Point
-`TEMPLATE^ISIIMPUA`
+[`TEMPLATE^ISIIMPUA`](../../VistA/Routines/ISIIMPUA.m)
 
 ## Input
 - Template name or IEN
@@ -86,10 +86,10 @@ Updates an existing patient import template or creates a new one.
 `ISI IMPORT SAVE TEMPLATE`
 
 ## Entry Point
-`TMPUPDTE^ISIIMPR1`
+[`TMPUPDTE^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m)
 
 ## API Entry Point
-`$$TEMPLATE^ISIIMP24(.ISIRESUL,.ISIMISC)`
+[`$$TEMPLATE^ISIIMP24`](../../VistA/Routines/ISIIMP24.m) - Main API
 
 ## Input Parameters
 

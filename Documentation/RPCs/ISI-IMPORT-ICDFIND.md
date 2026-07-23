@@ -7,10 +7,10 @@ Searches for ICD (International Classification of Diseases) code descriptions. T
 `ISI IMPORT ICDFIND`
 
 ## Entry Point
-`ICD9GET^ISIIMPR2`
+[`ICD9GET^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m)
 
 ## API Entry Point
-`ICD9^ISIIMPUA(.ISIRESUL,.TXT)`
+[`ICD9^ISIIMPUA`](../../VistA/Routines/ISIIMPUA.m) - ICD code lookup routine
 
 ## Input Parameters
 

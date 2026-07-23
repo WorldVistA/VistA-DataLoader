@@ -13,9 +13,9 @@ The V-File RPCs create entries in VistA's encounter-related "V" files. These fil
 - [ISI IMPORT V PATIENT ED](#isi-import-v-patient-ed) - Patient education
 
 ## Common Entry Points
-- **RPC Entry**: Various in ISIIMPR3
-- **API Entry**: Various in ISIIMP27
-- **Utility**: ISIIMPUG (shared validation)
+- **RPC Entry**: Various in [`ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
+- **API Entry**: Various in [`ISIIMP27`](../../VistA/Routines/ISIIMP27.m)
+- **Utility**: [`ISIIMPUG`](../../VistA/Routines/ISIIMPUG.m) (shared validation)
 
 ## Common Parameters
 
@@ -53,10 +53,10 @@ Creates V CPT (Current Procedural Terminology) entries for visit procedures.
 `ISI IMPORT V CPT`
 
 ## Entry Point
-`VCPT^ISIIMPR3`
+[`VCPT^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Point
-`$$VCPT^ISIIMP27(.ISIMISC)`
+[`$$VCPT^ISIIMP27`](../../VistA/Routines/ISIIMP27.m) - Main API
 
 ## Additional Parameters
 
@@ -109,10 +109,10 @@ Creates V POV (Purpose of Visit) entries for visit diagnoses.
 `ISI IMPORT V POV`
 
 ## Entry Point
-`VPOV^ISIIMPR3`
+[`VPOV^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Point
-`$$VPOV^ISIIMP27(.ISIMISC)`
+[`$$VPOV^ISIIMP27`](../../VistA/Routines/ISIIMP27.m) - Main API
 
 ## Additional Parameters
 
@@ -155,10 +155,10 @@ Creates V HEALTH FACTORS entries documenting health-related behaviors and condit
 `ISI IMPORT HFACTOR`
 
 ## Entry Point
-`HFACTOR^ISIIMPR3`
+[`HFACTOR^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Point
-`$$VHF^ISIIMP27(.ISIMISC)`
+[`$$VHF^ISIIMP27`](../../VistA/Routines/ISIIMP27.m) - Main API
 
 ## Additional Parameters
 
@@ -204,10 +204,10 @@ Creates V IMMUNIZATION entries documenting vaccines administered.
 `ISI IMPORT IMMUNIZATIONS`
 
 ## Entry Point
-`VIMMZ^ISIIMPR3`
+[`VIMMZ^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Point
-`$$VIMMZ^ISIIMP27(.ISIMISC)`
+[`$$VIMMZ^ISIIMP27`](../../VistA/Routines/ISIIMP27.m) - Main API
 
 ## Additional Parameters
 
@@ -247,10 +247,10 @@ Creates V EXAM entries documenting physical examination findings.
 `ISI IMPORT V EXAM`
 
 ## Entry Point
-`VEXAM^ISIIMPR3`
+[`VEXAM^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Point
-`$$VEXAM^ISIIMP27(.ISIMISC)`
+[`$$VEXAM^ISIIMP27`](../../VistA/Routines/ISIIMP27.m) - Main API
 
 ## Additional Parameters
 
@@ -285,10 +285,10 @@ Creates V PATIENT EDUCATION entries documenting patient teaching.
 `ISI IMPORT V PATIENT ED`
 
 ## Entry Point
-`VPTEDU^ISIIMPR3`
+[`VPTEDU^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Point
-`$$VPNTED^ISIIMP27(.ISIMISC)`
+[`$$VPNTED^ISIIMP27`](../../VistA/Routines/ISIIMP27.m) - Main API
 
 ## Additional Parameters
 

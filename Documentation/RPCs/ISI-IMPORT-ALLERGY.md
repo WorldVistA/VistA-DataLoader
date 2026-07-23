@@ -7,10 +7,11 @@ Creates allergy entries in a patient's allergy/adverse reaction record. This RPC
 `ISI IMPORT ALLERGY`
 
 ## Entry Point
-`ALGMAKE^ISIIMPR2`
+[`ALGMAKE^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m)
 
 ## API Entry Point
-`ALLERGY^ISIIMP10(.ISIRESUL,.ISIMISC)`
+[`$$ALLERGY^ISIIMP10`](../../VistA/Routines/ISIIMP10.m) - Main API  
+[`$$VALIDATE^ISIIMP11`](../../VistA/Routines/ISIIMP11.m) - Validation
 
 ## Input Parameters
 

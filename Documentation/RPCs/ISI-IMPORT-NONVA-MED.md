@@ -7,10 +7,12 @@ Creates Non-VA medication orders in the patient's medication profile. This RPC h
 `ISI IMPORT NONVA MED`
 
 ## Entry Point
-`NVAMED^ISIIMPR2`
+[`NVAMED^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m#L216)
 
 ## API Entry Point
-`$$NVAMEDS^ISIIMP16(.ISIRESUL,.ISIMISC)`
+[`$$NVAMEDS^ISIIMP16`](../../VistA/Routines/ISIIMP16.m#L37) - Main API  
+[`$$VALIDATE^ISIIMP29`](../../VistA/Routines/ISIIMP29.m) - Validation  
+[`$$MAKENVA^ISIIMP29`](../../VistA/Routines/ISIIMP29.m) - Creation
 
 ## Input Parameters
 

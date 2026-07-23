@@ -7,10 +7,11 @@ Creates vital signs measurements in VistA. This RPC records patient vital signs 
 `ISI IMPORT VITALS`
 
 ## Entry Point
-`VITMAKE^ISIIMPR1`
+[`VITMAKE^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m)
 
 ## API Entry Point
-`VITALS^ISIIMP08(.ISIRESUL,.ISIMISC)`
+[`$$VITALS^ISIIMP08`](../../VistA/Routines/ISIIMP08.m) - Main API  
+[`$$VALIDATE^ISIIMP09`](../../VistA/Routines/ISIIMP09.m) - Validation
 
 ## Input Parameters
 

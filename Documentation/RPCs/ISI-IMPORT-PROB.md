@@ -7,10 +7,11 @@ Creates problem list entries in VistA. This RPC adds diagnoses/problems to a pat
 `ISI IMPORT PROB`
 
 ## Entry Point
-`PROBMAKE^ISIIMPR1`
+[`PROBMAKE^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m)
 
 ## API Entry Point
-`PROBLEM^ISIIMP06(.ISIRESUL,.ISIMISC)`
+[`$$PROBLEM^ISIIMP06`](../../VistA/Routines/ISIIMP06.m) - Main API  
+[`$$VALIDATE^ISIIMP07`](../../VistA/Routines/ISIIMP07.m) - Validation
 
 ## Input Parameters
 

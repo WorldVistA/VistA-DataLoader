@@ -7,10 +7,11 @@ Creates patient records in VistA. Supports both individual patient creation and 
 `ISI IMPORT PAT`
 
 ## Entry Point
-`PNTIMPRT^ISIIMPR1`
+[`PNTIMPRT^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m)
 
 ## API Entry Point
-`IMPORTPT^ISIIMP03(ISIMISC)`
+[`IMPORTPT^ISIIMP03`](../../VistA/Routines/ISIIMP03.m) - Main API  
+[`$$PATIENT^ISIIMP02`](../../VistA/Routines/ISIIMP02.m) - Patient creation
 
 ## Input Parameters
 

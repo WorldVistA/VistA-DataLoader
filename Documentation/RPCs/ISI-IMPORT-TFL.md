@@ -7,10 +7,11 @@ Creates Treating Facility List entries for patients. The Treating Facility List 
 `ISI IMPORT TFL`
 
 ## Entry Point
-`TRTFACLS^ISIIMPR1`
+[`TRTFACLS^ISIIMPR1`](../../VistA/Routines/ISIIMPR1.m#L194)
 
 ## API Entry Point
-`$$TFL^ISIIMP28(.ISIRESUL,.ISIMISC)`
+[`$$TFL^ISIIMP28`](../../VistA/Routines/ISIIMP28.m) - Main API  
+[`$$VALTFL^ISIIMPUH`](../../VistA/Routines/ISIIMPUH.m) - Validation
 
 ## Input Parameters
 

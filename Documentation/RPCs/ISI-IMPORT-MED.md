@@ -7,10 +7,12 @@ Creates medication orders in VistA. This RPC processes outpatient medication pre
 `ISI IMPORT MED`
 
 ## Entry Point
-`MEDMAKE^ISIIMPR2`
+[`MEDMAKE^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m)
 
 ## API Entry Point
-`$$MEDS^ISIIMP16(.ISIRESUL,.ISIMISC)`
+[`$$MEDS^ISIIMP16`](../../VistA/Routines/ISIIMP16.m) - Main API  
+[`$$VALIDATE^ISIIMP17`](../../VistA/Routines/ISIIMP17.m) - Validation  
+[`$$MAKEMEDS^ISIIMP17`](../../VistA/Routines/ISIIMP17.m) - Creation
 
 ## Input Parameters
 

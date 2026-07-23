@@ -7,10 +7,11 @@ Creates individual laboratory test results in VistA. This RPC adds lab test resu
 `ISI IMPORT LAB`
 
 ## Entry Point
-`LABMAKE^ISIIMPR2`
+[`LABMAKE^ISIIMPR2`](../../VistA/Routines/ISIIMPR2.m)
 
 ## API Entry Point
-`$$LAB^ISIIMP12(.RC,.ISIMISC)`
+[`$$LAB^ISIIMP12`](../../VistA/Routines/ISIIMP12.m) - Main API  
+[`$$VALIDATE^ISIIMP13`](../../VistA/Routines/ISIIMP13.m) - Validation
 
 ## Input Parameters
 

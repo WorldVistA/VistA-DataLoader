@@ -7,11 +7,11 @@ Creates admission records in VistA for inpatient stays. This RPC handles patient
 `ISI IMPORT ADMIT`
 
 ## Entry Point
-`ADMIT^ISIIMPR3`
+[`ADMIT^ISIIMPR3`](../../VistA/Routines/ISIIMPR3.m)
 
 ## API Entry Points
-- `ADMIT^ISIIMP25(.ISIMISC)` - Creates admission
-- `DISCHARG^ISIIMP26(.ISIMISC)` - Processes discharge (if DDATE provided)
+- [`ADMIT^ISIIMP25`](../../VistA/Routines/ISIIMP25.m) - Creates admission
+- [`DISCHARG^ISIIMP26`](../../VistA/Routines/ISIIMP26.m) - Processes discharge (if DDATE provided)
 
 ## Status
 **⚠️ DEVELOPMENT STATUS**: According to source documentation, this API is marked as "DO NOT USE (*** still in development***)". Use with caution in production environments.
