@@ -31,12 +31,13 @@ This directory contains comprehensive documentation for all Remote Procedure Cal
 - [**ISI IMPORT RAD ORDER**](ISI-IMPORT-RAD-ORDER.md) - Create radiology orders
 
 ### Visit/Encounter CPT & Diagnosis
-- [**ISI IMPORT V CPT**](ISI-IMPORT-V-CPT.md) - Create V CPT (procedure) entries
-- [**ISI IMPORT V POV**](ISI-IMPORT-V-POV.md) - Create V POV (diagnosis) entries
-- [**ISI IMPORT V EXAM**](ISI-IMPORT-V-EXAM.md) - Create V Exam entries
-- [**ISI IMPORT V PATIENT ED**](ISI-IMPORT-V-PATIENT-ED.md) - Create V Patient Education entries
-- [**ISI IMPORT HFACTOR**](ISI-IMPORT-HFACTOR.md) - Create V Health Factor entries
-- [**ISI IMPORT IMMUNIZATIONS**](ISI-IMPORT-IMMUNIZATIONS.md) - Create V Immunization entries
+See [**V-File RPCs Overview**](V-FILE-RPCS-OVERVIEW.md) for comprehensive documentation of all 6 encounter-related RPCs:
+- **ISI IMPORT V CPT** - Create V CPT (procedure) entries
+- **ISI IMPORT V POV** - Create V POV (diagnosis) entries
+- **ISI IMPORT V EXAM** - Create V Exam entries
+- **ISI IMPORT V PATIENT ED** - Create V Patient Education entries
+- **ISI IMPORT HFACTOR** - Create V Health Factor entries
+- **ISI IMPORT IMMUNIZATIONS** - Create V Immunization entries
 
 ### Documentation
 - [**ISI IMPORT NOTE**](ISI-IMPORT-NOTE.md) - Create TIU/Progress notes
@@ -46,9 +47,10 @@ This directory contains comprehensive documentation for all Remote Procedure Cal
 - [**ISI IMPORT TFL**](ISI-IMPORT-TFL.md) - Create Treating Facility List entries
 
 ### Templates
-- [**ISI IMPORT GET TEMPLATES**](ISI-IMPORT-GET-TEMPLATES.md) - Fetch template list
-- [**ISI IMPORT GET TEMPLATE DETLS**](ISI-IMPORT-GET-TEMPLATE-DETLS.md) - Fetch template details
-- [**ISI IMPORT SAVE TEMPLATE**](ISI-IMPORT-SAVE-TEMPLATE.md) - Save template updates
+See [**Template RPCs**](TEMPLATE-RPCS.md) for comprehensive documentation of all 3 template management RPCs:
+- **ISI IMPORT GET TEMPLATES** - Fetch template list
+- **ISI IMPORT GET TEMPLATE DETLS** - Fetch template details
+- **ISI IMPORT SAVE TEMPLATE** - Save template updates
 
 ### Utilities
 - [**ISI IMPORT TABLEFETCH**](ISI-IMPORT-TABLEFETCH.md) - Export select VistA tables/files

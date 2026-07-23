@@ -2,7 +2,7 @@
 
 ## Documentation Status: ✅ COMPLETE
 
-All 26 Remote Procedure Calls (RPCs) in the VistA DataLoader package have been documented.
+All 27 Remote Procedure Calls (RPCs) in the VistA DataLoader package have been documented.
 
 ## Documentation Files Created
 
@@ -23,12 +23,15 @@ All 26 Remote Procedure Calls (RPCs) in the VistA DataLoader package have been d
 
 ### Orders (4 RPCs)
 9. ✅ **[ISI-IMPORT-MED.md](ISI-IMPORT-MED.md)** - Medication orders
-10. ✅ **[ISI-IMPORT-CONSULT.md](ISI-IMPORT-CONSULT.md)** - Consultation requests
-11. ✅ **[ISI-IMPORT-RAD-ORDER.md](ISI-IMPORT-RAD-ORDER.md)** - Radiology orders
-12. ✅ **[ISI-IMPORT-NOTE.md](ISI-IMPORT-NOTE.md)** - TIU progress notes
+10. ✅ **[ISI-IMPORT-NONVA-MED.md](ISI-IMPORT-NONVA-MED.md)** - Non-VA medication entries
+11. ✅ **[ISI-IMPORT-CONSULT.md](ISI-IMPORT-CONSULT.md)** - Consultation requests
+12. ✅ **[ISI-IMPORT-RAD-ORDER.md](ISI-IMPORT-RAD-ORDER.md)** - Radiology orders
+
+### Documentation (1 RPC)
+13. ✅ **[ISI-IMPORT-NOTE.md](ISI-IMPORT-NOTE.md)** - TIU progress notes
 
 ### V-File / Encounter Data (6 RPCs)
-13. ✅ **[V-FILE-RPCS-OVERVIEW.md](V-FILE-RPCS-OVERVIEW.md)** - Comprehensive guide covering:
+14. ✅ **[V-FILE-RPCS-OVERVIEW.md](V-FILE-RPCS-OVERVIEW.md)** - Comprehensive guide covering:
     - ISI IMPORT V CPT (procedure codes)
     - ISI IMPORT V POV (diagnoses)
     - ISI IMPORT HFACTOR (health factors)
@@ -37,21 +40,22 @@ All 26 Remote Procedure Calls (RPCs) in the VistA DataLoader package have been d
     - ISI IMPORT V PATIENT ED (patient education)
 
 ### Utility RPCs (5 RPCs)
-14. ✅ **[ISI-IMPORT-TABLEFETCH.md](ISI-IMPORT-TABLEFETCH.md)** - Export reference data (34 tables)
-15. ✅ **[ISI-IMPORT-ICDFIND.md](ISI-IMPORT-ICDFIND.md)** - ICD code lookup
-16. ✅ **[TEMPLATE-RPCS.md](TEMPLATE-RPCS.md)** - Template management covering:
+15. ✅ **[ISI-IMPORT-TABLEFETCH.md](ISI-IMPORT-TABLEFETCH.md)** - Export reference data (34 tables)
+16. ✅ **[ISI-IMPORT-ICDFIND.md](ISI-IMPORT-ICDFIND.md)** - ICD code lookup
+17. ✅ **[TEMPLATE-RPCS.md](TEMPLATE-RPCS.md)** - Template management covering:
     - ISI IMPORT GET TEMPLATES
     - ISI IMPORT GET TEMPLATE DETLS
     - ISI IMPORT SAVE TEMPLATE
 
 ### Administrative (3 RPCs)
-*Note: ISI IMPORT USER and ISI IMPORT TFL are documented in source code comments and the master README. Full standalone docs can be created if needed.*
+18. ✅ **[ISI-IMPORT-USER.md](ISI-IMPORT-USER.md)** - Create user accounts (NEW PERSON file)
+19. ✅ **[ISI-IMPORT-TFL.md](ISI-IMPORT-TFL.md)** - Create Treating Facility List entries
 
 ## Total Documentation
 
-- **📁 17 Documentation Files**
-- **📄 26 RPCs Documented**
-- **📊 ~2,500 lines of comprehensive documentation**
+- **📁 18 Documentation Files**
+- **📄 27 RPCs Documented**
+- **📊 ~3,000 lines of comprehensive documentation**
 
 ## What Each Document Includes
 
@@ -76,10 +80,11 @@ Every RPC documentation file contains:
 | Patient Management | 3 | ✅ Complete |
 | Clinical Data | 5 | ✅ Complete |
 | Orders | 4 | ✅ Complete |
+| Documentation | 1 | ✅ Complete |
 | V-File/Encounter | 6 | ✅ Complete |
 | Utilities | 5 | ✅ Complete |
 | Administrative | 3 | ✅ Complete |
-| **TOTAL** | **26** | **✅ 100%** |
+| **TOTAL** | **27** | **✅ 100%** |
 
 ## Documentation Location
 
@@ -99,7 +104,7 @@ c:\Users\VACOEllioS1\apps\Dataloader\VistA-DataLoader\Documentation\RPCs\
 ## Coverage Statistics
 
 ### By Functionality
-- **Data Import**: 13 RPCs (Patient, Clinical, Orders)
+- **Data Import**: 14 RPCs (Patient, Clinical, Orders, Documentation)
 - **Visit/Encounter**: 6 RPCs (V-Files)
 - **Reference/Utility**: 5 RPCs (Tables, ICD, Templates)
 - **Administrative**: 2 RPCs (User, TFL)
