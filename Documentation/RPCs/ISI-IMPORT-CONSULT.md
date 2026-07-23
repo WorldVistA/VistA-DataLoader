@@ -66,7 +66,9 @@ Format: `MISC(n) = "PARAMETER^VALUE"`
   - Must exist in file #200
   - Must be authorized to write medical orders (field #200,"PS" = 1)
   - Must have PROVIDER security key
+  - **Must have Electronic Signature** configured in field #200,20.4
 - **Converted to**: Internal IEN
+- **Important**: Electronic signature is automatically retrieved from the provider's user record - you do NOT pass it as a parameter
 
 ### TEXT
 - **Required**: No
@@ -157,10 +159,18 @@ Validations include:
 
 ## Electronic Signature Requirement
 
-The provider must have an electronic signature defined in field #200,20.4. If missing, the validation fails with:
-```
--1^PROVIDER missing Electronic Signature (#200,20.4)
-```
+⚠️ **Important**: The electronic signature is **NOT** passed as a parameter. Instead:
+
+1. The system automatically retrieves it from the provider's user record (field #200,20.4)
+2. The provider must have an electronic signature configured in VistA before creating consults
+3. If the provider has no electronic signature, validation fails with:
+   ```
+   -1^PROVIDER missing Electronic Signature (#200,20.4)
+   ```
+
+**To configure a provider's electronic signature in VistA:**
+- Menu: EVE → User Options → Enter/Edit Electronic Signature
+- Or directly edit field #200,20.4 in the NEW PERSON file
 
 ## Processing Flow
 
@@ -182,14 +192,16 @@ The provider must have an electronic signature defined in field #200,20.4. If mi
 ## Service Synonym Lookup
 
 The routine uses `SVCSYN^ORQQCN2(.RESULT,1,1,1)` to retrieve valid consultation services. This returns an array with:
-- Service name
-- Service IEN
-- ORDERITEM pointer
-
-The ORDERITEM is required for creating the consult order.
-
-## Notes
-
+- **Electronic signature is NOT a parameter** - it's automatically retrieved from provider's user record (field #200,20.4)
+- TEXT parameter defaults to "Consult order." if not provided
+- PROV parameter defaults to current user (DUZ) if not provided
+- Provider must have authorization to write medical orders
+- Provider must have the PROVIDER security key
+- Electronic signature is mandatory for the ordering provider (system retrieves it automatically)
+- Location must be active at the time of consult request
+- The routine uses VistA's standard consult ordering APIs
+- Consult requests are created in CONSULT/REQUEST TRACKING file (#123)
+- The consult is automatically signed using the provider's electronic signature
 - TEXT parameter defaults to "Consult order." if not provided
 - PROV parameter defaults to current user (DUZ) if not provided
 - Provider must have authorization to write medical orders
