@@ -90,7 +90,7 @@ Every RPC documentation file contains:
 
 All files are in:
 ```
-c:\Users\VACOEllioS1\apps\Dataloader\VistA-DataLoader\Documentation\RPCs\
+Documentation/RPCs/
 ```
 
 ## How to Use This Documentation
