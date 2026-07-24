@@ -129,16 +129,18 @@ VALCONS(ISIMISC)
  ;
  I $D(ISIMISC("PROV")) D
  . S VALUE=$G(ISIMISC("PROV")) I VALUE="" S EXIT=1 Q
- . S Y="" F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  Q:EXIT=1
+ . ;SME ADDED DUZ CHECK SO DUZ CAN BE USED 7/24/2026
+ . I (VALUE?.N) S EXIT=0 Q
+  . S Y="" F  S Y=$O(^VA(200,"B",VALUE,Y)) Q:Y=""  D  Q:EXIT=1
  . . I +$G(^VA(200,Y,"PS"))=1 S EXIT=1 Q
- . . I '$D(^VA(200,"AK.PROVIDER",$P(^VA(200,Y,0),U))) S EXIT=1 Q
+ . . ;I '$D(^VA(200,"AK.PROVIDER",$P(^VA(200,Y,0),U))) S EXIT=1 Q
+ . . ;SME FIXED XREF LOOKUP 
+ . . I '$D(^VA(200,"AK.PROVIDER",$P(^VA(200,Y,0),U),Y)) S EXIT=1 Q
+ . . S VALIDIEN=Y,EXIT=0
  . . Q
- . I Y'="" S EXIT=0,ISIMISC("PROV")=Y
+ . I VALIDIEN'="" S EXIT=0,ISIMISC("PROV")=VALIDIEN
  . Q
  Q:EXIT "-1^Invalid PROV value (#200, .01)."
- ;
- ;TEXT
- I '$D(ISIMISC("TEXT")) S ISIMISC("TEXT")="Consult order."
  ;
  ; -- ES --
  S ISIMISC("ES")=$P($G(^VA(200,ISIMISC("PROV"),20)),U,4)
