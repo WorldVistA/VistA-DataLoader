@@ -124,7 +124,7 @@ MISC(5) = "UP_DOB^3000101"
 
 ## Validation
 
-### Performed by: `VALIDATE^ISIIMPU1`
+### Performed by: [`VALIDATE^ISIIMPU1`](../../VistA/Routines/ISIIMPU1.m)
 
 Validations include:
 - Template name validity (if provided)

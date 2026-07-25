@@ -1,7 +1,7 @@
 # VistA Data Loader RPC Reference
 
 ## Overview
-This directory contains comprehensive documentation for all Remote Procedure Calls (RPCs) provided by the VistA Data Loader package (version 3.1). These RPCs enable external applications to import clinical and administrative data into VistA.
+This directory contains documentation for all Remote Procedure Calls (RPCs) provided by the VistA Data Loader package (version 3.1). These RPCs enable external applications to import clinical and administrative data into VistA.
 
 ## Package Information
 - **Package**: VISTA DATALOADER
@@ -31,13 +31,12 @@ This directory contains comprehensive documentation for all Remote Procedure Cal
 - [**ISI IMPORT RAD ORDER**](ISI-IMPORT-RAD-ORDER.md) - Create radiology orders
 
 ### Visit/Encounter CPT & Diagnosis
-See [**V-File RPCs Overview**](V-FILE-RPCS-OVERVIEW.md) for comprehensive documentation of all 6 encounter-related RPCs:
-- **ISI IMPORT V CPT** - Create V CPT (procedure) entries
-- **ISI IMPORT V POV** - Create V POV (diagnosis) entries
-- **ISI IMPORT V EXAM** - Create V Exam entries
-- **ISI IMPORT V PATIENT ED** - Create V Patient Education entries
-- **ISI IMPORT HFACTOR** - Create V Health Factor entries
-- **ISI IMPORT IMMUNIZATIONS** - Create V Immunization entries
+- [**ISI IMPORT V CPT**](ISI-IMPORT-V-CPT.md) - Create V CPT (procedure) entries
+- [**ISI IMPORT V POV**](ISI-IMPORT-V-POV.md) - Create V POV (diagnosis) entries
+- [**ISI IMPORT V EXAM**](ISI-IMPORT-V-EXAM.md) - Create V Exam entries
+- [**ISI IMPORT V PATIENT ED**](ISI-IMPORT-V-PATIENT-ED.md) - Create V Patient Education entries
+- [**ISI IMPORT HFACTOR**](ISI-IMPORT-HFACTOR.md) - Create V Health Factor entries
+- [**ISI IMPORT IMMUNIZATIONS**](ISI-IMPORT-IMMUNIZATIONS.md) - Create V Immunization entries
 
 ### Documentation
 - [**ISI IMPORT NOTE**](ISI-IMPORT-NOTE.md) - Create TIU/Progress notes
@@ -47,10 +46,9 @@ See [**V-File RPCs Overview**](V-FILE-RPCS-OVERVIEW.md) for comprehensive docume
 - [**ISI IMPORT TFL**](ISI-IMPORT-TFL.md) - Create Treating Facility List entries
 
 ### Templates
-See [**Template RPCs**](TEMPLATE-RPCS.md) for comprehensive documentation of all 3 template management RPCs:
-- **ISI IMPORT GET TEMPLATES** - Fetch template list
-- **ISI IMPORT GET TEMPLATE DETLS** - Fetch template details
-- **ISI IMPORT SAVE TEMPLATE** - Save template updates
+- [**ISI IMPORT GET TEMPLATES**](ISI-IMPORT-GET-TEMPLATES.md) - Fetch template list
+- [**ISI IMPORT GET TEMPLATE DETLS**](ISI-IMPORT-GET-TEMPLATE-DETLS.md) - Fetch template details
+- [**ISI IMPORT SAVE TEMPLATE**](ISI-IMPORT-SAVE-TEMPLATE.md) - Save template updates
 
 ### Utilities
 - [**ISI IMPORT TABLEFETCH**](ISI-IMPORT-TABLEFETCH.md) - Export select VistA tables/files
@@ -60,29 +58,32 @@ See [**Template RPCs**](TEMPLATE-RPCS.md) for comprehensive documentation of all
 
 | RPC Name | Entry Point | API | Purpose |
 |----------|-------------|-----|---------|
-| ISI IMPORT PAT | PNTIMPRT^ISIIMPR1 | IMPORTPT^ISIIMP03 | Patient creation |
-| ISI IMPORT APPT | APPMAKE^ISIIMPR1 | APPOINT^ISIIMP04 | Appointments |
-| ISI IMPORT ADMIT | ADMIT^ISIIMPR3 | ADMIT^ISIIMP25 | Admissions ⚠️ |
-| ISI IMPORT PROB | PROBMAKE^ISIIMPR1 | PROBLEM^ISIIMP06 | Problem list |
-| ISI IMPORT VITALS | VITMAKE^ISIIMPR1 | VITALS^ISIIMP08 | Vital signs |
-| ISI IMPORT ALLERGY | ALGMAKE^ISIIMPR2 | ALLERGY^ISIIMP10 | Allergies |
-| ISI IMPORT LAB | LABMAKE^ISIIMPR2 | LAB^ISIIMP12 | Lab tests |
-| ISI IMPORT LAB PANEL | LABPANEL^ISIIMPR2 | LAB^ISIIMP12 | Lab panels |
-| ISI IMPORT MED | MEDMAKE^ISIIMPR2 | MEDS^ISIIMP16 | Medications |
-| ISI IMPORT NONVA MED | NVAMED^ISIIMPR2 | NVAMEDS^ISIIMP16 | Non-VA meds |
-| ISI IMPORT NOTE | NOTEMAKE^ISIIMPR2 | NOTES^ISIIMP14 | TIU notes |
-| ISI IMPORT CONSULT | CONMAKE^ISIIMPR2 | CONSULTS^ISIIMP18 | Consults |
-| ISI IMPORT RAD ORDER | RADOMAKE^ISIIMPR1 | RADORDER^ISIIMP20 | Rad orders |
-| ISI IMPORT USER | USRCREAT^ISIIMPR1 | USER^ISIIMP22 | User accounts |
-| ISI IMPORT V CPT | VCPT^ISIIMPR3 | VCPT^ISIIMP27 | CPT codes |
-| ISI IMPORT V EXAM | VEXAM^ISIIMPR3 | VEXAM^ISIIMP27 | Exams |
-| ISI IMPORT V POV | VPOV^ISIIMPR3 | VPOV^ISIIMP27 | Diagnoses |
-| ISI IMPORT HFACTOR | HFACTOR^ISIIMPR3 | VHF^ISIIMP27 | Health factors |
-| ISI IMPORT IMMUNIZATIONS | VIMMZ^ISIIMPR3 | VIMMZ^ISIIMP27 | Immunizations |
-| ISI IMPORT V PATIENT ED | VPTEDU^ISIIMPR3 | VPNTED^ISIIMP27 | Patient ed |
-| ISI IMPORT TFL | TRTFACLS^ISIIMPR1 | TFL^ISIIMP28 | Facility list |
-| ISI IMPORT TABLEFETCH | TABLEGET^ISIIMPR2 | ENTRY^ISIIMPUA | Table export |
-| ISI IMPORT ICDFIND | ICD9GET^ISIIMPR2 | ICD9^ISIIMPUA | ICD lookup |
+| [ISI IMPORT PAT](ISI-IMPORT-PAT.md) | [PNTIMPRT^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [IMPORTPT^ISIIMP03](../../VistA/Routines/ISIIMP03.m) | Patient creation |
+| [ISI IMPORT APPT](ISI-IMPORT-APPT.md) | [APPMAKE^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [APPOINT^ISIIMP04](../../VistA/Routines/ISIIMP04.m) | Appointments |
+| [ISI IMPORT ADMIT](ISI-IMPORT-ADMIT.md) | [ADMIT^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [ADMIT^ISIIMP25](../../VistA/Routines/ISIIMP25.m) | Admissions ⚠️ |
+| [ISI IMPORT PROB](ISI-IMPORT-PROB.md) | [PROBMAKE^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [PROBLEM^ISIIMP06](../../VistA/Routines/ISIIMP06.m) | Problem list |
+| [ISI IMPORT VITALS](ISI-IMPORT-VITALS.md) | [VITMAKE^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [VITALS^ISIIMP08](../../VistA/Routines/ISIIMP08.m) | Vital signs |
+| [ISI IMPORT ALLERGY](ISI-IMPORT-ALLERGY.md) | [ALGMAKE^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [ALLERGY^ISIIMP10](../../VistA/Routines/ISIIMP10.m) | Allergies |
+| [ISI IMPORT LAB](ISI-IMPORT-LAB.md) | [LABMAKE^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [LAB^ISIIMP12](../../VistA/Routines/ISIIMP12.m) | Lab tests |
+| [ISI IMPORT LAB PANEL](ISI-IMPORT-LAB-PANEL.md) | [LABPANEL^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [LAB^ISIIMP12](../../VistA/Routines/ISIIMP12.m) | Lab panels |
+| [ISI IMPORT MED](ISI-IMPORT-MED.md) | [MEDMAKE^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [MEDS^ISIIMP16](../../VistA/Routines/ISIIMP16.m) | Medications |
+| [ISI IMPORT NONVA MED](ISI-IMPORT-NONVA-MED.md) | [NVAMED^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [NVAMEDS^ISIIMP16](../../VistA/Routines/ISIIMP16.m) | Non-VA meds |
+| [ISI IMPORT NOTE](ISI-IMPORT-NOTE.md) | [NOTEMAKE^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [NOTES^ISIIMP14](../../VistA/Routines/ISIIMP14.m) | TIU notes |
+| [ISI IMPORT CONSULT](ISI-IMPORT-CONSULT.md) | [CONMAKE^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [CONSULTS^ISIIMP18](../../VistA/Routines/ISIIMP18.m) | Consults |
+| [ISI IMPORT RAD ORDER](ISI-IMPORT-RAD-ORDER.md) | [RADOMAKE^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [RADORDER^ISIIMP20](../../VistA/Routines/ISIIMP20.m) | Rad orders |
+| [ISI IMPORT USER](ISI-IMPORT-USER.md) | [USRCREAT^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [USER^ISIIMP22](../../VistA/Routines/ISIIMP22.m) | User accounts |
+| [ISI IMPORT V CPT](ISI-IMPORT-V-CPT.md) | [VCPT^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [VCPT^ISIIMP27](../../VistA/Routines/ISIIMP27.m) | CPT codes |
+| [ISI IMPORT V EXAM](ISI-IMPORT-V-EXAM.md) | [VEXAM^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [VEXAM^ISIIMP27](../../VistA/Routines/ISIIMP27.m) | Exams |
+| [ISI IMPORT V POV](ISI-IMPORT-V-POV.md) | [VPOV^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [VPOV^ISIIMP27](../../VistA/Routines/ISIIMP27.m) | Diagnoses |
+| [ISI IMPORT HFACTOR](ISI-IMPORT-HFACTOR.md) | [HFACTOR^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [VHF^ISIIMP27](../../VistA/Routines/ISIIMP27.m) | Health factors |
+| [ISI IMPORT IMMUNIZATIONS](ISI-IMPORT-IMMUNIZATIONS.md) | [VIMMZ^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [VIMMZ^ISIIMP27](../../VistA/Routines/ISIIMP27.m) | Immunizations |
+| [ISI IMPORT V PATIENT ED](ISI-IMPORT-V-PATIENT-ED.md) | [VPTEDU^ISIIMPR3](../../VistA/Routines/ISIIMPR3.m) | [VPNTED^ISIIMP27](../../VistA/Routines/ISIIMP27.m) | Patient ed |
+| [ISI IMPORT TFL](ISI-IMPORT-TFL.md) | [TRTFACLS^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [TFL^ISIIMP28](../../VistA/Routines/ISIIMP28.m) | Facility list |
+| [ISI IMPORT TABLEFETCH](ISI-IMPORT-TABLEFETCH.md) | [TABLEGET^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [ENTRY^ISIIMPUA](../../VistA/Routines/ISIIMPUA.m) | Table export |
+| [ISI IMPORT ICDFIND](ISI-IMPORT-ICDFIND.md) | [ICD9GET^ISIIMPR2](../../VistA/Routines/ISIIMPR2.m) | [ICD9^ISIIMPUA](../../VistA/Routines/ISIIMPUA.m) | ICD lookup |
+| [ISI IMPORT GET TEMPLATES](ISI-IMPORT-GET-TEMPLATES.md) | [FETCHTMP^ISIIMPUA](../../VistA/Routines/ISIIMPUA.m) | N/A | Fetch template list |
+| [ISI IMPORT GET TEMPLATE DETLS](ISI-IMPORT-GET-TEMPLATE-DETLS.md) | [TEMPLATE^ISIIMPUA](../../VistA/Routines/ISIIMPUA.m) | N/A | Fetch template details |
+| [ISI IMPORT SAVE TEMPLATE](ISI-IMPORT-SAVE-TEMPLATE.md) | [TMPUPDTE^ISIIMPR1](../../VistA/Routines/ISIIMPR1.m) | [TEMPLATE^ISIIMP24](../../VistA/Routines/ISIIMP24.m) | Save template updates |
 
 ## Routine Organization
 
