@@ -271,9 +271,3 @@ PATIENT (#2)
        ├─ Facility 2: CINCINNATI VAMC, Last Seen: 2024-12-01
        └─ Facility 3: ATLANTA VAMC, Last Seen: 2024-10-20
 ```
-
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Updates
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (Build 70, Dec 2024): Continued maintenance

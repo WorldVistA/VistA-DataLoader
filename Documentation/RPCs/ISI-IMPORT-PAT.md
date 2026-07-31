@@ -141,9 +141,3 @@ Validations include:
 - MRG_SOURCE allows copying demographics from an existing patient
 - The DFN_NAME parameter controls whether patient name is derived from DFN
 - This API is the foundation for patient record creation and is used by other import functions
-
-## Version History
-- V.1.0 (June 2012): Initial implementation by Johns Hopkins University
-- V.2.0 (June 2014): Updates by University of Michigan
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued maintenance by DocMe360 LLC

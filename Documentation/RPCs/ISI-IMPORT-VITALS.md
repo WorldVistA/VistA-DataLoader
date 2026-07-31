@@ -224,9 +224,3 @@ Validations include:
 - Vital types can be referenced by either full name or abbreviation
 - The system validates ranges specific to each vital type
 - Multiple vitals can be entered for the same patient/date/time combination
-
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Updates and enhancements
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued maintenance

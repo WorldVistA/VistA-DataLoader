@@ -239,12 +239,5 @@ Returns: 1 if member, 0 if not
 
 This is used by the Synthea FHIR importer to dynamically decide whether to import individual labs or skip them if they're part of a panel being imported separately.
 
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): LOINC support added
-- V.2.1 (November 2014): Enhancements
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Lab Panel API added, panel member check function
-
 ## See Also
 - [ISI IMPORT LAB PANEL](ISI-IMPORT-LAB-PANEL.md) - For importing complete lab panels

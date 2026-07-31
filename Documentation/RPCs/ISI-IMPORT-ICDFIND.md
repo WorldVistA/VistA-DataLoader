@@ -77,9 +77,3 @@ ISIRESUL(3) = "250.02^DIABETES MELLITUS WITH HYPEROSMOLARITY"
 - Can search by code or description
 - Returns multiple matches if search is partial
 - Used to validate ICD codes before creating diagnoses
-
-## Version History
-- V.1.0 (June 2012): Initial ICD-9 support
-- V.2.0 (June 2014): ICD-10 support added
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued maintenance

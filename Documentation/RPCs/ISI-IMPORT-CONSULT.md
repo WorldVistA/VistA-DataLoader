@@ -212,9 +212,3 @@ The routine uses `SVCSYN^ORQQCN2(.RESULT,1,1,1)` to retrieve valid consultation 
 - Location must be active at the time of consult request
 - The routine uses VistA's standard consult ordering APIs
 - Consult requests are created in CONSULT/REQUEST TRACKING file (#123)
-
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Updates and enhancements
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued maintenance

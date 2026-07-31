@@ -247,9 +247,3 @@ The validation ensures the location is active on the visit date (VDT).
 - The note is created and signed in a single operation
 - TEXT content can be single or multi-line free text
 - The routine creates TIU documents linked to outpatient encounters
-
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Updates and enhancements
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued maintenance

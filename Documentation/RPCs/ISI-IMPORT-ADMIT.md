@@ -214,9 +214,3 @@ Validations include:
 - Discharge is only processed if DDATE is provided
 - The SHDIAG parameter provides a brief diagnosis description for the admission
 - Movement records are created in the PATIENT MOVEMENT file (#405)
-
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Updates
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued development

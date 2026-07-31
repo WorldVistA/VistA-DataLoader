@@ -282,11 +282,5 @@ DO LABMAKE^ISIIMPR2(.RC,.SAM)
 - The same API ($$LAB^ISIIMP12) handles both individual and panel imports
 - Panel member check function available: `$$PMEM^ISIIMPU7(PANEL,TEST)`
 
-## Version History
-- V.2.1 (November 2014): Initial panel support for QRDA
-- V.2.5 (2015): Enhancements and bug fixes
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Complete panel API implementation, panel member function
-
 ## See Also
 - [ISI IMPORT LAB](ISI-IMPORT-LAB.md) - For importing individual lab tests

@@ -229,9 +229,3 @@ Providers must pass multiple checks:
 - Drug list has strict validation requirements
 - TIU document list excludes templates and consult types
 - Results are returned as display values (names), not IENs
-
-## Version History
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Additional tables added
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Extended table support

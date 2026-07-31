@@ -201,15 +201,6 @@ ISIRESUL(0) = -1^ERROR_MESSAGE
 
 Use these with caution in production environments.
 
-## Version History
-
-- **V.1.0** (June 2012): Initial implementation by Johns Hopkins University
-- **V.2.0** (June 2014): Updates by University of Michigan
-- **V.2.1** (Nov 2014): QRDA support by Oroville Hospital
-- **V.2.2-2.5** (2015): Incremental updates and bug fixes
-- **V.3.0** (2018): Merge updates, Apache 2.0 license
-- **V.3.1** (2024-2025): Lab Panel API, continued maintenance by DocMe360 LLC
-
 ## Credits
 
 This software package leverages utilities originally developed for the "CAMP MASTER" VistA training system. Component authors include:
@@ -219,11 +210,9 @@ This software package leverages utilities originally developed for the "CAMP MAS
 - PROBLEM utility (ZVHGMPL): NTEO/JFR
 - APPOINTMENTS utility (ZVHZSDM): SLC/DAN
 
-## Support & Contact
+## Support
 
-For questions or collaboration:
-- Mike Stark: starklogic@gmail.com
-- ISI GROUP, LLC, Bethesda, MD
+For questions or support, please ask on the [Hardhats mailing list](https://groups.google.com/g/hardhats).
 
 ## License
 

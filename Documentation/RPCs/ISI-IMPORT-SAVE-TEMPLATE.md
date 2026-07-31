@@ -261,10 +261,3 @@ MISC(3) = "VETERAN^N"
 3. **Dates**: Use realistic date ranges
 4. **Testing**: Create separate templates for different test scenarios
 5. **Documentation**: Comment template purpose in NAME
-
-## Version History
-
-- V.1.0 (June 2012): Initial implementation
-- V.2.0 (June 2014): Updates
-- V.3.0 (2018): License change to Apache 2.0
-- V.3.1 (2024-2025): Continued maintenance
