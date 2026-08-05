@@ -99,9 +99,9 @@ Q14 ;D:$P(LRPARAM,U,17) ^LRORDD D ^LRORD2A    ;JFR  testing the max order stuff
  . D TIME^LROE
  . I LRCDT<1 Q
  . S LRORDTIM=$P(Y,".",2)
- D NOW^%DTC S LRNT=% S:'LRECT LRCDT=LRNT_"^1"
+ S %=^TMP("LRVEHU",$J,"COLL") S LRNT=% S:'LRECT LRCDT=LRNT_"^1" ; DOCME360/SMH ; % was NOW previously
  S LRIDT=9999999-LRCDT
- ; DOC360ME/SMH - From this code, we cannot input required comments. So just nuke that out from the LROT array
+ ; DOCME360/SMH - From this code, we cannot input required comments. So just nuke that out from the LROT array
  ; See SETLROT+6^LRORDB
  K LROT(LRSAMP,LRSPEC,1,2)
  ; END change DOC360ME/SMH

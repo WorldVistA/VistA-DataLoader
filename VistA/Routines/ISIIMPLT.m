@@ -912,3 +912,25 @@ WAIT ; Wait till a second passes so we can enter a new lab
  S LRDFN=$$LRDFN^LRPXAPIU(DFN)
  F  S RVDT=$$LRIDT^LRPXAPIU($$NOW^XLFDT()) Q:'$D(^LR(LRDFN,"CH",RVDT))  H .001
  QUIT
+ ;
+FLABDATE ; @TEST Ensure Order & Result match Collection Date
+ N FLABDATE S FLABDATE="3100202.114532" ; Our labs will be located at this fantasy date
+ ; Adjust date in case we have an entry already
+ N LRDFN,RVDT
+ S LRDFN=$$LRDFN^LRPXAPIU(DFN)
+ F  S RVDT=$$LRIDT^LRPXAPIU(FLABDATE) Q:'$D(^LR(LRDFN,"CH",RVDT))  S FLABDATE=$$FMADD^XLFDT(FLABDATE,0,0,0,1)
+ N SAM
+ S SAM(1)="PAT_SSN^"_PATSSN
+ S SAM(2)="LAB_TEST^LEAD"
+ S SAM(3)="RESULT_DT^"_FLABDATE
+ S SAM(4)="RESULT_VAL^189"
+ S SAM(5)="LOCATION^3E NORTH"
+ D LABMAKE^ISIIMPR2(.RC,.SAM) 
+ D eq^%ut($$LABDUP^ISIIMPU7(DFN,FLABDATE,"LEAD"),1)
+ D eq^%ut(RC(0),1)
+ S LRDFN=$$LRDFN^LRPXAPIU(DFN)
+ S RVDT=$$LRIDT^LRPXAPIU(FLABDATE)
+ zwrite ^LR(LRDFN,"CH",RVDT,*)
+ set ord=$p(^LR(LRDFN,"CH",RVDT,"ORUT",1,0),U,3)
+ zwrite ^OR(100,ord,*)
+ QUIT
