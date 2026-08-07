@@ -1,8 +1,10 @@
 # Development Status and Gap Analysis — VistA-DataLoader (ISI)
 
-Status date: 2026-06-09
+Status date: 2026-08-07
 Branch at time of writing: `fix/patient-state-pointer-file5`
 
+
+Reviewed 2026-08-07: no material capability change since the June status; date advanced for the August project-report refresh.
 Part of the VistA-on-FHIR workspace. Ecosystem-level context lives in
 `Vista-on-FHIR/docs/PROJECT_OVERVIEW.md`; the cross-repo roadmap is
 `Vista-on-FHIR/docs/PATH_FORWARD.md`.
