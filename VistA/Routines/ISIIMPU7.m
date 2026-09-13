@@ -449,6 +449,11 @@ PMEM(PANEL,LAB) ; [Public] Is lab a member of a panel
  N PIEN S PIEN=$$LIEN(PANEL)
  I 'PIEN Q 0
  ;
+ ; LIEN returns "" (not 0) when the lab name is absent from file 60;
+ ; EXP("") is a <SUBSCRIPT> error, so guard before the lookup.
+ N LIEN S LIEN=$$LIEN(LAB)
+ I LIEN'>0 Q 0
+ ;
  N EXP D EXPPNL(PIEN,.EXP)
  ; EXP subscript is the lab IEN
- Q ''$D(EXP($$LIEN(LAB)))
+ Q ''$D(EXP(LIEN))
