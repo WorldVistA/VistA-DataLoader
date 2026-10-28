@@ -1,10 +1,15 @@
 # Development Status and Gap Analysis — VistA-DataLoader (ISI)
 
-Status date: 2026-08-07
+Status date: 2026-10-27 (previous: 2026-08-07)
 Branch at time of writing: `fix/patient-state-pointer-file5`
 
 
-Reviewed 2026-08-07: no material capability change since the June status; date advanced for the August project-report refresh.
+Reviewed 2026-10-27. The state-pointer branch was merged to `master` on
+2026-09-09 (gap 6 below, first half). One commit since: `PMEM^ISIIMPU7`
+guards a null `LIEN` before the `EXP()` lookup (2026-09-13, found while
+loading the WorldVistA EHR 3.0 `wvehr` host). That commit is on the branch
+only — `master` and the branch have each moved since the merge — so the
+"cut a 3.1.x KIDS" half of gap 6 is still open. No other capability change.
 Part of the VistA-on-FHIR workspace. Ecosystem-level context lives in
 `Vista-on-FHIR/docs/PROJECT_OVERVIEW.md`; the cross-repo roadmap is
 `Vista-on-FHIR/docs/PATH_FORWARD.md`.
