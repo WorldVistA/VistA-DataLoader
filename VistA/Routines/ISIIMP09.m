@@ -61,6 +61,8 @@ PREP
  ;
 VITALS ;Add vitals for patient
  N RESULT K RESULT
+ ; ISI validation needs a unit letter on weight, but the Vitals package stores a plain number of pounds
+ I $P($G(^GMRD(120.51,+TYP,0)),U)="WEIGHT" S RT=$$NORMWT(RT)
  S DATA=VTKNDT_U_DFN_U_TYP_";"_RT_U_LOC_U_ENT
  D EN1^GMVDCSAV(.RESULT,DATA)
  I $G(RESULT(0))["ERROR" S ISIRC="-1^Error creating Vital entry (ISIIMP09)"
@@ -68,6 +70,15 @@ VITALS ;Add vitals for patient
  S ISIRESUL(0)="1"
  S ISIRESUL(1)="success"
  Q
+ ;
+NORMWT(RT) ;Weight as a plain number of pounds (strip L/lb, convert kg with 2.2 as CPRS does)
+ N I,NUM,UNIT
+ S I=1
+ F  Q:I>$L(RT)  Q:"0123456789."'[$E(RT,I)  S I=I+1
+ S NUM=$E(RT,1,I-1),UNIT=$$UP^XLFSTR($TR($E(RT,I,$L(RT))," "))
+ Q:NUM="" RT
+ I $E(UNIT)="K" Q +$J(NUM*2.2,0,3)
+ Q +NUM
  ;
 GEN(TYPE) ;Generate values for vitals
  N READ
